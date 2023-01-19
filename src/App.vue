@@ -1,16 +1,17 @@
 <script setup>
+import Login from './components/Login.vue'
 </script>
 
 <template>
   <header>
-    <div class="wrapper">
-    </div>
   </header>
 
   <main>
-    <TheWelcome />
+    <Login></Login>
   </main>
 </template>
 
 <style scoped>
 </style>
+
+
