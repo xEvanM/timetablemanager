@@ -19,7 +19,7 @@
           <div class="txt_field">
             <input type="text" required>
             <span></span>
-            <label>Username</label>
+            <label>Email</label>
           </div>
           <div class="txt_field">
             <input type="password" required>
@@ -41,6 +41,8 @@
 </script>
 
 <style scoped>
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
 
 .split {
     height: 100%;
@@ -104,8 +106,6 @@
   top: 190px;
   font-weight: bold;
  }
-
- @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
 
  *{
   margin: 0;

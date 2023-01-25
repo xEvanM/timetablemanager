@@ -1,17 +1,18 @@
-<script setup>
-import Login from './components/Login.vue'
-</script>
-
 <template>
-  <header>
-  </header>
 
-  <main>
-    <Login></Login>
-  </main>
+  <router-view/>
+
 </template>
 
-<style scoped>
+<script>
+
+export default {
+  name: 'App',
+  components: {
+
+  }
+}
+</script>
+
+<style>
 </style>
-
-
