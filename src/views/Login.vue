@@ -96,6 +96,7 @@
   left: 140px;
   top: 150px;
   font-weight: bold;
+  display: inline-block;
  }
 
  .text2 {
@@ -105,6 +106,7 @@
   left: 140px;
   top: 190px;
   font-weight: bold;
+  display: inline-block;
  }
 
  *{

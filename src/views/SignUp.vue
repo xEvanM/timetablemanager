@@ -106,24 +106,26 @@
       top: -50px;
      }
     
-     .text {
-      z-index: 3;
-      font-size: 30px;
-      color: white;
-      position: relative;
-      left: 140px;
-      top: 150px;
-      font-weight: bold;
-     }
-    
-     .text2 {
-      z-index: 3;
-      font-size: 42px;
-      color: white;
-      left: 140px;
-      top: 190px;
-      font-weight: bold;
-     }
+  .text {
+  z-index: 3;
+  font-size: 30px;
+  color: white;
+  position: relative;
+  left: 140px;
+  top: 150px;
+  font-weight: bold;
+  display: inline-block;
+ }
+
+ .text2 {
+  z-index: 3;
+  font-size: 42px;
+  color: white;
+  left: 140px;
+  top: 190px;
+  font-weight: bold;
+  display: inline-block;
+ }
     
     
      *{
