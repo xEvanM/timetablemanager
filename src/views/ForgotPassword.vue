@@ -1,6 +1,6 @@
 <template>
     <head>
-        <title>Sign Up</title>
+        <title>Forgot Password</title>
         <link rel="stylesheet" href="style.css"> 
     </head>
         <body>
@@ -14,21 +14,16 @@
             </div>
         
         <div class="center">
-            <h1>Sign Up</h1>
+            <h1>Password Reset</h1>
             <form>
               <div class="txt_field">
                 <input type="email" v-model="email">
                 <span></span>
                 <label>Your Email</label>
               </div>
-              <div class="txt_field">
-                <input type="password" v-model="password">
-                <span></span>
-                <label>Choose a Password</label>
-              </div>
-              <input id="test1" @click="reg" value="Sign up">
+              <input id="test1" @click="reset" value="Reset Password">
               <div class="signup_link">
-                Already have an account? <a href="#">Sign in</a>
+                Remember your password? <a href="#">Sign in</a>
               </div>
             </form>
           </div>
@@ -37,24 +32,25 @@
     
     <script setup>
     import { ref } from "vue";
-    import {getAuth, createUserWithEmailAndPassword} from "firebase/auth";
     import { useRouter } from "vue-router";
+    import { getAuth, sendPasswordResetEmail } from "firebase/auth";
     const email = ref("");
     const password = ref("");
     const router = useRouter();
-    
-    const reg = () => {
-        console.log("register called");
-        createUserWithEmailAndPassword(getAuth(), email.value, password.value)
+    const auth = getAuth();
+
+
+    const reset = () => {
+        sendPasswordResetEmail(auth, email.value)
         .then(() => {
-            console.log("Registered!");
-            router.push('/student') // redirect to student page - will update this to send to STUDENT or LECTURER depending on credentials 
-        })
+         console.log("Password reset email sent to " + email.value);
+    })
         .catch((error) => {
-            console.log("Error: " + error.code);
-            alert(error.message);
-        });
-    };
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // other error handling stuff goes here
+    });
+    }
     
     
     </script>
