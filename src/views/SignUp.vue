@@ -39,15 +39,17 @@
     <script setup>
     import { ref } from "vue";
     import {getAuth, createUserWithEmailAndPassword} from "firebase/auth";
+    import { useRouter } from "vue-router";
     const email = ref("");
     const password = ref("");
+    const router = useRouter();
     
     const reg = () => {
         console.log("register called");
         createUserWithEmailAndPassword(getAuth(), email.value, password.value)
         .then(() => {
             console.log("Registered!");
-            // router.push('/login') // redirect to login page (will be replaced with home page when available)
+            router.push('/student') // redirect to student page - will update this to send to STUDENT or LECTURER depending on credentials 
         })
         .catch((error) => {
             console.log("Error: " + error.code);

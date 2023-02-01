@@ -1,42 +1,65 @@
 <template>
-<head>
-    <title>Login</title>
-    <link rel="stylesheet" href="style.css"> 
-</head>
-    <body>
-    <div class="split left"></div>
-    <div class="split right"></div>
-    <div class="loginimg"> <img src= https://cdn-icons-png.flaticon.com/512/277/277991.png>
-    <div class="WebsiteName">WeeklyPlanner</div>
-    </div>
-    <div class="text">Your Timetable,
-        <div class="text2">Made easy</div>
-        </div>
-    
-    <div class="center">
-        <h1>Login</h1>
-        <form method="post">
-          <div class="txt_field">
-            <input type="text" required>
-            <span></span>
-            <label>Email</label>
-          </div>
-          <div class="txt_field">
-            <input type="password" required>
-            <span></span>
-            <label>Password</label>
-          </div>
-          <div class="pass">Forgot Password?</div>
-          <input type="submit" value="Login">
-          <div class="signup_link">
-            Don't have an account? <a href="#">Signup</a>
-          </div>
-        </form>
+  <head>
+      <title>Log In</title>
+      <link rel="stylesheet" href="style.css"> 
+  </head>
+      <body>
+      <div class="split left"></div>
+      <div class="split right"></div>
+      <div class="loginimg"> <img src= https://cdn-icons-png.flaticon.com/512/277/277991.png>
+      <div class="WebsiteName">WeeklyPlanner</div>
       </div>
-      </body>
-</template>
+      <div class="text">Your Timetable,
+          <div class="text2">Made easy</div>
+          </div>
+      
+      <div class="center">
+          <h1>Log In</h1>
+          <form>
+            <div class="txt_field">
+              <input type="email" v-model="email">
+              <span></span>
+              <label>Your Email</label>
+            </div>
+            <div class="txt_field">
+              <input type="password" v-model="password">
+              <span></span>
+              <label>Your Password</label>
+            </div>
+            <div class="pass">Forgot Password?</div>
+            <input id="test1" @click="reg" value="Log In">
+            <div class="signup_link">
+              Need an account? <a href="#">Sign up</a>
+            </div>
+          </form>
+        </div>
+        </body>
+  </template>
 
-<script>
+<script setup>
+import { ref } from "vue";
+import {getAuth, signInWithEmailAndPassword} from "firebase/auth";
+import { useRouter } from "vue-router";
+const email = ref("");
+const password = ref("");
+// const errMsg = ref(); 
+const router = useRouter();
+
+const reg = () => {
+    console.log("login called");
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, email.value, password.value)
+    .then((data) => {
+        console.log("Logged In!");
+        console.log(auth.currentUser);
+        router.push('/student') // redirect to student page - will update this to send to STUDENT or LECTURER depending on credentials 
+    })
+    .catch((error) => {
+        console.log("Error: " + error.code);
+        alert(error.code);
+    });
+};
+
 
 </script>
 
@@ -204,23 +227,24 @@ form .txt_field{
   text-decoration: underline;
 }
 
-input[type="submit"]{
-  width: 100%;
-  height: 50px;
-  border: 1px solid;
-  background: rgba(24, 47, 93, 1);
-  border-radius: 25px;
-  font-size: 18px;
-  color: #e9f4fb;
-  font-weight: 700;
-  cursor: pointer;
-  outline: none;
-}
-
-input[type="submit"]:hover{
-  border-color: rgba(24, 47, 93, 1);
-  transition: .5s;
-}
+#test1 {
+      width: 100%;
+      height: 50px;
+      border: 1px solid;
+      background: rgba(24, 47, 93, 1);
+      border-radius: 25px;
+      font-size: 18px;
+      color: #e9f4fb;
+      font-weight: 700;
+      cursor: pointer;
+      outline: none;
+      text-align: center;
+    }
+    
+    #test1:hover{
+      border-color: rgba(24, 47, 93, 1);
+      transition: .5s;
+    }
 
 .signup_link{
   margin: 30px 0;
