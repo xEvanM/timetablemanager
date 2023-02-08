@@ -8,10 +8,17 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "events": "^3.3.0",
     "firebase": "^9.16.0",
+<<<<<<< HEAD
     "firebase-tools": "^11.22.0",
     "router": "^1.3.7",
     "vue": "^3.2.47",
+=======
+    "firebase-admin": "^11.5.0",
+    "requirejs": "^2.3.6",
+    "vue": "^3.2.45",
+>>>>>>> 3df6add8dbff24c48abef6d8c4419e3473b46b16
     "vue-router": "^4.0.13"
   },
   "devDependencies": {
