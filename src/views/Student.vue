@@ -1,14 +1,5 @@
 <template>
-    <!DOCTYPE html>
-<html>
 
-<head>
-    <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet" />
-    <link href="main.css" rel="stylesheet" />
-    <title>Document</title>
-</head>
-
-<body>
     <div class="background">
         <button type="button" class="button1">
             <span class="button1__text">Daily View</span>
@@ -40,23 +31,22 @@
     <div class="box3"></div>
     <div class="box4"></div>
 
-    <span class="module1">software engineering</span>
+    <span class="module1">Software Engineering</span>
     <span class="Room1">IT106</span>
-</body>
-
-</html>
 </template>
 
 
-<script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js">
-    // console log user that is logged in from firebase
- // console.log(auth.currentUser)
- </script>
+<script>
+</script>
  
 
 <style scoped>
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
+
 * {
     box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
 }
 
 body {
@@ -78,7 +68,6 @@ body {
     outline: none;
     border-radius: 5px;
     overflow: hidden;
-    font-family: Inter;
     font-weight: Bold;
     font-size: 25px;
     cursor: pointer;
@@ -122,7 +111,6 @@ body {
     outline: none;
     border-radius: 5px;
     overflow: hidden;
-    font-family: Inter;
     font-weight: Bold;
     font-size: 26px;
     cursor: pointer;
@@ -249,7 +237,6 @@ body {
     position: absolute;
     top: 870px;
     left: 138px;
-    font-family: Inter;
     font-weight: Bold;
     font-size: 30px;
     opacity: 1;
@@ -262,7 +249,6 @@ body {
     position: absolute;
     top: 800px;
     left: 138px;
-    font-family: Inter;
     font-weight: Bold;
     font-size: 30px;
     opacity: 1;
@@ -275,7 +261,6 @@ body {
     position: absolute;
     top: 730px;
     left: 138px;
-    font-family: Inter;
     font-weight: Bold;
     font-size: 30px;
     opacity: 1;
@@ -287,7 +272,6 @@ body {
     position: absolute;
     top: 660px;
     left: 138px;
-    font-family: Inter;
     font-weight: Bold;
     font-size: 30px;
     opacity: 1;
@@ -300,7 +284,6 @@ body {
     position: absolute;
     top: 590px;
     left: 138px;
-    font-family: Inter;
     font-weight: Bold;
     font-size: 30px;
     opacity: 1;
@@ -312,7 +295,6 @@ body {
     position: absolute;
     top: 520px;
     left: 138px;
-    font-family: Inter;
     font-weight: Bold;
     font-size: 30px;
     opacity: 1;
@@ -325,7 +307,6 @@ body {
     position: absolute;
     top: 450px;
     left: 138px;
-    font-family: Inter;
     font-weight: Bold;
     font-size: 30px;
     opacity: 1;
@@ -338,7 +319,6 @@ body {
     position: absolute;
     top: 370px;
     left: 138px;
-    font-family: Inter;
     font-weight: Bold;
     font-size: 30px;
     opacity: 1;
@@ -350,7 +330,6 @@ body {
     position: absolute;
     top: 300px;
     left: 142px;
-    font-family: Inter;
     font-weight: Bold;
     font-size: 30px;
     opacity: 1;
@@ -363,9 +342,8 @@ body {
     position: absolute;
     top: 49px;
     left: 132px;
-    font-family: Inter;
     font-weight: Bold;
-    font-size: 70px;
+    font-size: 50px;
     opacity: 1;
     text-align: left;
 }
@@ -436,9 +414,8 @@ body {
     position: absolute;
     top: 228px;
     left: 293px;
-    font-family: Inter;
     font-weight: Bold;
-    font-size: 40px;
+    font-size: 30px;
     opacity: 1;
     text-align: left;
 }
@@ -450,9 +427,8 @@ body {
     position: absolute;
     top: 228px;
     left: 584px;
-    font-family: Inter;
     font-weight: Bold;
-    font-size: 40px;
+    font-size: 30px;
     opacity: 1;
     text-align: left;
 }
@@ -464,9 +440,8 @@ body {
     position: absolute;
     top: 228px;
     left: 854px;
-    font-family: Inter;
     font-weight: Bold;
-    font-size: 40px;
+    font-size: 30px;
     opacity: 1;
     text-align: left;
 }
@@ -477,9 +452,8 @@ body {
     position: absolute;
     top: 228px;
     left: 1172px;
-    font-family: Inter;
     font-weight: Bold;
-    font-size: 40px;
+    font-size: 30px;
     opacity: 1;
     text-align: left;
 }
@@ -489,9 +463,8 @@ body {
     position: absolute;
     top: 228px;
     left: 1501px;
-    font-family: Inter;
     font-weight: Bold;
-    font-size: 40px;
+    font-size: 30px;
     opacity: 1;
     text-align: left;
 }
@@ -502,9 +475,8 @@ body {
     position: absolute;
     top: 297px;
     left: 268px;
-    font-family: Inter;
     font-weight: Bold;
-    font-size: 20px;
+    font-size: 15px;
     opacity: 1;
     text-align: left;
 }
@@ -515,9 +487,8 @@ body {
     position: absolute;
     top: 320px;
     left: 268px;
-    font-family: Inter;
     font-weight: Bold;
-    font-size: 20px;
+    font-size: 15px;
     opacity: 1;
     text-align: left;
 }
