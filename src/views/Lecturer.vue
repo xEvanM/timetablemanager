@@ -1,42 +1,57 @@
 <template>
-    <p> This is the lecturer page</p>
-    <button @click="setData()">Set Module Data</button>
+  <p> Lecturer page</p>
+
+  <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label">Email address</label>
+      <input type="email" class="form-control" v-model="moduleID" id="exampleFormControlInput1" placeholder="CT101">
+    </div>
+
+    <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label">Email address</label>
+      <input type="email" class="form-control" v-model="taughtBy" id="exampleFormControlInput1" placeholder="f.glavin">
+    </div>
+    <div class="mb-3">
+      <label for="exampleFormControlTextarea1" class="form-label">Times</label>
+      <textarea class="form-control" v-model="times" id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>
+    <div class="mb-3 right">
+      <button type="button" @click="addModule" class="btn btn-primary">Add Module</button>
+    </div>
+
 </template>
 
 <script>
-// console log user that is logged in from firebase
-// console.log(auth.currentUser)
-
-import {initializeApp, applicationDefault, cert} from 'firebase-admin/app';
-import {getFirestore, Timestamp, FieldValue} from 'firebase-admin/firestore';
-
-//const { initializeApp, applicationDefault, cert } = require('firebase-admin/app');
-//const { getFirestore, Timestamp, FieldValue } = require('firebase-admin/firestore');
-
-initializeApp();
-
-const db = getFirestore();
-
-
+import app from '../api/firebase';
+import { getFunctions, httpsCallable } from "firebase/functions";
 export default {
-  methods: {
-    setData( ) {
-        const res = db.collection('modules').doc('CT101').set(data);},
+  data() {
+    return {
+      moduleID: '',
+      taughtBy: '',
+      times:[]
+    }
+  },
+  created(){
+
+  },
+  methods : {
+    addModule() {
+  const functions = getFunctions(app);
+  const addModule = httpsCallable(functions, 'addModule');
+  const data = {
+    moduleID: this.moduleID,
+    taughtBy: this.taughtBy,
+    times: this.times
+  };
+  
+  addModule(data).then((result) => {
+    // Read the result of the Cloud Function
+    // /** @type {any} */
+    this.getComments();
+  });
+}
   }
 }
-
-const data = {
-    moduleID: 'CT101',
-    taughtBy: 'Frank',
-    times: ['M11', 'T14']
-};
-
-
-// Add a new document in collection "modules" with ID 'CT101'
-
-
-
-
 </script>
 
 <style scoped>
