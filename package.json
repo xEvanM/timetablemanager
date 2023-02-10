@@ -8,6 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "events": "^3.3.0",
     "firebase": "^9.17.1",
     "firebase-admin": "^11.5.0",
