@@ -5,11 +5,7 @@ admin.initializeApp();
 
 exports.addModule = functions.https.onRequest((request, response) => {
     cors(request, response, () => {
-        return admin.firestore().collection('modules').add({
-            moduleID: request.body.moduleID,
-            taughtBy: request.body.taughtBy,
-            times: request.body.times
-        }).then(() => {
+        return admin.firestore().collection('modules').add(request.body).then(() => {
             response.json({ data: "Module added successfully" });
         });
     });
