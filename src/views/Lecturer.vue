@@ -55,7 +55,18 @@ export default {
       console.log("Attempting to add module");
       const functions = getFunctions(app);
       const addModule = httpsCallable(functions, "addModule");
-      addModule({"moduleID": this.moduleID, "taughtBy": this.taughtBy, "times" : this.times}).then((result) => {
+      var data = {
+        moduleID: this.moduleID,
+        taughtBy: this.taughtBy,
+        times: this.times,
+      };
+      console.log(data);
+      addModule({
+        moduleID: this.moduleID,
+        taughtBy: this.taughtBy,
+        times: this.times,
+      }).then((result) => {
+        console.log(result);
       });
     },
   },
