@@ -1,7 +1,6 @@
 <template>
   <head>
     <title>Log In</title>
-    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div class="loginimg">
