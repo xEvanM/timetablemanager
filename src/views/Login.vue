@@ -24,7 +24,7 @@
           <label>Your Password</label>
         </div>
         <div class="pass">Forgot Password?</div>
-        <input id="test1" @click="reg" value="Log In" readonly />
+        <input id="button" @click="reg" value="Log In" readonly />
         <div class="signup_link">Need an account? <a href="#">Sign up</a></div>
       </form>
     </div>
@@ -193,7 +193,7 @@ form .txt_field {
   text-decoration: underline;
 }
 
-#test1 {
+#button {
   width: 100%;
   height: 50px;
   border: 1px solid;
@@ -207,7 +207,7 @@ form .txt_field {
   text-align: center;
 }
 
-#test1:hover {
+#button:hover {
   border-color: rgb(46, 78, 141);
   transition: 0.5s;
 }
@@ -216,7 +216,7 @@ form .txt_field {
   margin: 30px 0;
   text-align: center;
   font-size: 16px;
-  color: #666666;
+  color: #a6a6a6;
 }
 
 .signup_link a {
