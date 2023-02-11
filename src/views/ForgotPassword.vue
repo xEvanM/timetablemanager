@@ -31,9 +31,10 @@
     </template>
     
     <script setup>
+    import app from "../api/firebase.js"
     import { ref } from "vue";
     import { useRouter } from "vue-router";
-    import { getAuth, sendPasswordResetEmail } from "firebase/auth";
+    import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
     const email = ref("");
     const password = ref("");
     const router = useRouter();

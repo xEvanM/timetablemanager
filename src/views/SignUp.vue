@@ -36,6 +36,7 @@
     </template>
     
     <script setup>
+    import app from "../api/firebase.js"
     import { ref } from "vue";
     import {getAuth, createUserWithEmailAndPassword} from "firebase/auth";
     import { useRouter } from "vue-router";
