@@ -7,9 +7,9 @@
     <div class="loginimg">
       <img src= https://cdn-icons-png.flaticon.com/512/277/277991.png>
     </div>
-    <div class="WebsiteName">WeeklyPlanner</div>
-    <div class="SloganText1">Your Timetable,</div>
-    <div class="SloganText2">Made easy</div>
+    <div class="websiteName">WeeklyPlanner</div>
+    <div class="sloganText1">Your Timetable,</div>
+    <div class="sloganText2">Made easy</div>
     <div class="center">
       <h1>Log In</h1>
       <form>
@@ -24,7 +24,7 @@
           <label>Your Password</label>
         </div>
         <div class="pass">Forgot Password?</div>
-        <input id="test1" @click="reg" value="Log In" />
+        <input id="test1" @click="reg" value="Log In" readonly />
         <div class="signup_link">Need an account? <a href="#">Sign up</a></div>
       </form>
     </div>
@@ -32,7 +32,7 @@
 </template>
 
 <script setup>
-import app from "../api/firebase.js"
+import app from "../api/firebase.js";
 import { ref } from "vue";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "vue-router";
@@ -76,34 +76,34 @@ const reg = () => {
   width: 6%;
 }
 
-.WebsiteName {
+.websiteName {
   font-size: 30px;
   color: white;
   position: absolute;
-  top: 6%;
+  top: 7%;
   left: 9%;
 }
 
-.SloganText1 {
+.sloganText1 {
   z-index: 1;
   font-size: 40px;
   color: white;
   position: absolute;
-  left: 12%;
+  left: 13%;
   top: 40%;
   font-weight: bold;
   display: inline-block;
 }
 
-.SloganText2 {
+.sloganText2 {
   z-index: 1;
   font-size: 45px;
   color: white;
+  position: absolute;
   left: 15%;
-  top: 50%;
+  top: 47%;
   font-weight: bold;
   display: inline-block;
-  position: absolute;
 }
 
 body {
