@@ -1,7 +1,6 @@
 <template>
   <head>
     <title>Forgot Password</title>
-    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div class="loginimg">
@@ -58,6 +57,7 @@ const reset = () => {
   padding: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
+  font-weight: bold !important;
 }
 
 .loginimg img {
@@ -84,7 +84,6 @@ const reset = () => {
   position: absolute;
   left: 13%;
   top: 40%;
-  font-weight: bold;
   display: inline-block;
 }
 
@@ -95,7 +94,6 @@ const reset = () => {
   position: absolute;
   left: 15%;
   top: 47%;
-  font-weight: bold;
   display: inline-block;
 }
 

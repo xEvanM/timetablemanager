@@ -1,7 +1,6 @@
 <template>
   <head>
     <title>Sign Up</title>
-    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div class="loginimg">
@@ -63,6 +62,7 @@ const reg = () => {
   padding: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
+  font-weight: bold;
 }
 
 .loginimg img {
@@ -89,7 +89,6 @@ const reg = () => {
   position: absolute;
   left: 13%;
   top: 40%;
-  font-weight: bold;
   display: inline-block;
 }
 
@@ -100,7 +99,6 @@ const reg = () => {
   position: absolute;
   left: 15%;
   top: 47%;
-  font-weight: bold;
   display: inline-block;
 }
 
