@@ -17,7 +17,7 @@
           <span></span>
           <label>Your Email</label>
         </div>
-        <input id="button" @click="reset" value="Reset Password" />
+        <input id="button" @click="reset" value="Reset Password" readonly />
         <div class="signup_link">
           Remember your password? <a href="#">Log In</a>
         </div>
