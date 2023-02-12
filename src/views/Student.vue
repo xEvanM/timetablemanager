@@ -3,6 +3,10 @@
     <title>Student</title>
   </head>
   <body>
+    <div class="loginimg">
+      <img src= https://cdn-icons-png.flaticon.com/512/277/277991.png>
+    </div>
+    <div class="viewbutton">Daily View</div>
     <div class="banner"></div>
     <div class="greeting">Hello, User!</div>
     <div class="profilepic">
@@ -98,7 +102,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap");
 
 body {
-  background-color: white;
   height: 100vh;
   overflow: hidden;
   background-color: rgb(46, 78, 141);
@@ -118,7 +121,7 @@ body {
 table,
 th,
 td {
-  margin-left: 5%;
+  margin-left: 1%;
   width: 90%;
   margin-top: 5%;
   table-layout: fixed;
@@ -131,6 +134,7 @@ td {
 
 th {
   background-color: rgb(46, 78, 141);
+  border: 1px solid white;
 }
 
 tr {
@@ -155,6 +159,15 @@ td {
   border-top-left-radius: 25px;
 }
 
+.loginimg img {
+  z-index: 1;
+  position: absolute;
+  top: 1%;
+  left: 2%;
+  height: 8%;
+  width: 5%;
+}
+
 .topright {
   border-top-right-radius: 25px;
 }
@@ -177,7 +190,7 @@ td {
 .greeting {
   font-size: 35px;
   position: absolute;
-  left: 6%;
+  left: 8%;
   top: 1%;
   display: inline-block;
   color: black;
@@ -188,7 +201,7 @@ td {
   height: 5%;
   border: 1px solid;
   background: rgb(46, 78, 141);
-  border-radius: 25px;
+  border-radius: 10px;
   font-size: 15px;
   color: white;
   font-weight: 700;
@@ -202,6 +215,30 @@ td {
 
 #button:hover {
   border-color: rgb(46, 78, 141);
+  transition: 0.5s;
+}
+
+.viewbutton {
+  width: 8%;
+  height: 6%;
+  border: 1px solid rgb(46, 78, 141);
+  background: black;
+  border-radius: 10px;
+  font-size: 15px;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  outline: none;
+  position: absolute;
+  bottom: 4%;
+  right: 1%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.viewbutton:hover {
+  border-color: black;
   transition: 0.5s;
 }
 
