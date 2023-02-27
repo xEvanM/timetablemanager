@@ -104,6 +104,7 @@ body {
   background-color: rgb(46, 78, 141);
   height: 100vh;
   overflow: hidden;
+  color: black;
 }
 
 .moduleid {
@@ -136,6 +137,14 @@ body {
   left: 40%;
   width: 20%;
   height: 20%;
+}
+
+input {
+  color: black;
+}
+
+textarea {
+  color: black;
 }
 
 .banner {
