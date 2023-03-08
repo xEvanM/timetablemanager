@@ -7,6 +7,11 @@
       <img src= https://cdn-icons-png.flaticon.com/512/277/277991.png>
     </div>
     <div class="box"></div>
+    <div class="box1"></div>
+    <div class="box2"></div>
+    <div class="box3"></div>
+    <div class="box4"></div>
+    <div class="box5"></div>
     <div class="viewbutton">Daily View</div>
     <div class="banner"></div>
     <div class="greeting">Hello, User!</div>
@@ -132,9 +137,8 @@ table {
 }
 
 th {
-  background: rgba(26, 77, 123, 1);
-  border: 1px solid white;
   color: black;
+  font-size: 22px;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
   border-bottom-left-radius: 15px;
@@ -146,7 +150,6 @@ tr {
 }
 
 td {
-  border: 1px solid;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
   border-bottom-left-radius: 15px;
@@ -170,6 +173,19 @@ td {
 
 .time {
   border: 0;
+}
+
+.box1 {
+  background: rgba(217, 217, 217, 1);
+  position: absolute;
+  top: 11%;
+  left: 11%;
+  height: 88%;
+  width: 16%;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
 }
 
 .box {
