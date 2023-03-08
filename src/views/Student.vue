@@ -9,9 +9,6 @@
     <div class="viewbutton">Daily View</div>
     <div class="banner"></div>
     <div class="greeting">Hello, User!</div>
-    <div class="profilepic">
-      <img src= https://www.pngall.com/wp-content/uploads/5/Biden.png>
-    </div>
     <input id="button" @click="reg" value="Sign Out" readonly />
     <table align="center">
       <tr>
@@ -240,14 +237,6 @@ td {
 .viewbutton:hover {
   border-color: black;
   transition: 0.5s;
-}
-
-.profilepic img {
-  position: absolute;
-  top: 1%;
-  right: 14%;
-  height: 8%;
-  width: 5%;
 }
 
 .banner {

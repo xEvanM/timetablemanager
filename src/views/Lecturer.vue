@@ -4,9 +4,6 @@
   </head>
   <body>
     <div class="banner"></div>
-    <div class="profilepic">
-      <img src= https://www.pngall.com/wp-content/uploads/5/Biden.png>
-    </div>
     <div class="loginimg">
       <img src= https://cdn-icons-png.flaticon.com/512/277/277991.png>
     </div>
@@ -165,14 +162,6 @@ textarea {
   top: 1%;
   display: inline-block;
   color: black;
-}
-
-.profilepic img {
-  position: absolute;
-  top: 1%;
-  right: 14%;
-  height: 8%;
-  width: 5%;
 }
 
 #button {

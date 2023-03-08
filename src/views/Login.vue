@@ -6,7 +6,7 @@
     <div class="loginimg">
       <img src= https://cdn-icons-png.flaticon.com/512/277/277991.png>
     </div>
-    <div class="websiteName">WeeklyPlanner</div>
+    <div class="websiteName">TimetablePro</div>
     <div class="sloganText1">Your Timetable,</div>
     <div class="sloganText2">Made easy</div>
     <div class="center">
