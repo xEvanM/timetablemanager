@@ -6,13 +6,15 @@
     <div class="loginimg">
       <img src= https://cdn-icons-png.flaticon.com/512/277/277991.png>
     </div>
+    <div class="box"></div>
     <div class="viewbutton">Daily View</div>
     <div class="banner"></div>
     <div class="greeting">Hello, User!</div>
+
     <input id="button" @click="reg" value="Sign Out" readonly />
     <table align="center">
       <tr>
-        <th class="topleft">Time/Day</th>
+        <th class="topleft"></th>
         <th>Monday</th>
         <th>Tuesday</th>
         <th>Wednesday</th>
@@ -71,7 +73,7 @@
         <td class="time">3:00pm</td>
         <td></td>
         <td></td>
-        <td class="example">Comp sys<br />IT125</td>
+        <td></td>
         <td></td>
         <td></td>
       </tr>
@@ -84,7 +86,7 @@
         <td></td>
       </tr>
       <tr>
-        <td class="bottomleft">5:00pm</td>
+        <td class="time">5:00pm</td>
         <td></td>
         <td></td>
         <td></td>
@@ -101,7 +103,7 @@
 body {
   height: 100vh;
   overflow: hidden;
-  background-color: rgb(46, 78, 141);
+  background: rgba(21, 38, 70, 1);
 }
 
 * {
@@ -112,26 +114,31 @@ body {
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
   font-weight: bold !important;
-  z-index: 1;
 }
 
-table,
-th,
-td {
-  margin-left: 1%;
-  width: 90%;
-  margin-top: 5%;
+table {
+  position: absolute;
+  top: 12%;
+  left: 2%;
+  height: 85%;
+  width: 88%;
+  display: table;
+  text-align: center;
+  overflow: hidden;
+  font-size: 20px;
+  border-spacing: 5px 3px;
   table-layout: fixed;
   overflow: hidden;
-  text-align: center;
-  border-spacing: 5px 3px;
-  border-collapse: separate;
-  font-size: 20px;
 }
 
 th {
-  background-color: rgb(46, 78, 141);
+  background: rgba(26, 77, 123, 1);
   border: 1px solid white;
+  color: black;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
 }
 
 tr {
@@ -139,21 +146,17 @@ tr {
 }
 
 td {
-  /* background-color: lightgrey; */
   border: 1px solid;
-}
-
-.bottomright {
-  border-bottom-right-radius: 25px;
-}
-
-.bottomleft {
-  border-bottom-left-radius: 25px;
-  background-color: lightgrey;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
 }
 
 .topleft {
-  border-top-left-radius: 25px;
+  border: 0;
+  width: 1%;
+  background: rgba(26, 77, 123, 1);
 }
 
 .loginimg img {
@@ -165,25 +168,29 @@ td {
   width: 5%;
 }
 
-.topright {
-  border-top-right-radius: 25px;
+.time {
+  border: 0;
 }
 
-.time {
-  background-color: lightgrey;
+.box {
+  width: 90%;
+  height: 88%;
+  position: absolute;
+  top: 11%;
+  left: 1%;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  background: rgba(26, 77, 123, 1);
 }
 
 .time,
 .bottomleft,
 .topleft {
-  width: 50%;
+  width: 10%;
 }
 
-.example {
-  background-color: lightgrey;
-  font-size: 14px;
-  color: black;
-}
 .greeting {
   font-size: 35px;
   position: absolute;
@@ -241,7 +248,6 @@ td {
 
 .banner {
   background-color: lightgrey;
-  z-index: 0;
   position: absolute;
   top: 0;
   width: 100%;
