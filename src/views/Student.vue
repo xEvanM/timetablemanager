@@ -13,7 +13,6 @@
     <div class="box4"></div>
     <div class="box5"></div>
     <div class="viewbutton">Daily View</div>
-    <div class="banner"></div>
     <div class="greeting">Hello, User!</div>
 
     <input id="button" @click="reg" value="Sign Out" readonly />
@@ -123,15 +122,15 @@ body {
 
 table {
   position: absolute;
-  top: 12%;
-  left: 2%;
+  top: 11%;
+  left: 5%;
   height: 85%;
   width: 88%;
   display: table;
   text-align: center;
   overflow: hidden;
   font-size: 20px;
-  border-spacing: 5px 3px;
+  border-spacing: 12px 5px;
   table-layout: fixed;
   overflow: hidden;
 }
@@ -154,11 +153,11 @@ td {
   border-top-right-radius: 15px;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
+  background-color: rgb(130, 22, 22);
 }
 
 .topleft {
   border: 0;
-  width: 1%;
   background: rgba(26, 77, 123, 1);
 }
 
@@ -166,22 +165,75 @@ td {
   z-index: 1;
   position: absolute;
   top: 1%;
-  left: 2%;
+  left: 5.5%;
   height: 8%;
-  width: 5%;
+  width: 4%;
 }
 
 .time {
   border: 0;
+  background: rgba(26, 77, 123, 1);
 }
 
 .box1 {
   background: rgba(217, 217, 217, 1);
   position: absolute;
-  top: 11%;
-  left: 11%;
-  height: 88%;
-  width: 16%;
+  top: 12%;
+  left: 14.8%;
+  height: 86%;
+  width: 15%;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+.box2 {
+  background: rgba(217, 217, 217, 1);
+  position: absolute;
+  top: 12%;
+  left: 30.5%;
+  height: 86%;
+  width: 15%;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+.box3 {
+  background: rgba(217, 217, 217, 1);
+  position: absolute;
+  top: 12%;
+  left: 46%;
+  height: 86%;
+  width: 15%;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+.box4 {
+  background: rgba(217, 217, 217, 1);
+  position: absolute;
+  top: 12%;
+  left: 61.6%;
+  height: 86%;
+  width: 15%;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+.box5 {
+  background: rgba(217, 217, 217, 1);
+  position: absolute;
+  top: 12%;
+  left: 77.3%;
+  height: 86%;
+  width: 15%;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
   border-bottom-left-radius: 15px;
@@ -192,8 +244,8 @@ td {
   width: 90%;
   height: 88%;
   position: absolute;
-  top: 11%;
-  left: 1%;
+  top: 10.5%;
+  left: 5%;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
   border-bottom-left-radius: 15px;
@@ -210,21 +262,20 @@ td {
 .greeting {
   font-size: 35px;
   position: absolute;
-  left: 8%;
+  left: 10.5%;
   top: 1%;
   display: inline-block;
-  color: black;
+  color: white;
 }
 
 #button {
-  width: 7%;
-  height: 5%;
+  width: 8%;
+  height: 6%;
   border: 1px solid;
   background: rgb(46, 78, 141);
   border-radius: 10px;
   font-size: 15px;
   color: white;
-  font-weight: 700;
   cursor: pointer;
   outline: none;
   text-align: center;
@@ -241,7 +292,7 @@ td {
 .viewbutton {
   width: 8%;
   height: 6%;
-  border: 1px solid rgb(46, 78, 141);
+  border: 1px solid white;
   background: black;
   border-radius: 10px;
   font-size: 15px;
@@ -250,8 +301,8 @@ td {
   cursor: pointer;
   outline: none;
   position: absolute;
-  bottom: 4%;
-  right: 1%;
+  top: 3%;
+  right: 15%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -260,15 +311,5 @@ td {
 .viewbutton:hover {
   border-color: black;
   transition: 0.5s;
-}
-
-.banner {
-  background-color: lightgrey;
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 10%;
-  border-bottom-left-radius: 25px;
-  border-bottom-right-radius: 25px;
 }
 </style>
