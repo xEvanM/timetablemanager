@@ -13,6 +13,7 @@
         <span class="twelcome">Daily View for, User!</span>
     </body>
 </template>
+
 <script>
 </script>
 

@@ -8,9 +8,8 @@ const router = createRouter({
         { path: "/student", component: () => import("../views/Student.vue") },
         { path: "/forgot", component: () => import("../views/ForgotPassword.vue") },
         { path: "/lecturer", component: () => import("../views/Lecturer.vue") },
-        { path: "/lectureralt", component: () => import("../views/Lecturer_alt.vue") },
-        { path: "/studentdaily", component: () => import("../views/DailyView.vue") }
-
+        { path: "/lectureralt", component: () => import("../views/LecturerAlt.vue") },
+        { path: "/daily", component: () => import("../views/Daily.vue") }
     ]
 });
 
