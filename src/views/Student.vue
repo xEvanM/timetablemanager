@@ -16,7 +16,7 @@
     <div class="greeting">Hello, User!</div>
 
     <input id="button" @click="reg" value="Sign Out" readonly />
-    <table align="center">
+    <table>
       <tr>
         <th class="topleft"></th>
         <th>Monday</th>
