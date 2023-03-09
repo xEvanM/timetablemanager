@@ -7,7 +7,10 @@ const router = createRouter({
         { path: "/signup", component: () => import("../views/SignUp.vue") },
         { path: "/student", component: () => import("../views/Student.vue") },
         { path: "/forgot", component: () => import("../views/ForgotPassword.vue") },
-        { path: "/lecturer", component: () => import("../views/Lecturer.vue") }
+        { path: "/lecturer", component: () => import("../views/Lecturer.vue") },
+        { path: "/lectureralt", component: () => import("../views/Lecturer_alt.vue") },
+        { path: "/studentdaily", component: () => import("../views/Daily.vue") }
+
     ]
 });
 
