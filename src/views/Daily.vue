@@ -1,7 +1,6 @@
 <template>
 <head>
     <link href="main2.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Inter&amp;display=swap" rel="stylesheet">
     <title>Daily View</title>
 </head>
 <body>
@@ -9,11 +8,17 @@
         <img src= https://cdn-icons-png.flaticon.com/512/277/277991.png>
     </div>
     <div class="background"></div>
+
     <span class="viewText">Here's Today's Timetable!</span>
-    <div class="background2">
+    <div class="background2"><div class="box1"></div>
+      <span class="DateText">Monday, 14th of March</span>
+      
+      <div class="box2"></div>
+      <div class="box3"></div>
+      <div class="box4"></div>
         <table class="table">
             <tr>
-                <th>Monday, 12th of March</th>
+                <th></th>
                 <th>Module</th>
                 <th>Venue</th>
             </tr>
@@ -66,20 +71,21 @@
                 <td>6pm</td>
                 <td>Row 10, Column 2</td>
                 <td>Row 10, Column 3</td>
-            
             </tr>
         </table>
-    </div>
+      </div>
     <div class="viewbutton">Weekly View</div>
+    
 </body>
 </template>
 
 <script>
 </script>
 
-<style scoped> .background {
+<style scoped> 
+.background {
     margin:0px;
-    background: rgba(21, 38, 70, 1);
+    background: rgb(3, 4, 94,);
     height: 100%;
     width: 100%;
     position: absolute;
@@ -93,10 +99,7 @@
     font-family: "Poppins", sans-serif;
     font-weight: bold !important;
   }
-body{
-    margin:0px;
-    padding:0px;
-}
+
 .loginimg img {
     z-index: 1;
     position: absolute;
@@ -116,7 +119,7 @@ body{
 .background2 {
     height: 80%;
     width: 90%;
-    background: rgba(26, 77, 123, 1);
+    background: rgb(0, 119, 182);
     opacity: 1;
     position: absolute;
     top: 15%;
@@ -127,32 +130,38 @@ body{
     border-top-right-radius: 35px;
     border-bottom-left-radius: 35px;
     border-bottom-right-radius: 35px;
+    z-index: 1;
 }
 .table {
-    width: 100%;
+    width: 65%;
     height: 100%;
     table-layout: fixed;
     border-collapse: collapse;
     font-size: 20px;
+    color: rgb(37, 37, 37);
     text-align: 20% right;
-  }
-  
-  .table td, .table th {
-    padding: 10px;
+    margin: auto;
+    z-index: 2;
+    position: relative;
   }
 
+  .table td, .table th {
+    padding: 1%;
+    z-index: 2;
+  }
 
   th {
-    color: black;
-    font-size: 22px;
+    color: rgb(	37, 37, 37);
+    font-size: 20px;
   }
+
 
 
   .viewbutton {
     width: 8%;
     height: 6%;
     border: 1px solid white;
-    background: black;
+    background:rgb(	37, 37, 37);
     border-radius: 10px;
     font-size: 15px;
     color: white;
@@ -167,7 +176,66 @@ body{
     align-items: center;
   }
   .viewbutton:hover {
-    border-color: black;
+    border-color: rgb(	37, 37, 37);
     transition: 0.5s;
+  }
+  .box2 {
+  background: rgb(0, 180, 216);
+  position: absolute;
+  top: 11.5%;
+  left: 13.5%;
+  height: 86%;
+  width: 12%;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+  z-index: 2;
+}
+.box3 {
+  background: rgb(0, 180, 216);
+  position: absolute;
+  top: 11.5%;
+  left: 59%;
+  height: 86%;
+  width: 17%;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+  z-index: 2;
+}
+.box4 {
+  background: rgb(0, 180, 216);
+  position: absolute;
+  top: 11.5%;
+  left: 37%;
+  height: 86%;
+  width: 17%;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+  z-index: 2;
+}
+.DateText {
+        font-size: 40px;
+        position: absolute;
+        left: 5%;
+        top: 2%;
+        display: inline-block;
+        color: rgb(	37, 37, 37);
+}
+.box1 {
+    width: 35%;
+    height: 9%;
+    background: rgb(193, 18, 31);
+    position: absolute;
+    top: 1.5%;
+    left: 2.5%;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
   }
 </style>
