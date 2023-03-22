@@ -12,10 +12,11 @@
       <span class="viewText">Here's Today's Timetable!</span>
       <div class="background2"><div class="box1"></div>
         <span class="DateText">Monday, 14th of March</span>
-        
         <div class="box2"></div>
+        <div class="ArrowRight">&#62;</div>
+        <div class="ArrowLeft">&#60;</div>
         <div class="box3"></div>
-        <div class="box4"></div>
+    
           <table class="table">
               <tr>
                   <td>9:00am</td>
@@ -26,58 +27,60 @@
               <tr>
                   <td>10:00am</td>
                   <td>CT:230</td>
-                  <td>Row 2, Column 3</td>
-                  <td>Row 2, Column 4</td>
+                  <td></td>
+                  <td></td>
               </tr>
               <tr>
                   <td>11:00am</td>
                   <td></td>
-                  <td>Row 3, Column 3</td>
-                  <td>Row 2, Column 4</td>
+                  <td></td>
+                  <td></td>
               </tr>
               <tr>
                   <td>12:00am</td>
-                  <td>Row 4, Column 2</td>
-                  <td>Row 4, Column 3</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
               </tr>
               <tr>
                   <td>1:00pm</td>
-                  <td>Row 5, Column 2</td>
-                  <td>Row 5, Column 3</td>
-                  <td>Row 2, Column 4</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
               </tr>
               <tr>
                   <td>2:00pm</td>
-                  <td>Row 6, Column 2</td>
-                  <td>Row 6, Column 3</td>
-                  <td>Row 2, Column 4</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
               </tr>
               <tr>
                   <td>3:00pm</td>
-                  <td>Row 7, Column 2</td>
-                  <td>Row 7, Column 3</td>
-                  <td>Row 2, Column 4</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
               </tr>
               <tr>
                   <td>4:00pm</td>
-                  <td>Row 8, Column 2</td>
-                  <td>Row 8, Column 3</td>
-                  <td>Row 2, Column 4</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
               </tr>
               <tr>
                   <td>5:00pm</td>
-                  <td>Row 9, Column 2</td>
-                  <td>Row 9, Column 3</td>
-                  <td>Row 2, Column 4</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
               </tr>
           </table>
         </div>
       <div class="viewbutton">Weekly View</div>
-      
+    
   </body>
   </template>
   
   <script>
+
   </script>
   
   <style scoped> 
@@ -173,8 +176,61 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      z-index: 2;
     }
     .viewbutton:hover {
+      border-color: rgb(	37, 37, 37);
+      transition: 0.5s;
+      z-index: 1;
+    }
+
+
+
+    .ArrowRight {
+      width: 8%;
+      height: 8%;
+      border: 1px solid white;
+      background:rgb(	37, 37, 37);
+      border-radius: 50%;
+      font-size: 50px;
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+      outline: none;
+      position: absolute;
+      top: 45%;
+      right: -5%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 3;
+    }
+    .ArrowRight:hover {
+      border-color: rgb(	37, 37, 37);
+      transition: 0.5s;
+    }
+
+
+    .ArrowLeft {
+      width: 8%;
+      height: 8%;
+      border: 1px solid white;
+      background:rgb(	37, 37, 37);
+      font-size: 50px;
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+      outline: none;
+      position: absolute;
+      top:45%;
+      left: -5%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 3;
+      border-radius: 50%
+    }
+    .ArrowLeft:hover {
       border-color: rgb(	37, 37, 37);
       transition: 0.5s;
     }
