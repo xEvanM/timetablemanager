@@ -64,6 +64,7 @@ const reg = () => {
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
   font-weight: bold !important;
+  overflow: hidden !important;
 }
 
 .loginimg img {
@@ -105,8 +106,7 @@ const reg = () => {
 
 body {
   background-color: rgb(46, 78, 141);
-  height: 92%;
-  width:92%;
+  height: 100vh;
   overflow: hidden;
 }
 
@@ -224,5 +224,26 @@ form .txt_field {
 
 .signup_link a:hover {
   text-decoration: underline;
+}
+
+.custom-shape-divider-bottom-1679498594 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom-1679498594 svg {
+  position: relative;
+  display: block;
+  width: calc(220% + 1.3px);
+  height: 195px;
+}
+
+.custom-shape-divider-bottom-1679498594 .shape-fill {
+  fill: #ffffff;
 }
 </style>
