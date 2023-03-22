@@ -105,7 +105,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap");
 
 body {
-  height: 100vh;
+  height: 92%;
+  width: 92%;
   overflow: hidden;
   background: rgba(21, 38, 70, 1);
 }

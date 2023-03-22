@@ -99,7 +99,8 @@ export default {
 
 body {
   background-color: rgb(46, 78, 141);
-  height: 100vh;
+  height: 92%;
+  width:92%;
   overflow: hidden;
   color: black;
 }
@@ -149,7 +150,7 @@ textarea {
   z-index: 0;
   position: absolute;
   top: 0;
-  width: 100%;
+  width:92%;
   height: 10%;
   border-bottom-left-radius: 25px;
   border-bottom-right-radius: 25px;

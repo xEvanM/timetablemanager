@@ -84,8 +84,8 @@
   .background {
       margin:0px;
       background: rgb(3, 4, 94,);
-      height: 100%;
-      width: 100%;
+      height: 92%;
+      width: 92%;
       position: absolute;
   }
   * {
