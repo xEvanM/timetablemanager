@@ -127,8 +127,9 @@ const reg = () => {
 
 body {
   background-color: rgb(46, 78, 141);
-  height: 100vh;
   overflow: hidden;
+  height: 92%;
+  width: 92%;
 }
 
 .center {
