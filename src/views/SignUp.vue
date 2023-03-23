@@ -13,6 +13,11 @@
       <h1>Sign Up</h1>
       <form>
         <div class="txt_field">
+          <input type="text" v-model="fname" />
+          <span></span>
+          <label>Enter First Name</label>
+        </div>
+        <div class="txt_field">
           <input type="email" v-model="email" />
           <span></span>
           <label>Enter Email</label>
@@ -22,7 +27,7 @@
           <span></span>
           <label>Create Password</label>
         </div>
-        <input id="button" @click="reg" value="Sign up" readonly />
+        <input id="button" @click="createStudent" value="Sign up" readonly />
         <div class="signup_link">
           Already have an account? <a href="#">Log In</a>
         </div>
@@ -54,26 +59,58 @@
   </body>
 </template>
 
-<script setup>
+<script>
 import app from "../api/firebase.js";
 import { ref } from "vue";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "vue-router";
-const email = ref("");
-const password = ref("");
-const router = useRouter();
+import { getFunctions, httpsCallable } from "firebase/functions";
 
-const reg = () => {
-  console.log("register called");
-  createUserWithEmailAndPassword(getAuth(), email.value, password.value)
-    .then(() => {
-      console.log("Registered!");
-      router.push("/student"); // redirect to student page - will update this to send to STUDENT or LECTURER depending on credentials
-    })
-    .catch((error) => {
-      console.log("Error: " + error.code);
-      alert(error.message);
-    });
+export default{
+  data() {
+    return {
+      email: "",
+      fname: "",
+      password: "",
+    };
+  },
+  created() {},
+  methods: {
+    createStudent() {
+      console.log("Attempting to create student");
+      const functions = getFunctions(app);
+      const addModule = httpsCallable(functions, "createStudent");
+      
+      // Call reg() method inside createStudent() method
+      this.reg();
+
+      var data = {
+        fname: this.fname,
+        email: this.email,
+      };
+      console.log(data);
+      addModule({
+        fname: this.fname,
+        email: this.email,
+      }).then((result) => {
+        console.log(result);
+      });
+    },
+
+    // Move reg() method inside Vue instance
+    reg() {
+      console.log("sign up function was called");
+      createUserWithEmailAndPassword(getAuth(), this.email, this.password)
+        .then(() => {
+          console.log("User created successfully");
+          // Navigate to another route after successful sign up
+          this.$router.push("/student");
+        })
+        .catch((error) => {
+          console.log("Error creating user:", error);
+        });
+    },
+  },
 };
 </script>
 

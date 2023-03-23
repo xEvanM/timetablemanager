@@ -11,9 +11,34 @@ exports.addModule = functions.https.onRequest((request, response) => {
     });
 });
 
+exports.createStudent = functions.https.onRequest((request, response) => {
+  cors(request, response, () => {
+      return admin.firestore().collection('students').add(request.body).then(() => {
+          response.json({ data: "New student added successfully"});
+      });
+  });
+});
+
+exports.getFirstName = functions.https.onRequest((request, response) => {
+  cors(request, response, () => {
+    const email = request.body.email;
+    if (!email) {
+      response.status(400).json({ error: "Email is required" });
+      return;
+    }
+    return admin.firestore().collection('students').where('email', '==', email).get().then((snapshot) => {
+      if (snapshot.empty) {
+        response.status(404).json({ error: "User not found" });
+        return;
+      }
+      const firstName = snapshot.docs[0].data().fname;
+      response.json({ data: firstName });
+    });
+  });
+});
+
 
 // enhanced addModule that gets data on students and lectuers
-
 // Add a module to Firestore
 exports.addModule2 = functions.https.onCall(async (data, context) => {
 
