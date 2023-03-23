@@ -18,6 +18,7 @@
           <label>Your Email</label>
         </div>
         <div class="txt_field">
+          <ion-icon name="arrow-back-outline"></ion-icon>
           <input type="password" v-model="password" />
           <span></span>
           <label>Your Password</label>
@@ -143,6 +144,7 @@ body {
   background: white;
   border-radius: 10px;
   box-shadow: 0px 0px 10px 0px rgba(23, 2, 32, 1);
+  color: rgb(37, 37, 37);
 }
 
 .center h1 {
@@ -178,6 +180,7 @@ form .txt_field {
   color: #adadad;
   transform: translateY(-50%);
   font-size: 16px;
+  top: -5px;
   pointer-events: none;
   transition: 0.5s;
 }
@@ -196,7 +199,7 @@ form .txt_field {
 .txt_field input:focus ~ label,
 .txt_field input:valid ~ label {
   top: -5px;
-  color: rgb(46, 78, 141);
+  color: rgba(24, 47, 93, 1);
 }
 
 .txt_field input:focus ~ span::before,

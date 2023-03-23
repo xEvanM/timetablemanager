@@ -66,7 +66,7 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "vue-router";
 import { getFunctions, httpsCallable } from "firebase/functions";
 
-export default{
+export default {
   data() {
     return {
       email: "",
@@ -80,7 +80,7 @@ export default{
       console.log("Attempting to create student");
       const functions = getFunctions(app);
       const addModule = httpsCallable(functions, "createStudent");
-      
+
       // Call reg() method inside createStudent() method
       this.reg();
 
@@ -179,6 +179,7 @@ body {
   background: white;
   border-radius: 10px;
   box-shadow: 0px 0px 10px 0px rgba(23, 2, 32, 1);
+  color: rgb(37, 37, 37);
 }
 
 .center h1 {
