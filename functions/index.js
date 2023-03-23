@@ -14,11 +14,10 @@ exports.addModule = functions.https.onRequest((request, response) => {
     });
 });
 
-<<<<<<< Updated upstream
 exports.createStudent = functions.https.onRequest((request, response) => {
   cors(request, response, () => {
       return admin.firestore().collection('students').add(request.body).then(() => {
-          response.json({ data: "New student added successfully"});
+          response.json({ data: "student added successfully"});
       });
   });
 });
@@ -51,22 +50,6 @@ exports.addModule2 = functions.https.onCall(async (data, context) => {
 
 
   const db = admin.firestore();
-=======
-/**
- * updateModuleData function 
- * Updates or creates a module document in Firestore with the given data.
- * 
- * @param {Object} data - The module data to save, containing moduleID, name, location, and times[].
- * @return {Object} An object containing a success property (a boolean indicating whether the operation succeeded) and an optional error property (a string containing an error message if the operation failed).
- */
-
-exports.updateModuleData = functions.https.onCall(async (data, context) => {
-  // Extract the module data fields from the data object
-  const moduleID = data.moduleID;
-  const name = data.name;
-  const location = data.location;
-  const times = data.times;
->>>>>>> Stashed changes
 
   try {
     // Get a reference to the module document in Firestore
