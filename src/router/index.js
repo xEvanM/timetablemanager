@@ -22,12 +22,10 @@ function isAuth(to, from, next) {
     onAuthStateChanged(auth, (user) => {
         if (user) {
             console.log(user);
-            // User is signed in so continue to desired page
+            // user is signed in so continue to page requested 
             return next();
-            // ...
         } else {
-            // User is signed out
-            // Send them back to the home page or maybe the login page
+            // if the user is signed out, send to login page
             return next({path: '/login'});
         }
     });
