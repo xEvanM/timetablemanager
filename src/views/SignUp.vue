@@ -89,10 +89,7 @@ export default {
         email: this.email,
       };
       console.log(data);
-      addModule({
-        fname: this.fname,
-        email: this.email,
-      }).then((result) => {
+      addModule(data).then((result) => {
         console.log(result);
       });
     },
