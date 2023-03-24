@@ -23,6 +23,16 @@
         </div>
       </form>
     </div>
+    <svg
+      class="emailicon"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+    >
+      <path
+        fill="currentColor"
+        d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5l-8-5h16zm0 12H4V8l8 5l8-5v10z"
+      />
+    </svg>
     <div class="custom-shape-divider-bottom-1679498594">
       <svg
         data-name="Layer 1"
@@ -98,6 +108,7 @@ const reset = () => {
   position: absolute;
   top: 7%;
   left: 9%;
+  text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
 }
 
 .sloganText1 {
@@ -108,6 +119,7 @@ const reset = () => {
   left: 13%;
   top: 40%;
   display: inline-block;
+  text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
 }
 
 .sloganText2 {
@@ -118,6 +130,7 @@ const reset = () => {
   left: 15%;
   top: 47%;
   display: inline-block;
+  text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
 }
 
 body {
@@ -137,6 +150,7 @@ body {
   background: white;
   border-radius: 10px;
   box-shadow: 0px 0px 10px 0px rgba(23, 2, 32, 1);
+  color: rgb(37, 37, 37);
 }
 
 .center h1 {
@@ -215,7 +229,7 @@ form .txt_field {
   background: rgb(46, 78, 141);
   border-radius: 25px;
   font-size: 18px;
-  color: #e9f4fb;
+  color: white;
   font-weight: 700;
   cursor: pointer;
   outline: none;
@@ -262,5 +276,15 @@ form .txt_field {
 
 .custom-shape-divider-bottom-1679498594 .shape-fill {
   fill: #ffffff;
+}
+
+.emailicon {
+  position: absolute;
+  top: 44%;
+  right: 16.5%;
+  height: 4.5%;
+  width: 4.5%;
+  display: block;
+  z-index: 2;
 }
 </style>

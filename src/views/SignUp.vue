@@ -33,6 +33,36 @@
         </div>
       </form>
     </div>
+    <svg
+      class="emailicon"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+    >
+      <path
+        fill="currentColor"
+        d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5l-8-5h16zm0 12H4V8l8 5l8-5v10z"
+      />
+    </svg>
+    <svg
+      class="nameicon"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+    >
+      <path
+        fill="currentColor"
+        d="M5.85 17.1q1.275-.975 2.85-1.538T12 15q1.725 0 3.3.563t2.85 1.537q.875-1.025 1.363-2.325T20 12q0-3.325-2.337-5.663T12 4Q8.675 4 6.337 6.337T4 12q0 1.475.488 2.775T5.85 17.1ZM12 13q-1.475 0-2.488-1.012T8.5 9.5q0-1.475 1.012-2.488T12 6q1.475 0 2.488 1.012T15.5 9.5q0 1.475-1.012 2.488T12 13Zm0 9q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22Z"
+      />
+    </svg>
+    <svg
+      class="passwordicon"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+    >
+      <path
+        fill="currentColor"
+        d="M6 22q-.825 0-1.413-.588T4 20V10q0-.825.588-1.413T6 8h1V6q0-2.075 1.463-3.538T12 1q2.075 0 3.538 1.463T17 6v2h1q.825 0 1.413.588T20 10v10q0 .825-.588 1.413T18 22H6Zm0-2h12V10H6v10Zm6-3q.825 0 1.413-.588T14 15q0-.825-.588-1.413T12 13q-.825 0-1.413.588T10 15q0 .825.588 1.413T12 17ZM9 8h6V6q0-1.25-.875-2.125T12 3q-1.25 0-2.125.875T9 6v2ZM6 20V10v10Z"
+      />
+    </svg>
     <div class="custom-shape-divider-bottom-1679498594">
       <svg
         data-name="Layer 1"
@@ -65,6 +95,8 @@ import { ref } from "vue";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "vue-router";
 import { getFunctions, httpsCallable } from "firebase/functions";
+
+import { Icon } from "@iconify/vue";
 const functions = getFunctions(app);
 
 export default {
@@ -84,18 +116,17 @@ export default {
       console.log("email: " + email);
       console.log("Attempting to create student");
       const addModule = httpsCallable(functions, "createStudent");
-      
 
       // Call reg() method inside createStudent() method
       this.reg();
 
       const data = {
         fname: this.fname,
-        email: this.email
+        email: this.email,
       };
       console.log(data);
       const jsonData = JSON.stringify(data);
-      console.log
+      console.log;
       addModule(jsonData).then((result) => {
         console.log(result.data);
       });
@@ -143,6 +174,7 @@ export default {
   position: absolute;
   top: 7%;
   left: 9%;
+  text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
 }
 
 .sloganText1 {
@@ -153,6 +185,7 @@ export default {
   left: 13%;
   top: 40%;
   display: inline-block;
+  text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
 }
 
 .sloganText2 {
@@ -163,6 +196,7 @@ export default {
   left: 15%;
   top: 47%;
   display: inline-block;
+  text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
 }
 
 body {
@@ -261,7 +295,7 @@ form .txt_field {
   background: rgb(46, 78, 141);
   border-radius: 25px;
   font-size: 18px;
-  color: #e9f4fb;
+  color: white;
   font-weight: 700;
   cursor: pointer;
   outline: none;
@@ -308,5 +342,35 @@ form .txt_field {
 
 .custom-shape-divider-bottom-1679498594 .shape-fill {
   fill: #ffffff;
+}
+
+.emailicon {
+  position: absolute;
+  top: 44%;
+  right: 16.5%;
+  height: 4.5%;
+  width: 4.5%;
+  display: block;
+  z-index: 2;
+}
+
+.passwordicon {
+  position: absolute;
+  top: 56.5%;
+  right: 16.5%;
+  height: 4.5%;
+  width: 4.5%;
+  display: block;
+  z-index: 2;
+}
+
+.nameicon {
+  position: absolute;
+  top: 31.8%;
+  right: 16.5%;
+  height: 4.5%;
+  width: 4.5%;
+  display: block;
+  z-index: 2;
 }
 </style>
