@@ -13,13 +13,33 @@ exports.addModule = functions.https.onRequest((request, response) => {
     });
 });
 
+// Create or update student function 
+exports.createStudent = functions.https.onRequest(async (req, res) => {
+  cors(req, res, async () => {
+    // Extract the module data fields from the request body
+    const email = req.body.email;
+    const fname = req.body.fname;
 
-// this function creates a student, and is called when a student is registered on signup
-exports.createStudent = functions.https.onRequest((request, response) => { 
-  cors(request, response, () => {
-      return admin.firestore().collection('students').add(request.body).then(() => {
-          response.json({ data: "student added successfully"});
-      });
+    const encodedEmail = encodeURIComponent(email);
+
+    try {
+      // Get a reference to the module document in Firestore
+      const moduleRef = db.collection('students').doc(encodedEmail);
+      const moduleDoc = await moduleRef.get();
+
+      // If the module document already exists, update it with the new location and times fields,
+      // If it does not exist, create it with the new location and times fields
+      await moduleRef.set({ 
+        fname: fname
+      }, { merge: true });
+
+      // Return a success message
+      res.status(200).send({ success: true });
+    } catch (error) {
+      // If an error occurs, log it and return an error message
+      console.error('Error adding or updating student', error);
+      res.status(500).send({ success: false, error: error.message });
+    }
   });
 });
 
@@ -42,45 +62,38 @@ exports.getFirstName = functions.https.onRequest((request, response) => {
   });
 });
 
-// this function is used to set OR update the data for a specific module in the firestore database
-exports.updateModuleData = functions.https.onCall(async (data, context) => {
-  const moduleID = data.moduleID;
-  const name = data.name;
-  const location = data.location;
-  const times = data.times;
+// Update Module Data function (Working!!)
+exports.updateModuleData2 = functions.https.onRequest(async (req, res) => {
+  cors(req, res, async () => {
+    // Extract the module data fields from the request body
+    const moduleID = req.body.moduleID;
+    const name = req.body.name;
+    const location = req.body.location;
+    const times = req.body.times;
 
-  try {
-    // Retrieve all students who are studying this module
-    const studentsSnapshot = await db.collection("students").where("studies", "array-contains", name).get();
-    const studentRefs = studentsSnapshot.docs.map((doc) => db.collection("students").doc(doc.id));
+    // mouduleIDString = moduleID.toString();
 
-    // Add the module data to Firestore
-    const moduleData = { location, name, students: studentRefs, taughtby: db.collection("lecturers").doc(taughtby), times };
-    const moduleRef = await db.collection("modules").add(moduleData);
+    try {
+      // Get a reference to the module document in Firestore
+      const moduleRef = db.collection('modules').doc(moduleID);
+      const moduleDoc = await moduleRef.get();
 
-    return { success: true, id: moduleRef.id };
-    // Get a reference to the module document in Firestore
-    const modRef = db.collection('modules').doc(moduleID);
-    const moduleDoc = await moduleRef.get();
-
-    // If the module document already exists, update it with the new location and times fields,
-    // If it does not exist, create it with the new location and times fields
-
+      // If the module document already exists, update it with the new location and times fields,
+      // If it does not exist, create it with the new location and times fields
       await moduleRef.set({ 
         name: name,
         location: location,
         times: times
-      });
+      }, { merge: true });
 
-    // Return a success message
-    return { success: true };
-  } catch (error) {
-    console.error("Error adding module:", error);
-    return { success: false };
-    // If an error occurs, log it and return an error message
-    console.error('Error updating module data:', error);
-    return { success: false, error: error.message };
-  }
+      // Return a success message
+      res.status(200).send({ success: true });
+    } catch (error) {
+      // If an error occurs, log it and return an error message
+      console.error('Error updating module data:', error);
+      res.status(500).send({ success: false, error: error.message });
+    }
+  });
 });
 
 /**
