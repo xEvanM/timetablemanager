@@ -65,6 +65,7 @@ import { ref } from "vue";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "vue-router";
 import { getFunctions, httpsCallable } from "firebase/functions";
+import { Icon } from "@iconify/vue";
 
 export default {
   data() {

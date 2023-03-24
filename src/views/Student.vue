@@ -149,6 +149,7 @@ table {
   top: 11%;
   left: 5%;
   width: 85%;
+  height: 85%;
   display: table;
   text-align: center;
   overflow: hidden;
@@ -165,10 +166,6 @@ th {
   border-top-right-radius: 15px;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
-}
-
-tr {
-  height: 45px;
 }
 
 /* td {
@@ -199,6 +196,7 @@ tr {
   background: #8ca6be;
   box-shadow: none;
   text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
+  color: white;
 }
 
 .box1 {
@@ -295,7 +293,7 @@ tr {
   font-size: 35px;
   position: absolute;
   left: 10.5%;
-  top: 1%;
+  top: 1.5%;
   display: inline-block;
   color: white;
   text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);

@@ -11,6 +11,27 @@
     <div class="box2"></div>
     <div class="box3"></div>
     <div class="viewbutton">Weekly View</div>
+    <svg
+      class="leftarrow"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+    >
+      <path
+        fill="currentColor"
+        d="m12 16l1.4-1.4l-1.6-1.6H16v-2h-4.2l1.6-1.6L12 8l-4 4l4 4Zm0 6q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22Z"
+      />
+    </svg>
+    <svg
+      class="rightarrow"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+    >
+      <path
+        fill="currentColor"
+        d="m12 16l4-4l-4-4l-1.4 1.4l1.6 1.6H8v2h4.2l-1.6 1.6L12 16Zm0 6q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22Z"
+      />
+    </svg>
+
     <div class="custom-shape-divider-bottom-1679498594">
       <svg
         data-name="Layer 1"
@@ -102,6 +123,10 @@
   </body>
 </template>
 
+<script>
+import { Icon } from "@iconify/vue";
+</script>
+
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap");
 
@@ -127,6 +152,7 @@ table {
   top: 11%;
   left: 12%;
   width: 70%;
+  height: 85%;
   display: table;
   text-align: center;
   overflow: hidden;
@@ -144,10 +170,6 @@ th {
   border-top-right-radius: 15px;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
-}
-
-tr {
-  height: 45px;
 }
 
 /* td {
@@ -178,6 +200,7 @@ tr {
   background: #8ca6be;
   box-shadow: none;
   text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
+  color: white;
 }
 
 .box1 {
@@ -223,11 +246,11 @@ tr {
 }
 
 .box {
-  width: 75%;
+  width: 70%;
   height: 88%;
   position: absolute;
   top: 10.5%;
-  left: 11%;
+  left: 13.5%;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
   border-bottom-left-radius: 15px;
@@ -246,7 +269,7 @@ tr {
   font-size: 35px;
   position: absolute;
   left: 10.5%;
-  top: 1%;
+  top: 1.5%;
   display: inline-block;
   color: white;
   text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
@@ -318,5 +341,35 @@ tr {
 
 .custom-shape-divider-bottom-1679498594 .shape-fill {
   fill: #ffffff;
+}
+
+.leftarrow {
+  position: absolute;
+  top: 45%;
+  left: 6.6%;
+  height: 12%;
+  width: 12%;
+  cursor: pointer;
+  display: block;
+  z-index: 2;
+  clip-path: circle(25% at 50% 50%);
+}
+
+.rightarrow {
+  position: absolute;
+  top: 45%;
+  right: 9.7%;
+  height: 12%;
+  width: 12%;
+  cursor: pointer;
+  display: block;
+  z-index: 2;
+  clip-path: circle(25% at 50% 50%);
+}
+
+.rightarrow:hover,
+.leftarrow:hover {
+  border: 1px solid white;
+  transition: 0.5s;
 }
 </style>
