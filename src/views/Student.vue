@@ -1,6 +1,6 @@
 <template>
   <head>
-    <title>Student</title>
+    <title>Weekly View</title>
   </head>
   <body>
     <div class="loginimg">
@@ -46,7 +46,7 @@
         <th>Tuesday</th>
         <th>Wednesday</th>
         <th>Thursday</th>
-        <th class="topright">Friday</th>
+        <th>Friday</th>
       </tr>
       <tr>
         <td class="time">9:00am</td>
@@ -211,12 +211,13 @@ tr {
   height: 45px;
 }
 
-/*td {
+/* td {
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
   background-color: rgb(204, 0, 0);
+  box-shadow: 0px 0px 5px 0px rgba(23, 2, 32, 1);
 } */
 
 .topleft {
@@ -236,6 +237,8 @@ tr {
 .time {
   border: 0;
   background: #8ca6be;
+  box-shadow: none;
+  text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
 }
 
 .box1 {
@@ -309,11 +312,11 @@ tr {
 }
 
 .box {
-  width: 90%;
+  width: 85%;
   height: 88%;
   position: absolute;
   top: 10.5%;
-  left: 5%;
+  left: 6%;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
   border-bottom-left-radius: 15px;
@@ -335,6 +338,7 @@ tr {
   top: 1%;
   display: inline-block;
   color: white;
+  text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
 }
 
 #button {
