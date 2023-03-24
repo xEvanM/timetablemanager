@@ -1,6 +1,6 @@
 <template>
   <head>
-    <title>Student</title>
+    <title>Weekly View</title>
   </head>
   <body>
     <div class="loginimg">
