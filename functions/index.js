@@ -14,7 +14,7 @@ exports.createStudent = functions.https.onRequest(async (req, res) => {
 
     try {
       const studentRef = db.collection('students').doc(encodedEmail); // reference to the student
-      const studentDoc = await moduleRef.get();
+      const studentDoc = await studentRef.get();
 
       await studentRef.set({  // set the data for the student, based on the student ref
         fname: fname
@@ -27,6 +27,39 @@ exports.createStudent = functions.https.onRequest(async (req, res) => {
     }
   });
 });
+
+// FUNCTION TO CREATE OR UPDATE A LECTURER
+exports.createLecturer = functions.https.onRequest(async (req, res) => {
+  cors(req, res, async () => {
+    // Extract the module data fields from the request body
+    const email = req.body.data.email;
+    const name = req.body.data.name;
+    const encodedEmail = encodeURIComponent(email);
+    const auth = req.body.data.auth;
+    const authString = auth.toString();
+    console.log("Auth string: " + authString);
+
+    if (authString == "admin123") {
+      console.log("Admin authorised");
+      try {
+        const lectureRef = db.collection('lecturers').doc(encodedEmail); // reference to the student
+        const lectureDoc = await lectureRef.get();
+  
+        await lectureRef.set({  // set the data for the student, based on the lecturer ref
+          name: name
+        }, { merge: true }); // if the lecturer already exists, update the existing lecturer
+        res.status(200).send({"status": "success", "data": "Lecturer added successfully"});
+  
+      } catch (error) { // error handling
+        console.error('Error adding or updating lecturer', error);
+        res.status(500).send({"status": "fail", "data": "Lecturer was not added"});
+      }
+    } else {
+      res.status(200).send({"status": "fail", "data": "Admin not authorised"});
+    }
+  });
+});
+
 
 // this function is used to retrieve the first name of the student based on their email 
 exports.getFirstName = functions.https.onRequest(async (request, response) => {
