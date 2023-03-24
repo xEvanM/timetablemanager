@@ -4,78 +4,105 @@ const admin = require('firebase-admin');
 admin.initializeApp();
 const db = admin.firestore(); // initialise a firestore database object
 
-// this is the initial function being used to add a module to the firestore database
-exports.addModule = functions.https.onRequest((request, response) => { 
-    cors(request, response, () => {
-        return admin.firestore().collection('modules').add(request.body).then(() => {
-            response.json({ data: "Module added successfully" });
-        });
-    });
-});
-
-// Create or update student function 
+// FUNCTION TO CREATE OR UPDATE A STUDENT
 exports.createStudent = functions.https.onRequest(async (req, res) => {
   cors(req, res, async () => {
     // Extract the module data fields from the request body
-    const email = req.body.email;
-    const fname = req.body.fname;
-
+    const email = req.body.data.email;
+    const fname = req.body.data.fname;
     const encodedEmail = encodeURIComponent(email);
 
     try {
-      // Get a reference to the module document in Firestore
-      const moduleRef = db.collection('students').doc(encodedEmail);
-      const moduleDoc = await moduleRef.get();
+      const studentRef = db.collection('students').doc(encodedEmail); // reference to the student
+      const studentDoc = await studentRef.get();
 
-      // If the module document already exists, update it with the new location and times fields,
-      // If it does not exist, create it with the new location and times fields
-      await moduleRef.set({ 
+      await studentRef.set({  // set the data for the student, based on the student ref
         fname: fname
-      }, { merge: true });
+      }, { merge: true }); // if the student already exists, update the existing student
+      res.status(200).send({"status": "success", "data": "Student added successfully"});
 
-      // Return a success message
-      res.status(200).send({ success: true });
-    } catch (error) {
-      // If an error occurs, log it and return an error message
+    } catch (error) { // error handling
       console.error('Error adding or updating student', error);
-      res.status(500).send({ success: false, error: error.message });
+      res.status(500).send({"status": "fail", "data": "Student was not added"});
     }
   });
 });
 
-// this function is used to retrieve the first name of the student based on their email 
-exports.getFirstName = functions.https.onRequest((request, response) => {
-  cors(request, response, () => {
-    const email = request.body.email;
-    if (!email) {
-      response.status(400).json({ error: "Email is required" });
-      return;
-    }
-    return admin.firestore().collection('students').where('email', '==', email).get().then((snapshot) => {
-      if (snapshot.empty) {
-        response.status(404).json({ error: "User not found" });
-        return;
-      }
-      const firstName = snapshot.docs[0].data().fname;
-      response.json({ data: firstName });
-    });
-  });
-});
-
-// Update Module Data function (Working!!)
-exports.updateModuleData2 = functions.https.onRequest(async (req, res) => {
+// FUNCTION TO CREATE OR UPDATE A LECTURER
+exports.createLecturer = functions.https.onRequest(async (req, res) => {
   cors(req, res, async () => {
     // Extract the module data fields from the request body
-    const moduleID = req.body.moduleID;
-    const name = req.body.name;
-    const location = req.body.location;
-    const times = req.body.times;
+    const email = req.body.data.email;
+    const name = req.body.data.name;
+    const encodedEmail = encodeURIComponent(email);
+    const auth = req.body.data.auth;
+    const authString = auth.toString();
+    console.log("Auth string: " + authString);
 
-    // mouduleIDString = moduleID.toString();
+    if (authString == "admin123") {
+      console.log("Admin authorised");
+      try {
+        const lectureRef = db.collection('lecturers').doc(encodedEmail); // reference to the student
+        const lectureDoc = await lectureRef.get();
+  
+        await lectureRef.set({  // set the data for the student, based on the lecturer ref
+          name: name
+        }, { merge: true }); // if the lecturer already exists, update the existing lecturer
+        res.status(200).send({"status": "success", "data": "Lecturer added successfully"});
+  
+      } catch (error) { // error handling
+        console.error('Error adding or updating lecturer', error);
+        res.status(500).send({"status": "fail", "data": "Lecturer was not added"});
+      }
+    } else {
+      res.status(200).send({"status": "fail", "data": "Admin not authorised"});
+    }
+  });
+});
+
+
+// this function is used to retrieve the first name of the student based on their email 
+exports.getFirstName = functions.https.onRequest(async (request, response) => {
+  cors(request, response, async () => {
+    const email = request.body.data.email;
+    const encodedEmail = encodeURIComponent(email);
+
+    try {
+      const studentRef = db.collection('students').doc(encodedEmail);
+
+      await studentRef.get().then((doc) => {
+        if (doc.exists) {
+          const data = doc.data();
+          const fname = data.fname;
+          response.status(200).send({"status": "success", "data": fname});
+        } else {
+          response.status(404).send({"status": "fail", "data": "Student not found"});
+        }
+      });
+    } catch (error) {
+      console.error('Error retrieving student first name', error);
+      response.status(500).send({"status": "fail", "data": "Student first name was not retrieved"});
+    }
+  });
+});
+
+
+// Update Module Data function (Working!!)
+exports.moduleManagement = functions.https.onRequest(async (req, res) => {
+  cors(req, res, async () => {
+    // Extract the module data fields from the request body
+    console.log(req.body.data);
+    const moduleID = req.body.data.moduleID;
+    const name = req.body.data.name;
+    const location = req.body.data.location;
+    const times = req.body.data.times;
+
+    mouduleIDString = moduleID.toString();
 
     try {
       // Get a reference to the module document in Firestore
       const moduleRef = db.collection('modules').doc(moduleID);
+      console.log("moduleRef: " + moduleRef);
       const moduleDoc = await moduleRef.get();
 
       // If the module document already exists, update it with the new location and times fields,
@@ -87,73 +114,54 @@ exports.updateModuleData2 = functions.https.onRequest(async (req, res) => {
       }, { merge: true });
 
       // Return a success message
-      res.status(200).send({ success: true });
+      res.status(200).send({ success: true, data: 'Module data updated successfully' });
     } catch (error) {
       // If an error occurs, log it and return an error message
       console.error('Error updating module data:', error);
-      res.status(500).send({ success: false, error: error.message });
+      res.status(500).send({ success: false, data: 'Module data was not updated' });
     }
   });
 });
 
-/**
- * addStudentToModule function
- * Adds a student to a module in Firestore.
- * 
- * @param {Object} req - The HTTP request object.
- * @param {string} req.body.studentId - The ID of the student to add.
- * @param {string} req.body.moduleName - The name of the module to add the student to.
- * @param {Object} res - The HTTP response object.
- * 
- * @return {void} - This function does not return anything directly, but it sends an HTTP response to the client.
- */
+// function to add a student to a module
+exports.addStudentToModule = functions.https.onRequest(async (req, res) => {
+  cors(req, res, async () => {
+  const email = req.body.data.email; 
+  const codes = req.body.data.codes;
 
-// Define the function that will be triggered by HTTP requests
-exports.addStudentToModule = functions.https.onRequest((req, res) => {
-  const studentId = req.body.studentId; 
-  const moduleName = req.body.moduleName;
+  const encodedEmail = encodeURIComponent(email);
 
-  // Create references to the module and student documents in Firestore
-  const moduleRef = db.collection('modules').doc(moduleName);
-  const studentRef = db.collection('students').doc(studentId);
+  try {
+    // Check if the module exists
+    const moduleDoc = await db.collection('modules').doc(codes).get();
+    if (!moduleDoc.exists) {
+      return res.status(404).send({ success: false, data: 'Module not found' });
+    }
 
-  // Use a Promise.all() to retrieve both documents at the same time
-  Promise.all([moduleRef.get(), studentRef.get()])
-    .then(([moduleDoc, studentDoc]) => {
-      // Check if both documents exist
-      if (moduleDoc.exists && studentDoc.exists) {
-        // Retrieve the data from the module and student documents
-        const moduleData = moduleDoc.data();
-        const studentData = studentDoc.data();
+    // Check if the student is already in the module
+    const studentDoc = await db.collection('students').doc(encodedEmail).get();
+    if (!studentDoc.exists) {
+      return res.status(404).send({ success: false, data: 'Student not found' });
+    }
+    const studentData = studentDoc.data();
+    if (studentData.modules && studentData.modules.includes(codes)) {
+      return res.status(400).send({ success: false, data: 'Student is already in the module' });
+    }
 
-        // Check if the student is already enrolled in the module
-        if (moduleData.students && moduleData.students.includes(studentId)) {
-          // Send an error response if the student is already enrolled
-          res.status(400).send('Student already enrolled in module');
-          return;
-        }
-
-        // Add the student ID to the "students" array in the module document
-        moduleRef.update({
-          students: admin.firestore.FieldValue.arrayUnion(studentId)
-        }).then(() => {
-          // Send a success response if the update is successful
-          res.status(200).send(`Student ${studentId} added to module ${moduleName}`);
-        }).catch((error) => {
-          // Send an error response if there is a problem updating the document
-          console.error(error);
-          res.status(500).send('Error adding student to module');
-        });
-      } else {
-        // Send an error response if either document does not exist
-        res.status(400).send('Invalid student or module ID');
-      }
-    }).catch((error) => {
-      // Send an error response if there is a problem retrieving the documents from Firestore
-      console.error(error);
-      res.status(500).send('Error retrieving data from database');
+    // Add the module to the student
+    const studentRef = db.collection('students').doc(encodedEmail);
+    await studentRef.update({
+      modules: admin.firestore.FieldValue.arrayUnion(codes)
     });
+
+    return res.status(200).send({ success: true, data: 'Student added to module' });
+  } catch (error) {
+    console.error('Error adding student to module', error);
+    return res.status(500).send({ success: false, data: 'An error occured of unknown nature' });
+  }
+  });
 });
+
 
 /**
  * getStudentModules
