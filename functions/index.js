@@ -1,12 +1,11 @@
-const functions = require('firebase-functions');
+const functions = require('firebase-functions'); // import firebase-functions module
 const cors = require("cors")({ origin: true });
 const admin = require('firebase-admin');
 admin.initializeApp();
+const db = admin.firestore(); // initialise a firestore database object
 
-// Initialize a Firestore database object
-const db = admin.firestore();
-
-exports.addModule = functions.https.onRequest((request, response) => {
+// this is the initial function being used to add a module to the firestore database
+exports.addModule = functions.https.onRequest((request, response) => { 
     cors(request, response, () => {
         return admin.firestore().collection('modules').add(request.body).then(() => {
             response.json({ data: "Module added successfully" });
@@ -14,7 +13,9 @@ exports.addModule = functions.https.onRequest((request, response) => {
     });
 });
 
-exports.createStudent = functions.https.onRequest((request, response) => {
+
+// this function creates a student, and is called when a student is registered on signup
+exports.createStudent = functions.https.onRequest((request, response) => { 
   cors(request, response, () => {
       return admin.firestore().collection('students').add(request.body).then(() => {
           response.json({ data: "student added successfully"});
@@ -22,6 +23,7 @@ exports.createStudent = functions.https.onRequest((request, response) => {
   });
 });
 
+// this function is used to retrieve the first name of the student based on their email 
 exports.getFirstName = functions.https.onRequest((request, response) => {
   cors(request, response, () => {
     const email = request.body.email;
@@ -40,20 +42,25 @@ exports.getFirstName = functions.https.onRequest((request, response) => {
   });
 });
 
-
-// enhanced addModule that gets data on students and lectuers
-// Add a module to Firestore
-exports.addModule2 = functions.https.onCall(async (data, context) => {
-
-    // TODO: export data from lecturer page to here
-  const { location, name, students, taughtby, times } = data;
-
-
-  const db = admin.firestore();
+// this function is used to set OR update the data for a specific module in the firestore database
+exports.updateModuleData = functions.https.onCall(async (data, context) => {
+  const moduleID = data.moduleID;
+  const name = data.name;
+  const location = data.location;
+  const times = data.times;
 
   try {
+    // Retrieve all students who are studying this module
+    const studentsSnapshot = await db.collection("students").where("studies", "array-contains", name).get();
+    const studentRefs = studentsSnapshot.docs.map((doc) => db.collection("students").doc(doc.id));
+
+    // Add the module data to Firestore
+    const moduleData = { location, name, students: studentRefs, taughtby: db.collection("lecturers").doc(taughtby), times };
+    const moduleRef = await db.collection("modules").add(moduleData);
+
+    return { success: true, id: moduleRef.id };
     // Get a reference to the module document in Firestore
-    const moduleRef = db.collection('modules').doc(moduleID);
+    const modRef = db.collection('modules').doc(moduleID);
     const moduleDoc = await moduleRef.get();
 
     // If the module document already exists, update it with the new location and times fields,
@@ -68,6 +75,8 @@ exports.addModule2 = functions.https.onCall(async (data, context) => {
     // Return a success message
     return { success: true };
   } catch (error) {
+    console.error("Error adding module:", error);
+    return { success: false };
     // If an error occurs, log it and return an error message
     console.error('Error updating module data:', error);
     return { success: false, error: error.message };
@@ -88,8 +97,7 @@ exports.addModule2 = functions.https.onCall(async (data, context) => {
 
 // Define the function that will be triggered by HTTP requests
 exports.addStudentToModule = functions.https.onRequest((req, res) => {
-  // Extract the student ID and module name from the request body
-  const studentId = req.body.studentId;
+  const studentId = req.body.studentId; 
   const moduleName = req.body.moduleName;
 
   // Create references to the module and student documents in Firestore
@@ -134,10 +142,8 @@ exports.addStudentToModule = functions.https.onRequest((req, res) => {
     });
 });
 
-
-
 /**
- * getStudentModules (NOT WORKING)
+ * getStudentModules
  * Retrieves the studies of a student as an array of JSON objects from Firestore.
  *
  * @param {string} email The email of the student whose studies to retrieve.
