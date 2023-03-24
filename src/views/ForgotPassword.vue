@@ -98,6 +98,7 @@ const reset = () => {
   position: absolute;
   top: 7%;
   left: 9%;
+  text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
 }
 
 .sloganText1 {
@@ -108,6 +109,7 @@ const reset = () => {
   left: 13%;
   top: 40%;
   display: inline-block;
+  text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
 }
 
 .sloganText2 {
@@ -118,6 +120,7 @@ const reset = () => {
   left: 15%;
   top: 47%;
   display: inline-block;
+  text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
 }
 
 body {
@@ -137,6 +140,7 @@ body {
   background: white;
   border-radius: 10px;
   box-shadow: 0px 0px 10px 0px rgba(23, 2, 32, 1);
+  color: rgb(37, 37, 37);
 }
 
 .center h1 {
@@ -215,7 +219,7 @@ form .txt_field {
   background: rgb(46, 78, 141);
   border-radius: 25px;
   font-size: 18px;
-  color: #e9f4fb;
+  color: white;
   font-weight: 700;
   cursor: pointer;
   outline: none;

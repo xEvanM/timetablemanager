@@ -105,6 +105,7 @@ const reg = () => {
   position: absolute;
   top: 7%;
   left: 9%;
+  text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
 }
 
 .sloganText1 {
@@ -115,6 +116,7 @@ const reg = () => {
   left: 13%;
   top: 40%;
   display: inline-block;
+  text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
 }
 
 .sloganText2 {
@@ -125,6 +127,7 @@ const reg = () => {
   left: 15%;
   top: 47%;
   display: inline-block;
+  text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
 }
 
 body {
@@ -224,7 +227,7 @@ form .txt_field {
   background: rgb(46, 78, 141);
   border-radius: 25px;
   font-size: 18px;
-  color: #e9f4fb;
+  color: white;
   font-weight: 700;
   cursor: pointer;
   outline: none;

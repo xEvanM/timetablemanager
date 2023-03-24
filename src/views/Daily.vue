@@ -246,11 +246,11 @@ th {
 }
 
 .box {
-  width: 70%;
+  width: 67%;
   height: 88%;
   position: absolute;
   top: 10.5%;
-  left: 13.5%;
+  left: 14.5%;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
   border-bottom-left-radius: 15px;
@@ -346,7 +346,7 @@ th {
 .leftarrow {
   position: absolute;
   top: 45%;
-  left: 6.6%;
+  left: 7.5%;
   height: 12%;
   width: 12%;
   cursor: pointer;
@@ -358,7 +358,7 @@ th {
 .rightarrow {
   position: absolute;
   top: 45%;
-  right: 9.7%;
+  right: 11.6%;
   height: 12%;
   width: 12%;
   cursor: pointer;
