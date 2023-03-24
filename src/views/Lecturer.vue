@@ -81,14 +81,43 @@
 </template>
 
 <script>
+
 import app from "../api/firebase.js";
 import { ref } from "vue";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "vue-router";
 import { getFunctions, httpsCallable } from "firebase/functions";
 const functions = getFunctions(app);
+const auth = getAuth(app);
 
 export default {
+  setup() {
+    const lecturerName = ref("");
+    
+    const getLecturerNameFn = httpsCallable(functions, "getLecturerName");
+  
+    // Add an auth state change listener
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        console.log("User: " + user.email);
+        const userEmail = user.email;
+        const email = { email: userEmail}
+        getLecturerNameFn(email)
+          .then((resp) => {
+            lecturerName.value = resp.data;
+            console.log("Lecturer name:", lecturerName.value);
+          })
+          .catch((err) => {
+            console.error("Error getting lecturer name:", err);
+          });
+      } else {
+        console.log("No user is currently signed in.");
+      }
+    });
+    
+    return { lecturerName };
+  },
+  
   data() {
     return {
       moduleID: "",
@@ -97,32 +126,38 @@ export default {
       times: "",
       codes: "",
       email: "",
+      lecturer: "",
     };
   },
-  created() {},
+  
   methods: {
     moduleManagement() {
       const moduleID = this.moduleID;
       const name = this.name;
       const location = this.location;
-      const times = this.times;
+      const lecturer = this.lecturerName;
+      const times = this.times.split(",");
       console.log("Attempting to manage the module");
       const moduleManagement = httpsCallable(functions, "moduleManagement");
-  
-
-      const data = {
+      const input = {
         moduleID: moduleID,
         name: name,
         location: location,
-        times: times
+        times: times,
+        lecturer: lecturer
       };
-      console.log(data);
-      moduleManagement(data).then((result) => {
-        console.log(result);
-      });
+      console.log(input);
+
+      moduleManagement(input)
+        .then((result) => {
+          console.log(result);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     },
     addStudentToModule() {
-      const codes = this.codes;
+      const codes = this.codes.split(",");
       const email = this.email;
       console.log("Attempting to add a student to module");
       const addStudentToModule = httpsCallable(functions, "addStudentToModule");
