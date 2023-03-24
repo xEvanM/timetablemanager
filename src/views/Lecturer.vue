@@ -152,12 +152,12 @@ export default {
       const times = this.times.split(",");
       console.log("Attempting to manage the module");
       const moduleManagement = httpsCallable(functions, "moduleManagement");
-
-      const data = {
+      const input = {
         moduleID: moduleID,
         name: name,
         location: location,
         times: times,
+        lecturer: lecturer
       };
       console.log(input);
 
@@ -174,14 +174,15 @@ export default {
       const email = this.email;
       console.log("Attempting to add a student to module");
       const addStudentToModule = httpsCallable(functions, "addStudentToModule");
+  
 
       const data = {
         codes: codes,
-        email: email,
+        email: email
       };
       console.log(data);
       addStudentToModule(data).then((result) => {
-        console.log(result);
+        console.log("Result: " + result.data);
       });
     },
   },
