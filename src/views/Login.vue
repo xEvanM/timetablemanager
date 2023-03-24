@@ -28,6 +28,26 @@
         <div class="signup_link">Need an account? <a href="#">Sign up</a></div>
       </form>
     </div>
+    <svg
+      class="emailicon"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+    >
+      <path
+        fill="currentColor"
+        d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5l-8-5h16zm0 12H4V8l8 5l8-5v10z"
+      />
+    </svg>
+    <svg
+      class="passwordicon"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+    >
+      <path
+        fill="currentColor"
+        d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6zm9 14H6V10h12v10zm-6-3c1.1 0 2-.9 2-2s-.9-2-2-2s-2 .9-2 2s.9 2 2 2z"
+      />
+    </svg>
     <div class="custom-shape-divider-bottom-1679498594">
       <svg
         data-name="Layer 1"
@@ -274,5 +294,25 @@ form .txt_field {
 
 .custom-shape-divider-bottom-1679498594 .shape-fill {
   fill: #ffffff;
+}
+
+.emailicon {
+  position: absolute;
+  top: 34.5%;
+  right: 16.5%;
+  height: 4.5%;
+  width: 4.5%;
+  display: block;
+  z-index: 2;
+}
+
+.passwordicon {
+  position: absolute;
+  top: 46.7%;
+  right: 16.5%;
+  height: 4.5%;
+  width: 4.5%;
+  display: block;
+  z-index: 2;
 }
 </style>

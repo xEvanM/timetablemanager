@@ -10,7 +10,6 @@
     <div class="box1"></div>
     <div class="box2"></div>
     <div class="box3"></div>
-    <div class="viewbutton">Weekly View</div>
     <svg
       class="leftarrow"
       xmlns="http://www.w3.org/2000/svg"
@@ -31,7 +30,26 @@
         d="m12 16l4-4l-4-4l-1.4 1.4l1.6 1.6H8v2h4.2l-1.6 1.6L12 16Zm0 6q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22Z"
       />
     </svg>
-
+    <svg
+      class="signouticon"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+    >
+      <path
+        fill="#252525"
+        d="M16 17v-3H9v-4h7V7l5 5l-5 5M14 2a2 2 0 0 1 2 2v2h-2V4H5v16h9v-2h2v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9Z"
+      />
+    </svg>
+    <svg
+      class="viewicon"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+    >
+      <path
+        fill="currentColor"
+        d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5s5 2.24 5 5s-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3s3-1.34 3-3s-1.34-3-3-3z"
+      />
+    </svg>
     <div class="custom-shape-divider-bottom-1679498594">
       <svg
         data-name="Layer 1"
@@ -56,8 +74,8 @@
       </svg>
     </div>
     <div class="greeting">Schedule for (InsertDay)</div>
-
-    <input id="button" @click="reg" value="Sign Out" readonly />
+    <input id="button" @click="reg" value=" Sign Out" readonly />
+    <input id="viewbutton" @click="reg" value=" Weekly View" readonly />
     <table>
       <tr>
         <th class="topleft"></th>
@@ -289,6 +307,7 @@ th {
   position: absolute;
   top: 3%;
   right: 6%;
+  text-align: left;
 }
 
 #button:hover {
@@ -296,8 +315,8 @@ th {
   transition: 0.5s;
 }
 
-.viewbutton {
-  width: 9%;
+#viewbutton {
+  width: 10.2%;
   height: 6%;
   border: 1px solid white;
   background: rgb(37, 37, 37);
@@ -310,12 +329,10 @@ th {
   position: absolute;
   top: 3%;
   right: 15%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  text-align: left;
 }
 
-.viewbutton:hover {
+#viewbutton:hover {
   border-color: rgb(37, 37, 37);
   transition: 0.5s;
 }
@@ -371,5 +388,25 @@ th {
 .leftarrow:hover {
   border: 1px solid white;
   transition: 0.5s;
+}
+
+.signouticon {
+  position: absolute;
+  top: 4%;
+  right: 5.3%;
+  height: 4%;
+  width: 4%;
+  display: block;
+  z-index: 2;
+}
+
+.viewicon {
+  position: absolute;
+  top: 4%;
+  right: 14.3%;
+  height: 4%;
+  width: 4%;
+  display: block;
+  z-index: 2;
 }
 </style>
