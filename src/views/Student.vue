@@ -36,7 +36,7 @@
         ></path>
       </svg>
     </div>
-    <div class="greeting">Welcome, User!</div>
+    <div class="greeting">Welcome, {{name}}!</div>
 
     <input id="button" @click="reg" value="Sign Out" readonly />
     <table>
@@ -123,6 +123,46 @@
     </table>
   </body>
 </template>
+
+<script>
+import firebase from '../api/firebase.js'
+import {getAuth, onAuthStateChanged, signOut} from "firebase/auth" ;
+import app from '../api/firebase.js';
+import { getFunctions, httpsCallable } from "firebase/functions";
+import { ref } from 'vue';
+const functions = getFunctions(app);
+const auth = getAuth(app);
+export default {
+  setup() {
+    const name = ref('');
+
+    const fetchFirstName = async () => {
+      try {
+        console.log("Attempting to get student first name");
+        const addModule = httpsCallable(functions, "getFirstName");
+        const email = auth.currentUser.email;
+        const data = {
+          email: email
+        };
+        console.log(data);
+        const jsonData = JSON.stringify(data);
+        console.log(jsonData);
+        const result = await addModule(data);
+        console.log(result);
+        name.value = result.data;
+      } catch (error) {
+        console.error('Error retrieving student first name', error);
+      }
+    }
+
+    fetchFirstName();
+
+    return {
+      name
+    }
+  }
+}
+</script>
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap");

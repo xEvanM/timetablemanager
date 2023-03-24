@@ -65,6 +65,7 @@ import { ref } from "vue";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "vue-router";
 import { getFunctions, httpsCallable } from "firebase/functions";
+const functions = getFunctions(app);
 
 export default {
   data() {
@@ -77,23 +78,28 @@ export default {
   created() {},
   methods: {
     createStudent() {
+      const fname = this.fname;
+      const email = this.email;
+      console.log("fname: " + fname);
+      console.log("email: " + email);
       console.log("Attempting to create student");
-      const functions = getFunctions(app);
       const addModule = httpsCallable(functions, "createStudent");
+      
 
       // Call reg() method inside createStudent() method
       this.reg();
 
-      var data = {
+      const data = {
         fname: this.fname,
-        email: this.email,
+        email: this.email
       };
       console.log(data);
-      addModule(data).then((result) => {
+      const jsonData = JSON.stringify(data);
+      console.log
+      addModule(jsonData).then((result) => {
         console.log(result);
       });
     },
-
     // Move reg() method inside Vue instance
     reg() {
       console.log("sign up function was called");
