@@ -9,7 +9,6 @@
     <div class="websiteName">Hi, lecturer!</div>
     <div class="sloganText1">Managing your students,</div>
     <div class="sloganText2">made easy!</div>
-
     <div class="addModule">
       <h1>Create/Edit Module</h1>
       <form>
@@ -33,10 +32,25 @@
           <span></span>
           <label>Module Times</label>
         </div>
+        <div>
+          <label>Module Colour</label>
+        </div>
+        <ul>
+          <div class="red"></div>
+          <div class="orange"></div>
+          <div class="lightorange"></div>
+          <div class="yellow"></div>
+          <div class="lightgreen"></div>
+          <div class="green"></div>
+          <div class="teal"></div>
+          <div class="blue"></div>
+        </ul>
+        <br />
+        <br />
+        <br />
         <input id="button" @click="moduleManagement" value="Done" readonly />
       </form>
     </div>
-
     <div class="addStudent">
       <h1>Assign students</h1>
       <form>
@@ -53,7 +67,6 @@
         <input id="button" @click="addStudentToModule" value="Add" readonly />
       </form>
     </div>
-
     <div class="custom-shape-divider-bottom-1679498594">
       <svg
         data-name="Layer 1"
@@ -108,13 +121,12 @@ export default {
       const times = this.times;
       console.log("Attempting to manage the module");
       const moduleManagement = httpsCallable(functions, "moduleManagement");
-  
 
       const data = {
         moduleID: moduleID,
         name: name,
         location: location,
-        times: times
+        times: times,
       };
       console.log(data);
       moduleManagement(data).then((result) => {
@@ -126,15 +138,14 @@ export default {
       const email = this.email;
       console.log("Attempting to add a student to module");
       const addStudentToModule = httpsCallable(functions, "addStudentToModule");
-  
 
       const data = {
         codes: codes,
-        email: email
+        email: email,
       };
       console.log(data);
       addStudentToModule(data).then((result) => {
-        console.log("Result: " + result.data);
+        console.log(result);
       });
     },
   },
@@ -200,9 +211,10 @@ body {
   z-index: 2;
   position: absolute;
   top: 50%;
-  left: 55%;
+  left: 20%;
   transform: translate(-50%, -50%);
-  width: 400px;
+  width: 40%;
+  height: 100%;
   background: white;
   border-radius: 10px;
   box-shadow: 0px 0px 10px 0px rgba(23, 2, 32, 1);
@@ -417,5 +429,87 @@ form .txt_field_admin {
 
 .custom-shape-divider-bottom-1679498594 .shape-fill {
   fill: #ffffff;
+}
+
+ul {
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+ul div:hover {
+  transform: scale(1.1);
+}
+
+.red {
+  background-color: #c70039;
+  position: absolute;
+  top: 75%;
+  left: 10%;
+  width: 7%;
+  height: 6%;
+  border-radius: 50%;
+}
+.orange {
+  background-color: #ff5733;
+  position: absolute;
+  top: 75%;
+  left: 20%;
+  width: 7%;
+  height: 6%;
+  border-radius: 50%;
+}
+.lightorange {
+  background-color: #ff8d1a;
+  position: absolute;
+  top: 75%;
+  left: 30%;
+  width: 7%;
+  height: 6%;
+  border-radius: 50%;
+}
+.yellow {
+  background-color: #eddd53;
+  position: absolute;
+  top: 75%;
+  left: 40%;
+  width: 7%;
+  height: 6%;
+  border-radius: 50%;
+}
+.lightgreen {
+  background-color: #add45c;
+  position: absolute;
+  top: 75%;
+  left: 50%;
+  width: 7%;
+  height: 6%;
+  border-radius: 50%;
+}
+.green {
+  background-color: #57c785;
+  position: absolute;
+  top: 75%;
+  left: 60%;
+  width: 7%;
+  height: 6%;
+  border-radius: 50%;
+}
+.teal {
+  background-color: #00baad;
+  position: absolute;
+  top: 75%;
+  left: 70%;
+  width: 7%;
+  height: 6%;
+  border-radius: 50%;
+}
+.blue {
+  background-color: #2a7b9b;
+  position: absolute;
+  top: 75%;
+  left: 80%;
+  width: 7%;
+  height: 6%;
+  border-radius: 50%;
 }
 </style>
