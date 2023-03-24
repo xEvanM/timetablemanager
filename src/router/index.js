@@ -11,7 +11,6 @@ const router = createRouter({
         { path: "/student", component: () => import("../views/Student.vue"), beforeEnter: isAuth  },
         { path: "/forgot", component: () => import("../views/ForgotPassword.vue") },
         { path: "/lecturer", component: () => import("../views/Lecturer.vue") },
-        { path: "/lectureralt", component: () => import("../views/LecturerAlt.vue") },
         { path: "/daily", component: () => import("../views/Daily.vue"), beforeEnter: isAuth  }
     ]
 });
