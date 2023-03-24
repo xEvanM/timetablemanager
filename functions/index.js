@@ -135,17 +135,17 @@ exports.addStudentToModule = functions.https.onRequest(async (req, res) => {
     // Check if the module exists
     const moduleDoc = await db.collection('modules').doc(codes).get();
     if (!moduleDoc.exists) {
-      return res.status(404).send({ success: false, data: 'Module not found' });
+      return res.status(404).send({ "success": "false", "data": "Module not found" });
     }
 
     // Check if the student is already in the module
     const studentDoc = await db.collection('students').doc(encodedEmail).get();
     if (!studentDoc.exists) {
-      return res.status(404).send({ success: false, data: 'Student not found' });
+      return res.status(404).send({ "success": "false", "data": "Student not found" });
     }
     const studentData = studentDoc.data();
     if (studentData.modules && studentData.modules.includes(codes)) {
-      return res.status(400).send({ success: false, data: 'Student is already in the module' });
+      return res.status(400).send({ "success": "false", "data": "Student already in module" });
     }
 
     // Add the module to the student
@@ -154,10 +154,10 @@ exports.addStudentToModule = functions.https.onRequest(async (req, res) => {
       modules: admin.firestore.FieldValue.arrayUnion(codes)
     });
 
-    return res.status(200).send({ success: true, data: 'Student added to module' });
+    return res.status(200).send({ "success": "true", "data": "Student was added to module" });
   } catch (error) {
     console.error('Error adding student to module', error);
-    return res.status(500).send({ success: false, data: 'An error occured of unknown nature' });
+    return res.status(500).send({ "success": "false", "data": "Some error occurred"});
   }
   });
 });

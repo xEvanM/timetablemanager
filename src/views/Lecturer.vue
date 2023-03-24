@@ -134,7 +134,7 @@ export default {
       };
       console.log(data);
       addStudentToModule(data).then((result) => {
-        console.log(result);
+        console.log("Result: " + result.data);
       });
     },
   },

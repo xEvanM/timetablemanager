@@ -90,7 +90,7 @@
         console.log("name: " + name);
         console.log("email: " + email);
         console.log("Attempting to create lecturer");
-        const addModule = httpsCallable(functions, "createLecturer");
+        const createLecturer = httpsCallable(functions, "createLecturer");
         
   
         // Call reg() method inside createStudent() method
@@ -102,10 +102,8 @@
           auth: this.auth
         };
         console.log(data);
-        const jsonData = JSON.stringify(data);
-        console.log
-        addModule(jsonData).then((result) => {
-          console.log(result);
+        createLecturer(data).then((result) => {
+          console.log(result.data);
         });
       },
       // Move reg() method inside Vue instance

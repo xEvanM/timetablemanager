@@ -97,7 +97,7 @@ export default {
       const jsonData = JSON.stringify(data);
       console.log
       addModule(jsonData).then((result) => {
-        console.log(result);
+        console.log(result.data);
       });
     },
     // Move reg() method inside Vue instance
