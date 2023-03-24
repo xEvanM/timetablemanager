@@ -134,8 +134,10 @@ exports.addStudentToModule = functions.https.onRequest((req, res) => {
     });
 });
 
+
+
 /**
- * getStudentModules
+ * getStudentModules (NOT WORKING)
  * Retrieves the studies of a student as an array of JSON objects from Firestore.
  *
  * @param {string} email The email of the student whose studies to retrieve.
