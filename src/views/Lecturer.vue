@@ -39,29 +39,44 @@
             <label>Module Times</label>
           </div>
           <div class="txt_field">
-            <input type="text" v-model="email" />
-            <span></span>
-            <label>Assign Students</label>
-          </div>
-          <div class="txt_field">
             <label>Module Colour</label>
           </div>
-          <ul>
-            <div class="red"></div>
-            <div class="orange"></div>
-            <div class="lightorange"></div>
-            <div class="yellow"></div>
-            <div class="lightgreen"></div>
-            <div class="green"></div>
-            <div class="teal"></div>
-            <div class="blue"></div>
-          </ul>
+          <div class="colours">
+            <ul>
+              <div class="violet"></div>
+              <div class="orange"></div>
+              <div class="lightorange"></div>
+              <div class="yellow"></div>
+              <div class="lightgreen"></div>
+              <div class="green"></div>
+              <div class="teal"></div>
+              <div class="blue"></div>
+            </ul>
+          </div>
         </div>
+        <br />
+        <br />
+        <br />
         <span class="divider"></span>
         <input id="button" @click="moduleManagement" value="Done" readonly />
       </form>
     </div>
-
+    <div class="addStudent">
+      <h1>Assign students</h1>
+      <form>
+        <div class="txt_field">
+          <input type="text" v-model="codes" />
+          <span></span>
+          <label>Module Codes</label>
+        </div>
+        <div class="txt_field">
+          <input type="text" v-model="email" />
+          <span></span>
+          <label>Student Email</label>
+        </div>
+        <input id="button" @click="addStudentToModule" value="Add" readonly />
+      </form>
+    </div>
     <div class="custom-shape-divider-bottom-1679498594">
       <svg
         data-name="Layer 1"
@@ -89,10 +104,13 @@
 </template>
 
 <script>
-
 import app from "../api/firebase.js";
 import { ref } from "vue";
-import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  onAuthStateChanged,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
 import { useRouter } from "vue-router";
 import { getFunctions, httpsCallable } from "firebase/functions";
 const functions = getFunctions(app);
@@ -101,15 +119,15 @@ const auth = getAuth(app);
 export default {
   setup() {
     const lecturerName = ref("");
-    
+
     const getLecturerNameFn = httpsCallable(functions, "getLecturerName");
-  
+
     // Add an auth state change listener
     auth.onAuthStateChanged((user) => {
       if (user) {
         console.log("User: " + user.email);
         const userEmail = user.email;
-        const email = { email: userEmail}
+        const email = { email: userEmail };
         getLecturerNameFn(email)
           .then((resp) => {
             lecturerName.value = resp.data;
@@ -122,10 +140,10 @@ export default {
         console.log("No user is currently signed in.");
       }
     });
-    
+
     return { lecturerName };
   },
-  
+
   data() {
     return {
       moduleID: "",
@@ -137,7 +155,7 @@ export default {
       lecturer: "",
     };
   },
-  
+
   methods: {
     moduleManagement() {
       const moduleID = this.moduleID;
@@ -147,12 +165,12 @@ export default {
       const times = this.times.split(",");
       console.log("Attempting to manage the module");
       const moduleManagement = httpsCallable(functions, "moduleManagement");
-      const input = {
+
+      const data = {
         moduleID: moduleID,
         name: name,
         location: location,
         times: times,
-        lecturer: lecturer
       };
       console.log(input);
 
@@ -169,11 +187,10 @@ export default {
       const email = this.email;
       console.log("Attempting to add a student to module");
       const addStudentToModule = httpsCallable(functions, "addStudentToModule");
-  
 
       const data = {
         codes: codes,
-        email: email
+        email: email,
       };
       console.log(data);
       addStudentToModule(data).then((result) => {
@@ -214,10 +231,10 @@ body {
 .addModule {
   z-index: 2;
   position: absolute;
-  top: 5%;
-  left: 10%;
-  width: 80%;
-  height: 80%;
+  top: 20%;
+  left: 6%;
+  width: 50%;
+  height: 65%;
   background: white;
   border-radius: 10px;
   box-shadow: 0px 0px 10px 0px rgba(23, 2, 32, 1);
@@ -227,6 +244,7 @@ body {
 .addModule h1 {
   text-align: center;
   padding: 20px 0;
+  border-bottom: 1px solid silver;
 }
 
 .addModule form {
@@ -237,10 +255,10 @@ body {
 .addStudent {
   z-index: 2;
   position: absolute;
-  top: 50%;
-  left: 80%;
-  transform: translate(-50%, -50%);
-  width: 400px;
+  top: 20%;
+  left: 62%;
+  width: 30%;
+  height: 65%;
   background: white;
   border-radius: 10px;
   box-shadow: 0px 0px 10px 0px rgba(23, 2, 32, 1);
@@ -250,21 +268,24 @@ body {
 .addStudent h1 {
   text-align: center;
   padding: 20px 0;
+  border-bottom: 1px solid silver;
 }
 
 .addStudent form {
-  padding: 0 40px;
-  padding-bottom: 40px;
+  padding: 0 30px;
+  padding-bottom: 60px;
+  position: absolute;
+  top: 30%;
+  left: 15%;
 }
 
 form .txt_field {
   position: relative;
-
   margin: 30px 0;
 }
 
 .txt_field input {
-  width: 40%;
+  width: 100%;
   padding: 0 5px;
   height: 40px;
   font-size: 16px;
@@ -275,7 +296,6 @@ form .txt_field {
 
 .txt_field label {
   position: absolute;
-  top: 50%;
   left: 5px;
   transform: translateY(-50%);
   font-size: 16px;
@@ -288,10 +308,8 @@ form .txt_field {
   position: absolute;
   top: 40px;
   left: 0;
-  width: 0%;
   height: 2px;
   background: rgb(46, 78, 141);
-  transition: 0.5s;
 }
 
 .txt_field label {
@@ -301,12 +319,15 @@ form .txt_field {
 
 .txt_field input:focus ~ span::before,
 .txt_field input:valid ~ span::before {
-  width: 40%;
+  width: 80%;
 }
 
 #button {
-  width: 100%;
+  position: absolute;
+  width: 50%;
   height: 50px;
+  top: 82%;
+  left: 25%;
   border: 1px solid;
   background: rgb(46, 78, 141);
   border-radius: 25px;
@@ -344,6 +365,16 @@ form .txt_field {
   fill: #ffffff;
 }
 
+.greeting {
+  font-size: 35px;
+  position: absolute;
+  left: 9%;
+  top: 5%;
+  display: inline-block;
+  color: white;
+  text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
+}
+
 ul {
   cursor: pointer;
   transition: transform 0.3s;
@@ -353,108 +384,100 @@ ul div:hover {
   transform: scale(1.1);
 }
 
-.red {
-  background-color: #c70039;
+.violet {
+  background-color: #cf9fff;
   position: absolute;
-  top: 75%;
-  left: 10%;
-  width: 7%;
-  height: 6%;
+  top: 125%;
+  left: 0%;
+  width: 15%;
+  height: 25%;
   border-radius: 50%;
 }
 .orange {
   background-color: #ff5733;
   position: absolute;
-  top: 75%;
+  top: 125%;
   left: 20%;
-  width: 7%;
-  height: 6%;
+  width: 15%;
+  height: 25%;
   border-radius: 50%;
 }
 .lightorange {
   background-color: #ff8d1a;
   position: absolute;
-  top: 75%;
-  left: 30%;
-  width: 7%;
-  height: 6%;
+  top: 125%;
+  left: 40%;
+  width: 15%;
+  height: 25%;
   border-radius: 50%;
 }
 .yellow {
   background-color: #eddd53;
   position: absolute;
-  top: 75%;
-  left: 40%;
-  width: 7%;
-  height: 6%;
+  top: 125%;
+  left: 60%;
+  width: 15%;
+  height: 25%;
   border-radius: 50%;
 }
 .lightgreen {
   background-color: #add45c;
   position: absolute;
-  top: 75%;
-  left: 50%;
-  width: 7%;
-  height: 6%;
+  top: 165%;
+  left: 0%;
+  width: 15%;
+  height: 25%;
   border-radius: 50%;
 }
 .green {
   background-color: #57c785;
   position: absolute;
-  top: 75%;
-  left: 60%;
-  width: 7%;
-  height: 6%;
+  top: 165%;
+  left: 20%;
+  width: 15%;
+  height: 25%;
   border-radius: 50%;
 }
 .teal {
   background-color: #00baad;
   position: absolute;
-  top: 75%;
-  left: 70%;
-  width: 7%;
-  height: 6%;
+  top: 165%;
+  left: 40%;
+  width: 15%;
+  height: 25%;
   border-radius: 50%;
 }
 .blue {
   background-color: #2a7b9b;
   position: absolute;
-  top: 75%;
-  left: 80%;
-  width: 7%;
-  height: 6%;
+  top: 165%;
+  left: 60%;
+  width: 15%;
+  height: 25%;
   border-radius: 50%;
+}
+
+.leftside {
+  position: absolute;
+  left: 10%;
+  top: 22%;
+}
+
+.rightside {
+  position: absolute;
+  left: 60%;
+  top: 22%;
 }
 
 .divider {
   content: "";
   position: absolute;
-  top: 55%;
+  top: 52%;
   left: 35%;
-  width: 35%;
+  width: 30%;
   height: 2px;
   background: silver;
   display: inline-block;
   transform: rotate(90deg);
-}
-
-.greeting {
-  font-size: 35px;
-  position: absolute;
-  left: 10.5%;
-  top: 1.5%;
-  display: inline-block;
-  color: white;
-  text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
-}
-
-.leftside {
-  position: absolute;
-  left: 20%;
-}
-
-.rightside {
-  position: absolute;
-  right: 20%;
 }
 </style>
