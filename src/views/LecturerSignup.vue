@@ -87,8 +87,6 @@
         const name = this.name;
         const email = this.email;
         const auth = this.adminAuth;
-        console.log("name: " + name);
-        console.log("email: " + email);
         console.log("Attempting to create lecturer");
         const createLecturer = httpsCallable(functions, "createLecturer");
         

@@ -12,10 +12,21 @@
     <div class="center">
       <h1>Sign Up</h1>
       <form>
-        <div class="txt_field">
-          <input type="text" v-model="fname" />
+        <div class="check_field">
+          <input type="checkbox" v-model="admin" />
           <span></span>
-          <label>Enter First Name</label>
+          <label>Admin Mode</label>
+        </div>
+        <div v-if="admin" class="txt_field_admin">
+            <input type="password" v-model="auth" />
+            <span></span>
+            <label>Enter Admin Password</label>
+          </div>
+        <div class="txt_field">
+          <input type="text" v-model="name" />
+          <span></span>
+          <label>{{ admin ? 'Enter Full Name' : 'Enter First Name' }}</label>
+
         </div>
         <div class="txt_field">
           <input type="email" v-model="email" />
@@ -27,13 +38,13 @@
           <span></span>
           <label>Create Password</label>
         </div>
-        <input id="button" @click="createStudent" value="Sign up" readonly />
+        <input id="button" @click="create" value="Sign up" readonly />
         <div class="signup_link">
           Already have an account? <a href="#">Log In</a>
         </div>
       </form>
       <svg
-      class="emailicon"
+      :class="admin ? 'emailicon2' : 'emailicon'"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
     >
@@ -43,7 +54,7 @@
       />
     </svg>
     <svg
-      class="nameicon"
+      :class="admin ? 'nameicon2' : 'nameicon'"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
     >
@@ -53,7 +64,7 @@
       />
     </svg>
     <svg
-      class="passwordicon"
+    :class="admin ? 'passwordicon2' : 'passwordicon'"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
     >
@@ -102,34 +113,68 @@ export default {
   data() {
     return {
       email: "",
-      fname: "",
+      name: "",
       password: "",
+      auth: "",
+      admin: false,
     };
   },
   created() {},
   methods: {
+    create() {
+      if (this.admin == true) {
+        this.createLecturer();
+      } else {
+        this.createStudent();
+      }
+    },
     createStudent() {
-      const fname = this.fname;
-      const email = this.email;
-      console.log("fname: " + fname);
-      console.log("email: " + email);
       console.log("Attempting to create student");
-      const addModule = httpsCallable(functions, "createStudent");
+      const createStudent = httpsCallable(functions, "createStudent");
 
       // Call reg() method inside createStudent() method
       this.reg();
 
       const data = {
-        fname: this.fname,
+        fname: this.name,
         email: this.email,
       };
       console.log(data);
-      const jsonData = JSON.stringify(data);
-      console.log;
-      addModule(jsonData).then((result) => {
+      createStudent(data).then((result) => {
         console.log(result.data);
       });
     },
+    createLecturer() {
+        console.log("Attempting to create lecturer");
+        const createLecturer = httpsCallable(functions, "createLecturer");
+        
+  
+        // Call reg() method inside createStudent() method
+        this.reg();
+  
+        const data = {
+          name: this.name,
+          email: this.email,
+          auth: this.auth
+        };
+        console.log(data);
+        createLecturer(data).then((result) => {
+          console.log(result.data);
+        });
+      },
+      // Move reg() method inside Vue instance
+      reg() {
+        console.log("sign up function was called");
+        createUserWithEmailAndPassword(getAuth(), this.email, this.password)
+          .then(() => {
+            console.log("User created successfully");
+            // Navigate to another route after successful sign up
+            this.$router.push("/student");
+          })
+          .catch((error) => {
+            console.log("Error creating user:", error);
+          });
+      },
     // Move reg() method inside Vue instance
     reg() {
       console.log("sign up function was called");
@@ -228,6 +273,22 @@ body {
   padding: 0 40px;
 }
 
+form .check_field {
+  align-items: center;
+  justify-content: space-between;
+  margin: 5px 0;
+  margin-left: 90px;
+  padding-top: 5px;
+}
+.check_field label {
+  position: absolute;
+  margin: 0 5px;
+  color: rgb(223, 79, 39);
+  font-size: 16px;
+}
+
+
+
 form .txt_field {
   position: relative;
   border-bottom: 2px solid #adadad;
@@ -276,6 +337,55 @@ form .txt_field {
 .txt_field input:valid ~ span::before {
   width: 100%;
 }
+
+form .txt_field_admin {
+    position: relative;
+    border-bottom: 2px solid #adadad;
+    margin: 30px 0;
+  }
+  
+  .txt_field_admin input {
+    width: 100%;
+    padding: 0 5px;
+    height: 40px;
+    font-size: 16px;
+    border: none;
+    background: none;
+    outline: none;
+  }
+  
+  .txt_field_admin label {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    color: #adadad;
+    transform: translateY(-50%);
+    font-size: 16px;
+    pointer-events: none;
+    transition: 0.5s;
+  }
+  
+  .txt_field_admin span::before {
+    content: "";
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: rgb(223, 79, 39);
+    transition: 0.5s;
+  }
+  
+  .txt_field_admin input:focus ~ label,
+  .txt_field_admin input:valid ~ label {
+    top: -5px;
+    color: rgb(223, 79, 39);
+  }
+  
+  .txt_field_admin input:focus ~ span::before,
+  .txt_field_admin input:valid ~ span::before {
+    width: 100%;
+  }
 
 .pass {
   margin: -5px 0 20px 5px;
@@ -345,7 +455,17 @@ form .txt_field {
 
 .emailicon {
   position: absolute;
-  top: 41.5%;
+  top: 44%;
+  right: 16.5%;
+  height: 6%;
+  width: 6%;
+  display: block;
+  z-index: 2;
+}
+
+.emailicon2 {
+  position: absolute;
+  top: 51.5%;
   right: 16.5%;
   height: 6%;
   width: 6%;
@@ -355,7 +475,17 @@ form .txt_field {
 
 .passwordicon {
   position: absolute;
-  top: 56.5%;
+  top: 58%;
+  right: 16.5%;
+  height: 6%;
+  width: 6%;
+  display: block;
+  z-index: 2;
+}
+
+.passwordicon2 {
+  position: absolute;
+  top: 64%;
   right: 16.5%;
   height: 6%;
   width: 6%;
@@ -365,7 +495,17 @@ form .txt_field {
 
 .nameicon {
   position: absolute;
-  top: 26.5%;
+  top: 30%;
+  right: 16.5%;
+  height: 6%;
+  width: 6%;
+  display: block;
+  z-index: 2;
+}
+
+.nameicon2 {
+  position: absolute;
+  top: 39.5%;
   right: 16.5%;
   height: 6%;
   width: 6%;
