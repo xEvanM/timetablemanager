@@ -191,35 +191,42 @@ exports.addStudentToModule = functions.https.onRequest(async (req, res) => {
 });
 
 
-/**
- * getStudentModules
- * Retrieves the studies of a student as an array of JSON objects from Firestore.
- *
- * @param {string} email The email of the student whose studies to retrieve.
- * @return {Promise<Array>} A promise that resolves to an array of JSON objects representing the student's studies.
- * @throws {Error} If the student document cannot be found in Firestore.
- */
-exports.getStudentModules = async (studentId) => {
-  try {
-    // Get a reference to the student document with the given email in Firestore.
-    const studentRef = db.collection('students').where('email', '==', email);
-    // Get the student document data from Firestore.
-    const studentDoc = await studentRef.get();
+exports.getModulesStudied = functions.https.onRequest(async (request, response) => {
+  cors(request, response, async () => {
+    const email = request.body.data.email;
+    const encodedEmail = encodeURIComponent(email);
 
-    // If the student document does not exist, throw an error.
-    if (studentDoc.empty) {
-      throw new Error('Student not found');
-  }
+    try {
+      const studentRef = db.collection('students').doc(encodedEmail);
 
-    // Extract the 'studies' array from the student document data.
-    const studentData = studentDoc.data();
-    const studies = studentData.studies || [];
+      await studentRef.get().then(async (doc) => {
+        if (doc.exists) {
+          const data = doc.data();
+          const modules = data.modules;
 
-    // Return the 'studies' array.
-    return studies;
-  } catch (error) {
-    // Log and re-throw any errors that occur during execution.
-    console.error('Error getting student studies:', error);
-    throw error;
-  }
-};
+          // Fetch module data for each module the student studies
+          const moduleDataPromises = modules.map(async (moduleName) => {
+            const moduleRef = db.collection('modules').doc(moduleName);
+            const moduleDoc = await moduleRef.get();
+            if (moduleDoc.exists) {
+              return moduleDoc.data();
+            } else {
+              return null;
+            }
+          });
+          const moduleData = await Promise.all(moduleDataPromises);
+
+          // Filter out null values for modules that couldn't be found in the "modules" collection
+          const modulesStudied = moduleData.filter(module => module !== null);
+
+          response.status(200).send({"status": "success", "data": modulesStudied});
+        } else {
+          response.status(404).send({"status": "fail", "data": "Student modules could not be found"});
+        }
+      });
+    } catch (error) {
+      console.error('Error retrieving student first name', error);
+      response.status(500).send({"status": "fail", "data": "Student modules not retrieved"});
+    }
+  });
+});

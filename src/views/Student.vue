@@ -58,86 +58,24 @@
     <div class="greeting">Welcome, {{ name }}!</div>
     <input id="button" @click="reg" value=" Sign Out" readonly />
     <input id="viewbutton" @click="reg" value=" Daily View" readonly />
+
     <table>
       <tr>
         <th class="topleft"></th>
-        <th>Monday</th>
-        <th>Tuesday</th>
-        <th>Wednesday</th>
-        <th>Thursday</th>
-        <th>Friday</th>
+        <th v-for="day in days" :key="day">{{ day }}</th>
       </tr>
-      <tr>
-        <td class="time">9:00am</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td class="time">10:00am</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td class="time">11:00am</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td class="time">12:00pm</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td class="time">1:00pm</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td class="time">2:00pm</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td class="time">3:00pm</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td class="time">4:00pm</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td class="time">5:00pm</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td class="bottomright"></td>
+      <tr v-for="hour in hours" :key="hour">
+        <td class="time">{{ hour }}</td>
+        <td v-for="day in days" :key="day">
+          <div
+            class="lecture"
+            v-if="schedule[day] && schedule[day][hour] !== undefined"
+          >
+            {{ schedule[day][hour].name }}<br />
+            {{ schedule[day][hour].lecturer }}<br />
+            {{ schedule[day][hour].location }}
+          </div>
+        </td>
       </tr>
     </table>
   </body>
@@ -152,6 +90,20 @@ import { ref } from "vue";
 const functions = getFunctions(app);
 const auth = getAuth(app);
 export default {
+  data() {
+      return {
+        days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        hours: ["9am", "10am", "11am", "12pm", "1pm", "2pm", "3pm", "4pm", "5pm"],
+        modules: [],
+        schedule: {}
+      };
+    },
+    mounted() {
+      this.$nextTick(() => {
+        this.fetchModules();
+        console.log("Mounted!");
+      });
+    },
   setup() {
     const name = ref("");
 
@@ -180,8 +132,48 @@ export default {
       name,
     };
   },
-};
+  methods: {
+    async fetchModules() {
+      try {
+        console.log("Fetching student modules");
+        const getModules = httpsCallable(functions, "getModulesStudied");
+        const email = auth.currentUser.email;
+        const result = await getModules({ email });
+        console.log(result);
+        this.modules = result.data;
+        this.populateSchedule(this.modules);
+      } catch (error) {
+        console.error("Error fetching student modules", error);
+      }
+    },
+    populateSchedule(modules) {
+      console.log("Populating schedule");
+      if (!Array.isArray(modules)) {
+        console.error("Invalid modules array:", modules);
+        return;
+      }
+      modules.forEach(module => {
+        module.times.forEach(time => {
+          const dayCode = time.substr(0, 2);
+          const dayIndex = this.days.findIndex(day => day.startsWith(dayCode));
+          const day = this.days[dayIndex];
+          const hourIndex = parseInt(time.substr(2)) - 9;
+          const hour = this.hours[hourIndex];
+          if (!this.schedule[day]) {
+            this.schedule[day] = {};
+          }
+          this.schedule[day][hour] = {
+            name: module.name,
+            lecturer: module.lecturer,
+            location: module.location
+          }
+        });
+      });
+    }
+  }
+}
 </script>
+
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap");
@@ -225,16 +217,20 @@ th {
   border-top-right-radius: 15px;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
+  margin-block: 10px;
 }
 
-/* td {
+.lecture {
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
+  height: 45px;
+  font-size: 9.5px;
+  word-wrap: break-word;
   background-color: rgb(204, 0, 0);
   box-shadow: 0px 0px 5px 0px rgba(23, 2, 32, 1);
-} */
+}
 
 .topleft {
   border: 0;
