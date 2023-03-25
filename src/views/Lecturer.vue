@@ -10,11 +10,6 @@
     <div class="addModule">
       <h1>Create/Edit Module</h1>
       <form>
-        <div class="txt_field_admin">
-            <input type="password" v-model="auth" />
-            <span></span>
-            <label>Enter Admin Password</label>
-          </div>
         <div class="leftside">
           <div class="txt_field">
             <input type="text" v-model="moduleID" />
