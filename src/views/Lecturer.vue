@@ -1,72 +1,62 @@
 <template>
   <head>
-    <title>Lecturer | Sign Up</title>
+    <title>Lecturer View</title>
   </head>
   <body>
     <div class="loginimg">
       <img src= https://cdn-icons-png.flaticon.com/512/277/277991.png>
     </div>
-    <div class="websiteName">Hi, lecturer!</div>
-    <div class="sloganText1">Managing your students,</div>
-    <div class="sloganText2">made easy!</div>
+    <div class="greeting">Hello, Lecturer</div>
     <div class="addModule">
       <h1>Create/Edit Module</h1>
       <form>
-        <div class="txt_field">
-          <input type="text" v-model="moduleID" />
-          <span></span>
-          <label>Module Code</label>
+        <div class="leftside">
+          <div class="txt_field">
+            <input type="text" v-model="moduleID" />
+            <span></span>
+            <label>Module Code</label>
+          </div>
+          <div class="txt_field">
+            <input type="text" v-model="name" />
+            <span></span>
+            <label>Module Name</label>
+          </div>
+          <div class="txt_field">
+            <input type="text" v-model="location" />
+            <span></span>
+            <label>Module Location</label>
+          </div>
         </div>
-        <div class="txt_field">
-          <input type="text" v-model="name" />
-          <span></span>
-          <label>Module Name</label>
+        <div class="rightside">
+          <div class="txt_field">
+            <input type="text" v-model="times" />
+            <span></span>
+            <label>Module Times</label>
+          </div>
+          <div class="txt_field">
+            <input type="text" v-model="email" />
+            <span></span>
+            <label>Assign Students</label>
+          </div>
+          <div class="txt_field">
+            <label>Module Colour</label>
+          </div>
+          <ul>
+            <div class="red"></div>
+            <div class="orange"></div>
+            <div class="lightorange"></div>
+            <div class="yellow"></div>
+            <div class="lightgreen"></div>
+            <div class="green"></div>
+            <div class="teal"></div>
+            <div class="blue"></div>
+          </ul>
         </div>
-        <div class="txt_field">
-          <input type="text" v-model="location" />
-          <span></span>
-          <label>Module Location</label>
-        </div>
-        <div class="txt_field">
-          <input type="text" v-model="times" />
-          <span></span>
-          <label>Module Times</label>
-        </div>
-        <div>
-          <label>Module Colour</label>
-        </div>
-        <ul>
-          <div class="red"></div>
-          <div class="orange"></div>
-          <div class="lightorange"></div>
-          <div class="yellow"></div>
-          <div class="lightgreen"></div>
-          <div class="green"></div>
-          <div class="teal"></div>
-          <div class="blue"></div>
-        </ul>
-        <br />
-        <br />
-        <br />
+        <span class="divider"></span>
         <input id="button" @click="moduleManagement" value="Done" readonly />
       </form>
     </div>
-    <div class="addStudent">
-      <h1>Assign students</h1>
-      <form>
-        <div class="txt_field">
-          <input type="text" v-model="codes" />
-          <span></span>
-          <label>Module Codes</label>
-        </div>
-        <div class="txt_field">
-          <input type="text" v-model="email" />
-          <span></span>
-          <label>Student Email</label>
-        </div>
-        <input id="button" @click="addStudentToModule" value="Add" readonly />
-      </form>
-    </div>
+
     <div class="custom-shape-divider-bottom-1679498594">
       <svg
         data-name="Layer 1"
@@ -172,34 +162,6 @@ export default {
   width: 6%;
 }
 
-.websiteName {
-  font-size: 30px;
-  color: white;
-  position: absolute;
-  top: 7%;
-  left: 9%;
-}
-
-.sloganText1 {
-  z-index: 1;
-  font-size: 40px;
-  color: white;
-  position: absolute;
-  left: 13%;
-  top: 40%;
-  display: inline-block;
-}
-
-.sloganText2 {
-  z-index: 1;
-  font-size: 45px;
-  color: white;
-  position: absolute;
-  left: 15%;
-  top: 47%;
-  display: inline-block;
-}
-
 body {
   background-color: rgb(60, 58, 185);
   overflow: hidden;
@@ -210,11 +172,10 @@ body {
 .addModule {
   z-index: 2;
   position: absolute;
-  top: 50%;
-  left: 20%;
-  transform: translate(-50%, -50%);
-  width: 40%;
-  height: 100%;
+  top: 5%;
+  left: 10%;
+  width: 80%;
+  height: 80%;
   background: white;
   border-radius: 10px;
   box-shadow: 0px 0px 10px 0px rgba(23, 2, 32, 1);
@@ -224,7 +185,6 @@ body {
 .addModule h1 {
   text-align: center;
   padding: 20px 0;
-  border-bottom: 1px solid silver;
 }
 
 .addModule form {
@@ -248,7 +208,6 @@ body {
 .addStudent h1 {
   text-align: center;
   padding: 20px 0;
-  border-bottom: 1px solid silver;
 }
 
 .addStudent form {
@@ -258,12 +217,12 @@ body {
 
 form .txt_field {
   position: relative;
-  border-bottom: 2px solid #adadad;
+
   margin: 30px 0;
 }
 
 .txt_field input {
-  width: 100%;
+  width: 40%;
   padding: 0 5px;
   height: 40px;
   font-size: 16px;
@@ -276,18 +235,6 @@ form .txt_field {
   position: absolute;
   top: 50%;
   left: 5px;
-  color: #adadad;
-  transform: translateY(-50%);
-  font-size: 16px;
-  pointer-events: none;
-  transition: 0.5s;
-}
-
-.txt_field placeholder::before {
-  position: absolute;
-  top: 50%;
-  left: 5px;
-  color: #adadad;
   transform: translateY(-50%);
   font-size: 16px;
   pointer-events: none;
@@ -305,74 +252,14 @@ form .txt_field {
   transition: 0.5s;
 }
 
-.txt_field input:focus ~ label,
-.txt_field input:valid ~ label {
+.txt_field label {
   top: -5px;
   color: rgb(46, 78, 141);
 }
 
 .txt_field input:focus ~ span::before,
 .txt_field input:valid ~ span::before {
-  width: 100%;
-}
-
-form .txt_field_admin {
-  position: relative;
-  border-bottom: 2px solid #adadad;
-  margin: 30px 0;
-}
-
-.txt_field_admin input {
-  width: 100%;
-  padding: 0 5px;
-  height: 40px;
-  font-size: 16px;
-  border: none;
-  background: none;
-  outline: none;
-}
-
-.txt_field_admin label {
-  position: absolute;
-  top: 50%;
-  left: 5px;
-  color: #adadad;
-  transform: translateY(-50%);
-  font-size: 16px;
-  pointer-events: none;
-  transition: 0.5s;
-}
-
-.txt_field_admin span::before {
-  content: "";
-  position: absolute;
-  top: 40px;
-  left: 0;
-  width: 0%;
-  height: 2px;
-  background: rgb(223, 79, 39);
-  transition: 0.5s;
-}
-
-.txt_field_admin input:focus ~ label,
-.txt_field_admin input:valid ~ label {
-  top: -5px;
-  color: rgb(223, 79, 39);
-}
-
-.txt_field_admin input:focus ~ span::before,
-.txt_field_admin input:valid ~ span::before {
-  width: 100%;
-}
-
-.pass {
-  margin: -5px 0 20px 5px;
-  color: #a6a6a6;
-  cursor: pointer;
-}
-
-.pass:hover {
-  text-decoration: underline;
+  width: 40%;
 }
 
 #button {
@@ -392,22 +279,6 @@ form .txt_field_admin {
 #button:hover {
   border-color: rgb(46, 78, 141);
   transition: 0.5s;
-}
-
-.signup_link {
-  margin: 30px 0;
-  text-align: center;
-  font-size: 16px;
-  color: #a6a6a6;
-}
-
-.signup_link a {
-  color: rgb(46, 78, 141);
-  text-decoration: none;
-}
-
-.signup_link a:hover {
-  text-decoration: underline;
 }
 
 .custom-shape-divider-bottom-1679498594 {
@@ -511,5 +382,37 @@ ul div:hover {
   width: 7%;
   height: 6%;
   border-radius: 50%;
+}
+
+.divider {
+  content: "";
+  position: absolute;
+  top: 55%;
+  left: 35%;
+  width: 35%;
+  height: 2px;
+  background: silver;
+  display: inline-block;
+  transform: rotate(90deg);
+}
+
+.greeting {
+  font-size: 35px;
+  position: absolute;
+  left: 10.5%;
+  top: 1.5%;
+  display: inline-block;
+  color: white;
+  text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
+}
+
+.leftside {
+  position: absolute;
+  left: 20%;
+}
+
+.rightside {
+  position: absolute;
+  right: 20%;
 }
 </style>
