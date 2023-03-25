@@ -10,12 +10,14 @@
     <div class="box1"></div>
     <div class="box2"></div>
     <div class="box3"></div>
+
     <svg
       class="leftarrow"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
     >
       <path
+        value="left" @click="handleClick('left')"
         fill="currentColor"
         d="m12 16l1.4-1.4l-1.6-1.6H16v-2h-4.2l1.6-1.6L12 8l-4 4l4 4Zm0 6q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22Z"
       />
@@ -26,6 +28,7 @@
       viewBox="0 0 24 24"
     >
       <path
+        value="right" @click="handleClick('right')"
         fill="currentColor"
         d="m12 16l4-4l-4-4l-1.4 1.4l1.6 1.6H8v2h4.2l-1.6 1.6L12 16Zm0 6q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22Z"
       />
@@ -73,7 +76,7 @@
         ></path>
       </svg>
     </div>
-    <div class="greeting">Schedule for (InsertDay)</div>
+    <div class="greeting">{{ name }}'s Schedule for {{ currentDay }}</div>
     <input id="button" @click="reg" value=" Sign Out" readonly />
     <input id="viewbutton" @click="reg" value=" Weekly View" readonly />
     <table>
@@ -142,7 +145,120 @@
 </template>
 
 <script>
-import { Icon } from "@iconify/vue";
+// import { Icon } from "@iconify/vue";
+import firebase from "../api/firebase.js";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import app from "../api/firebase.js";
+import { getFunctions, httpsCallable } from "firebase/functions";
+import { ref, computed } from "vue";
+const functions = getFunctions(app);
+const auth = getAuth(app);
+export default {
+  data() {
+    return {
+      days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      hours: ["9am", "10am", "11am", "12pm", "1pm", "2pm", "3pm", "4pm", "5pm"],
+      modules: [],
+      schedule: {},
+      daysOfWeek: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      currentDayIndex: new Date().getDay()
+    };
+  },
+  mounted() {
+    this.$nextTick(() => {
+      this.fetchModules();
+      console.log("Mounted!");
+    });
+  },
+  setup() {
+    const name = ref("");
+
+    const fetchFirstName = async () => {
+      try {
+        console.log("Attempting to get student first name");
+        const addModule = httpsCallable(functions, "getFirstName");
+        const email = auth.currentUser.email;
+        const data = {
+          email: email,
+        };
+        console.log(data);
+        const jsonData = JSON.stringify(data);
+        console.log(jsonData);
+        const result = await addModule(data);
+        console.log(result);
+        name.value = result.data;
+      } catch (error) {
+        console.error("Error retrieving student first name", error);
+      }
+    };
+    fetchFirstName();
+
+    return {
+      name,
+    };
+  },
+  computed: {
+    currentDay() {
+      return this.daysOfWeek[this.currentDayIndex];
+  },
+  },
+  methods: {
+    async fetchModules() {
+      try {
+        console.log("Fetching student modules");
+        const getModules = httpsCallable(functions, "getModulesStudied");
+        const email = auth.currentUser.email;
+        const result = await getModules({ email });
+        console.log(result);
+        this.modules = result.data;
+        this.populateSchedule(this.modules);
+      } catch (error) {
+        console.error("Error fetching student modules", error);
+      }
+    },
+    populateSchedule(modules) {
+      console.log("Populating schedule");
+      if (!Array.isArray(modules)) {
+        console.error("Invalid modules array:", modules);
+        return;
+      }
+      modules.forEach(module => {
+        module.times.forEach(time => {
+          const dayCode = time.substr(0, 2).toLowerCase();
+          const dayIndex = this.days.findIndex(day => day.toLowerCase().startsWith(dayCode));
+          const day = this.days[dayIndex];
+          const hourIndex = parseInt(time.substr(2)) - 9;
+          const hour = this.hours[hourIndex];
+          if (!this.schedule[day]) {
+            this.schedule[day] = {};
+          }
+          this.schedule[day][hour] = {
+            name: module.name,
+            lecturer: module.lecturer,
+            location: module.location
+          };
+        });
+      });
+    },
+    handleClick(pathID) {
+  console.log("Clicked path: " + pathID);
+  const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  if (pathID === "left") {
+    this.currentDayIndex = (this.currentDayIndex + days.length - 1) % days.length;
+    if (this.currentDayIndex === days.length - 1) {
+      this.currentDayIndex = 6;
+    }
+  } else {
+    this.currentDayIndex = (this.currentDayIndex + 1) % days.length;
+    if (this.currentDayIndex === 7) {
+      this.currentDayIndex = 0 ;
+    }
+  }
+},
+
+
+  },
+};
 </script>
 
 <style scoped>
