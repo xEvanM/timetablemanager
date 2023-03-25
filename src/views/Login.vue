@@ -27,8 +27,7 @@
         <input id="button" @click="reg" value="Log In" readonly />
         <div class="signup_link">Need an account? <a href="#">Sign up</a></div>
       </form>
-    </div>
-    <svg
+      <svg
       class="emailicon"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
@@ -48,6 +47,8 @@
         d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6zm9 14H6V10h12v10zm-6-3c1.1 0 2-.9 2-2s-.9-2-2-2s-2 .9-2 2s.9 2 2 2z"
       />
     </svg>
+      
+    </div>
     <div class="custom-shape-divider-bottom-1679498594">
       <svg
         data-name="Layer 1"
@@ -298,20 +299,20 @@ form .txt_field {
 
 .emailicon {
   position: absolute;
-  top: 34.5%;
+  top: 28%;
   right: 16.5%;
-  height: 4.5%;
-  width: 4.5%;
+  height: 6.5%;
+  width: 6.5%;
   display: block;
   z-index: 2;
 }
 
 .passwordicon {
   position: absolute;
-  top: 46.7%;
+  top: 44.5%;
   right: 16.5%;
-  height: 4.5%;
-  width: 4.5%;
+  height:6.5%;
+  width: 6.5%;
   display: block;
   z-index: 2;
 }
