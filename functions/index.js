@@ -86,6 +86,32 @@ exports.getFirstName = functions.https.onRequest(async (request, response) => {
   });
 });
 
+// This function is used to get a lecturers fullname based on their email provided in auth, in order to add their name to the module that they teach 
+exports.getLecturerName = functions.https.onRequest(async (request, response) => {
+  cors(request, response, async () => {
+    const email = request.body.data.email;
+    console.log("Email: " + email);
+    const encodedEmail = encodeURIComponent(email);
+
+    try {
+      const lecturerRef = db.collection('lecturers').doc(encodedEmail);
+
+      await lecturerRef.get().then((doc) => {
+        if (doc.exists) {
+          const data = doc.data();
+          const name = data.name;
+          response.status(200).send({"status": "success", "data": name});
+        } else {
+          response.status(404).send({"status": "fail", "data": "Lecturer not found"});
+        }
+      });
+    } catch (error) {
+      console.error('Error retrieving lecturers name', error);
+      response.status(500).send({"status": "fail", "data": "Lecturers name was not retrieved"});
+    }
+  });
+});
+
 
 // Update Module Data function (Working!!)
 exports.moduleManagement = functions.https.onRequest(async (req, res) => {
@@ -96,6 +122,7 @@ exports.moduleManagement = functions.https.onRequest(async (req, res) => {
     const name = req.body.data.name;
     const location = req.body.data.location;
     const times = req.body.data.times;
+    const lecturer = req.body.data.lecturer;
 
     mouduleIDString = moduleID.toString();
 
@@ -110,7 +137,8 @@ exports.moduleManagement = functions.https.onRequest(async (req, res) => {
       await moduleRef.set({ 
         name: name,
         location: location,
-        times: times
+        lecturer: lecturer,
+        times: admin.firestore.FieldValue.arrayUnion(... times) // using spread operator to add multiple elements to the array
       }, { merge: true });
 
       // Return a success message
@@ -151,7 +179,7 @@ exports.addStudentToModule = functions.https.onRequest(async (req, res) => {
     // Add the module to the student
     const studentRef = db.collection('students').doc(encodedEmail);
     await studentRef.update({
-      modules: admin.firestore.FieldValue.arrayUnion(codes)
+      modules: admin.firestore.FieldValue.arrayUnion(... codes)
     });
 
     return res.status(200).send({ "success": "true", "data": "Student was added to module" });
