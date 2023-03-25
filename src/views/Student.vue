@@ -154,8 +154,8 @@ export default {
       }
       modules.forEach(module => {
         module.times.forEach(time => {
-          const dayCode = time.substr(0, 2);
-          const dayIndex = this.days.findIndex(day => day.startsWith(dayCode));
+          const dayCode = time.substr(0, 2).toLowerCase();
+          const dayIndex = this.days.findIndex(day => day.toLowerCase().startsWith(dayCode));
           const day = this.days[dayIndex];
           const hourIndex = parseInt(time.substr(2)) - 9;
           const hour = this.hours[hourIndex];
