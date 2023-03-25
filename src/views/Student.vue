@@ -225,7 +225,6 @@ th {
   border-top-right-radius: 15px;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
-  height: 45px;
   font-size: 9.5px;
   word-wrap: break-word;
   background-color: rgb(204, 0, 0);
