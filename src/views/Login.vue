@@ -24,30 +24,29 @@
           <label>Your Password</label>
         </div>
         <div class="pass">Forgot Password?</div>
-        <input id="button" @click="reg" value="Log In" readonly />
+        <input id="button" @click="login" value="Log In" readonly />
         <div class="signup_link">Need an account? <a href="#">Sign up</a></div>
       </form>
       <svg
-      class="emailicon"
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-    >
-      <path
-        fill="currentColor"
-        d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5l-8-5h16zm0 12H4V8l8 5l8-5v10z"
-      />
-    </svg>
-    <svg
-      class="passwordicon"
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-    >
-      <path
-        fill="currentColor"
-        d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6zm9 14H6V10h12v10zm-6-3c1.1 0 2-.9 2-2s-.9-2-2-2s-2 .9-2 2s.9 2 2 2z"
-      />
-    </svg>
-      
+        class="emailicon"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+      >
+        <path
+          fill="currentColor"
+          d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5l-8-5h16zm0 12H4V8l8 5l8-5v10z"
+        />
+      </svg>
+      <svg
+        class="passwordicon"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+      >
+        <path
+          fill="currentColor"
+          d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6zm9 14H6V10h12v10zm-6-3c1.1 0 2-.9 2-2s-.9-2-2-2s-2 .9-2 2s.9 2 2 2z"
+        />
+      </svg>
     </div>
     <div class="custom-shape-divider-bottom-1679498594">
       <svg
@@ -75,29 +74,64 @@
   </body>
 </template>
 
-<script setup>
+<script>
 import app from "../api/firebase.js";
 import { ref } from "vue";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "vue-router";
-const email = ref("");
-const password = ref("");
-// const errMsg = ref();
-const router = useRouter();
+import { getFunctions, httpsCallable } from "firebase/functions";
 
-const reg = () => {
-  console.log("login called");
-  const auth = getAuth();
-  signInWithEmailAndPassword(auth, email.value, password.value)
-    .then((data) => {
-      console.log("Logged In!");
-      console.log(auth.currentUser);
-      router.push("/student"); // redirect to student page - will update this to send to STUDENT or LECTURER depending on credentials
-    })
-    .catch((error) => {
-      console.log("Error: " + error.code);
-      alert(error.code);
-    });
+const functions = getFunctions(app);
+
+export default {
+  data() {
+    return {
+      email: "",
+      password: "",
+    };
+  },
+  created() {
+    this.router = useRouter();
+  },
+  methods: {
+    login() {
+      console.log("login called");
+      const auth = getAuth();
+      signInWithEmailAndPassword(auth, this.email, this.password)
+        .then(() => {
+          console.log("Logged In!");
+          console.log(auth.currentUser);
+          this.getAccess();
+
+          // router.push("/student"); // redirect to student page - will update this to send to STUDENT or LECTURER depending on credentials
+        })
+        .catch((error) => {
+          console.log("Error: " + error.code);
+          alert(error.code);
+        });
+    },
+    getAccess() {
+      console.log("Attempting to find access level");
+      const getAccessLevel = httpsCallable(functions, "getAccessLevel");
+
+      const data = {
+        email: this.email,
+      };
+      console.log(data);
+      getAccessLevel(data).then((result) => {
+        console.log(result.data);
+        const level = result.data;
+
+        if (level == "student") {
+          this.router.push("/student");
+        } else if (level == "lecturer") {
+          this.router.push("/lecturer");
+        } else {
+          alert("Error: There is an issue with your account. Contact administrator.");
+        }
+      });
+    },
+  },
 };
 </script>
 
@@ -311,7 +345,7 @@ form .txt_field {
   position: absolute;
   top: 44.5%;
   right: 16.5%;
-  height:6.5%;
+  height: 6.5%;
   width: 6.5%;
   display: block;
   z-index: 2;

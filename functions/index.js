@@ -155,13 +155,13 @@ exports.moduleManagement = functions.https.onRequest(async (req, res) => {
 exports.addStudentToModule = functions.https.onRequest(async (req, res) => {
   cors(req, res, async () => {
   const email = req.body.data.email; 
-  const codes = req.body.data.codes;
+  const code = req.body.data.code;
 
   const encodedEmail = encodeURIComponent(email);
 
   try {
     // Check if the module exists
-    const moduleDoc = await db.collection('modules').doc(codes).get();
+    const moduleDoc = await db.collection('modules').doc(code).get();
     if (!moduleDoc.exists) {
       return res.status(404).send({ "success": "false", "data": "Module not found" });
     }
@@ -172,14 +172,14 @@ exports.addStudentToModule = functions.https.onRequest(async (req, res) => {
       return res.status(404).send({ "success": "false", "data": "Student not found" });
     }
     const studentData = studentDoc.data();
-    if (studentData.modules && studentData.modules.includes(codes)) {
+    if (studentData.modules && studentData.modules.includes(code)) {
       return res.status(400).send({ "success": "false", "data": "Student already in module" });
     }
 
     // Add the module to the student
     const studentRef = db.collection('students').doc(encodedEmail);
     await studentRef.update({
-      modules: admin.firestore.FieldValue.arrayUnion(... codes)
+      modules: admin.firestore.FieldValue.arrayUnion(code)
     });
 
     return res.status(200).send({ "success": "true", "data": "Student was added to module" });
@@ -227,6 +227,34 @@ exports.getModulesStudied = functions.https.onRequest(async (request, response) 
     } catch (error) {
       console.error('Error retrieving student first name', error);
       response.status(500).send({"status": "fail", "data": "Student modules not retrieved"});
+    }
+  });
+});
+
+exports.getAccessLevel = functions.https.onRequest(async (request, response) => {
+  cors(request, response, async () => {
+    const email = request.body.data.email;
+    const encodedEmail = encodeURIComponent(email);
+
+    try {
+      const studentRef = db.collection('students').doc(encodedEmail);
+      const lecturerRef = db.collection('lecturers').doc(encodedEmail);
+      
+      const [studentDoc, lecturerDoc] = await Promise.all([
+        studentRef.get(),
+        lecturerRef.get(),
+      ]);
+
+      if (studentDoc.exists) {
+        response.status(200).send({"status": "success", "data": "student"});
+      } else if (lecturerDoc.exists) {
+        response.status(200).send({"status": "success", "data": "lecturer"});
+      } else {
+        response.status(404).send({"status": "fail", "data": "Access level could not be found"});
+      }
+    } catch (error) {
+      console.error('Error retrieving access level', error);
+      response.status(500).send({"status": "fail", "data": "Access level not retrieved"});
     }
   });
 });

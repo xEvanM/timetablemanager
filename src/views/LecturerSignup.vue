@@ -84,9 +84,6 @@
     created() {},
     methods: {
       createLecturer() {
-        const name = this.name;
-        const email = this.email;
-        const auth = this.adminAuth;
         console.log("Attempting to create lecturer");
         const createLecturer = httpsCallable(functions, "createLecturer");
         

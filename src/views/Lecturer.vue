@@ -60,9 +60,9 @@
       <h1>Assign students</h1>
       <form>
         <div class="txt_field">
-          <input type="text" v-model="codes" />
+          <input type="text" v-model="code" />
           <span></span>
-          <label>Module Codes</label>
+          <label>Module Code</label>
         </div>
         <div class="txt_field">
           <input type="text" v-model="email" />
@@ -145,7 +145,7 @@ export default {
       name: "",
       location: "",
       times: "",
-      codes: "",
+      code: "",
       email: "",
       lecturer: "",
     };
@@ -166,10 +166,11 @@ export default {
         name: name,
         location: location,
         times: times,
+        lecturer: lecturer,
       };
-      console.log(input);
+      console.log(data);
 
-      moduleManagement(input)
+      moduleManagement(data)
         .then((result) => {
           console.log(result);
         })
@@ -178,13 +179,13 @@ export default {
         });
     },
     addStudentToModule() {
-      const codes = this.codes.split(",");
+      const code = this.code
       const email = this.email;
       console.log("Attempting to add a student to module");
       const addStudentToModule = httpsCallable(functions, "addStudentToModule");
 
       const data = {
-        codes: codes,
+        code: code,
         email: email,
       };
       console.log(data);

@@ -119,7 +119,9 @@ export default {
       admin: false,
     };
   },
-  created() {},
+  created() {
+    this.router = useRouter();
+  },
   methods: {
     create() {
       if (this.admin == true) {
@@ -169,25 +171,18 @@ export default {
           .then(() => {
             console.log("User created successfully");
             // Navigate to another route after successful sign up
-            this.$router.push("/student");
+            if (this.admin == true) {
+              this.router.push("/lecturer");
+              console.log("Pushing to lecturer route");
+            } else {
+              this.router.push("/student");
+              console.log("Pushing to student route");
+            }
           })
           .catch((error) => {
             console.log("Error creating user:", error);
           });
       },
-    // Move reg() method inside Vue instance
-    reg() {
-      console.log("sign up function was called");
-      createUserWithEmailAndPassword(getAuth(), this.email, this.password)
-        .then(() => {
-          console.log("User created successfully");
-          // Navigate to another route after successful sign up
-          this.$router.push("/student");
-        })
-        .catch((error) => {
-          console.log("Error creating user:", error);
-        });
-    },
   },
 };
 </script>
