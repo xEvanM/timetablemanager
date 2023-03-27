@@ -19,7 +19,7 @@
         </div>
         <input id="button" @click="reset" value="Reset Password" readonly />
         <div class="signup_link">
-          Remember your password? <a href="#">Log In</a>
+          Remember your password? <a href="#" @click="login">Log In</a>
         </div>
       </form>
     </div>
@@ -79,6 +79,10 @@ const reset = () => {
       const errorMessage = error.message;
       // other error handling stuff goes here
     });
+};
+
+const login = () => {
+  router.push("/login");
 };
 </script>
 
@@ -280,10 +284,10 @@ form .txt_field {
 
 .emailicon {
   position: absolute;
-  top: 44%;
-  right: 16.5%;
-  height: 4.5%;
-  width: 4.5%;
+  top: 45%;
+  right: 21.5%;
+  height: 4%;
+  width: 4%;
   display: block;
   z-index: 2;
 }

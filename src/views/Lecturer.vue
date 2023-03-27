@@ -7,6 +7,7 @@
       <img src= https://cdn-icons-png.flaticon.com/512/277/277991.png>
     </div>
     <div class="greeting">Hello, Lecturer</div>
+    <input id="signout" @click="signOut" value=" Sign Out" readonly />
     <div class="addModule">
       <h1>Create/Edit Module</h1>
       <form>
@@ -101,11 +102,7 @@
 <script>
 import app from "../api/firebase.js";
 import { ref } from "vue";
-import {
-  getAuth,
-  onAuthStateChanged,
-  createUserWithEmailAndPassword,
-} from "firebase/auth";
+import { getAuth, signOut } from "firebase/auth";
 import { useRouter } from "vue-router";
 import { getFunctions, httpsCallable } from "firebase/functions";
 const functions = getFunctions(app);
@@ -192,6 +189,16 @@ export default {
       addStudentToModule(data).then((result) => {
         console.log("Result: " + result.data);
       });
+    },
+    signOut() {
+      signOut(auth)
+        .then(() => {
+          console.log("Signed out");
+          this.$router.push("/login");
+        })
+        .catch(error => {
+          console.error("Error signing out", error);
+        });
     },
   },
 };
@@ -333,6 +340,22 @@ form .txt_field {
   cursor: pointer;
   outline: none;
   text-align: center;
+}
+
+#signout {
+  width: 8%;
+  height: 6%;
+  border: 2px solid;
+  background: white;
+  border-radius: 10px;
+  font-size: 15px;
+  color: rgb(37, 37, 37);
+  cursor: pointer;
+  outline: none;
+  text-align: left;
+  position: absolute;
+  top: 5%;
+  right: 10%;
 }
 
 #button:hover {

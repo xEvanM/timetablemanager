@@ -79,8 +79,8 @@
       </svg>
     </div>
     <div class="greeting">{{ name }}'s Schedule for {{ currentDay }}</div>
-    <input id="button" @click="reg" value=" Sign Out" readonly />
-    <input id="viewbutton" @click="reg" value=" Weekly View" readonly />
+    <input id="button" @click="signOut" value=" Sign Out" readonly />
+    <input id="viewbutton" @click="weekly" value=" Weekly View" readonly />
     <table>
       <tr>
         <th class="topleft"></th>
@@ -90,9 +90,15 @@
       </tr>
       <tr v-for="hour in hours" :key="hour">
         <td class="time">{{ hour }}</td>
-        <td :class="schedule[hour]?.name ? 'lecture' : ''">{{ schedule[hour]?.name }}</td>
-        <td :class="schedule[hour]?.location ? 'lecture' : ''">{{ schedule[hour]?.location }}</td>
-        <td :class="schedule[hour]?.lecturer ? 'lecture' : ''">{{ schedule[hour]?.lecturer }}</td>
+        <td :class="schedule[hour]?.name ? 'lecture' : ''">
+          {{ schedule[hour]?.name }}
+        </td>
+        <td :class="schedule[hour]?.location ? 'lecture' : ''">
+          {{ schedule[hour]?.location }}
+        </td>
+        <td :class="schedule[hour]?.lecturer ? 'lecture' : ''">
+          {{ schedule[hour]?.lecturer }}
+        </td>
       </tr>
     </table>
   </body>
@@ -124,15 +130,17 @@ export default {
         "Saturday",
       ],
       currentDayIndex: (() => {
-  const dayIndex = new Date().getDay();
-  if (dayIndex === 6) { // Saturday
-    return 1; // Monday
-  } else if (dayIndex === 0) { // Sunday
-    return 1; // Monday
-  } else {
-    return dayIndex;
-  }
-})(),
+        const dayIndex = new Date().getDay();
+        if (dayIndex === 6) {
+          // Saturday
+          return 1; // Monday
+        } else if (dayIndex === 0) {
+          // Sunday
+          return 1; // Monday
+        } else {
+          return dayIndex;
+        }
+      })(),
     };
   },
   mounted() {
@@ -188,35 +196,45 @@ export default {
       }
     },
     populateSchedule(modules, currentDay) {
-  console.log("Populating schedule");
-  if (!Array.isArray(modules)) {
-    console.error("Invalid modules array:", modules);
-    return;
-  }
-  modules.forEach((module) => {
-    module.times.forEach((time) => {
-      const dayCode = time.substr(0, 2).toLowerCase();
-      const curr = this.currentDay.toLowerCase();
-      if (!curr.startsWith(dayCode)) {
+      console.log("Populating schedule");
+      if (!Array.isArray(modules)) {
+        console.error("Invalid modules array:", modules);
         return;
       }
-      const hourIndex = parseInt(time.substr(2)) - 9;
-      const hour = this.hours[hourIndex];
-      if (!this.schedule[hour]) {
-        this.schedule[hour] = {};
-      } 
-      this.schedule[hour] = {
-              name: module.name,
-              lecturer: module.lecturer,
-              location: module.location
-            }
-            console.log("Added " + module.name + " to " + hour);
-    });
-  });
-},
-
-
-
+      modules.forEach((module) => {
+        module.times.forEach((time) => {
+          const dayCode = time.substr(0, 2).toLowerCase();
+          const curr = this.currentDay.toLowerCase();
+          if (!curr.startsWith(dayCode)) {
+            return;
+          }
+          const hourIndex = parseInt(time.substr(2)) - 9;
+          const hour = this.hours[hourIndex];
+          if (!this.schedule[hour]) {
+            this.schedule[hour] = {};
+          }
+          this.schedule[hour] = {
+            name: module.name,
+            lecturer: module.lecturer,
+            location: module.location,
+          };
+          console.log("Added " + module.name + " to " + hour);
+        });
+      });
+    },
+    signOut() {
+      signOut(auth)
+        .then(() => {
+          console.log("Signed out");
+          this.$router.push("/");
+        })
+        .catch((error) => {
+          console.error("Error signing out", error);
+        });
+    },
+    weekly() {
+      this.$router.push("/student");
+    },
     handleClick(pathID) {
       this.schedule = [];
       console.log("Clicked path: " + pathID);

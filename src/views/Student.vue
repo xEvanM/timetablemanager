@@ -56,8 +56,8 @@
       </svg>
     </div>
     <div class="greeting">Welcome, {{ name }}!</div>
-    <input id="button" @click="reg" value=" Sign Out" readonly />
-    <input id="viewbutton" @click="reg" value=" Daily View" readonly />
+    <input id="button" @click="signOut" value=" Sign Out" readonly />
+    <input id="viewbutton" @click="daily" value=" Daily View" readonly />
 
     <table>
       <tr>
@@ -87,8 +87,10 @@ import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import app from "../api/firebase.js";
 import { getFunctions, httpsCallable } from "firebase/functions";
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 const functions = getFunctions(app);
 const auth = getAuth(app);
+
 export default {
   data() {
       return {
@@ -132,6 +134,9 @@ export default {
       name,
     };
   },
+  created() {
+    this.router = useRouter();
+  },
   methods: {
     async fetchModules() {
       try {
@@ -169,6 +174,19 @@ export default {
           }
         });
       });
+    },
+    signOut() {
+      signOut(auth)
+        .then(() => {
+          console.log("Signed out");
+          this.$router.push("/login");
+        })
+        .catch(error => {
+          console.error("Error signing out", error);
+        });
+    },
+    daily() {
+      this.router.push("/daily");
     }
   }
 }

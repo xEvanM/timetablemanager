@@ -40,7 +40,7 @@
         </div>
         <input id="button" @click="create" value="Sign up" readonly />
         <div class="signup_link">
-          Already have an account? <a href="#">Log In</a>
+          Already have an account? <a href="#" @click="login">Log In</a>
         </div>
       </form>
       <svg
@@ -183,6 +183,9 @@ export default {
             console.log("Error creating user:", error);
           });
       },
+      login() {
+        this.router.push("/login");
+      }
   },
 };
 </script>

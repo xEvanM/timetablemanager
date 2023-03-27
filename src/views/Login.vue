@@ -23,9 +23,9 @@
           <span></span>
           <label>Your Password</label>
         </div>
-        <div class="pass">Forgot Password?</div>
+        <div class="pass" @click="forgot">Forgot Password?</div>
         <input id="button" @click="login" value="Log In" readonly />
-        <div class="signup_link">Need an account? <a href="#">Sign up</a></div>
+        <div class="signup_link">Need an account? <a href="#" @click="signup">Sign up</a></div>
       </form>
       <svg
         class="emailicon"
@@ -130,6 +130,12 @@ export default {
           alert("Error: There is an issue with your account. Contact administrator.");
         }
       });
+    },
+    forgot() {
+      this.router.push("/forgot");
+    },
+    signup() {
+      this.router.push("/signup");
     },
   },
 };
