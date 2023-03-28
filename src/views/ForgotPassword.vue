@@ -7,8 +7,9 @@
       <img src= https://cdn-icons-png.flaticon.com/512/277/277991.png>
     </div>
     <div class="websiteName">TimetablePro</div>
-    <div class="sloganText1">Your Timetable,</div>
-    <div class="sloganText2">Made easy</div>
+    <div class="sloganText1">Your Timetable, made easy</div>
+    <div class="sloganText2">{{ quoteText }}
+    <br> {{ authorText }}</div>
     <div class="center">
       <h1>Password Reset</h1>
       <form>
@@ -59,31 +60,66 @@
   </body>
 </template>
 
-<script setup>
+<script>
 import app from "../api/firebase.js";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
-const email = ref("");
-const password = ref("");
-const router = useRouter();
+import axios from "axios";
+
 const auth = getAuth();
 
-const reset = () => {
-  sendPasswordResetEmail(auth, email.value)
+export default {
+  data() {
+    return {
+      email: "",
+      password: "",
+      quote: "Quote goes here",
+      author: "Author goes here",
+    };
+  },
+  created() {
+    this.router = useRouter();
+    this.getQuote();
+  },
+  computed: {
+    quoteText() {
+      return this.quote;
+    },
+    authorText() {
+      return this.author;
+    },
+  },
+  methods: {
+    reset() {
+  sendPasswordResetEmail(auth, this.email)
     .then(() => {
-      console.log("Password reset email sent to " + email.value);
+      console.log("Password reset email sent to " + this.email);
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
       // other error handling stuff goes here
     });
+},
+async getQuote() {
+      try {
+    const response = await axios.get('https://api.quotable.io/random?minLength=100&maxLength=140');
+    this.qt = response.data.content;
+    this.author = "-" + response.data.author;
+    this.quote = "'" + this.qt + "'";
+    return this.quote;
+  } catch (error) {
+    console.error(error);
+    return 'Error getting quote';
+  }
+},
+    login() {
+        router.push("/login");
+    }
+  },
 };
 
-const login = () => {
-  router.push("/login");
-};
 </script>
 
 <style scoped>
@@ -120,7 +156,7 @@ const login = () => {
   font-size: 40px;
   color: white;
   position: absolute;
-  left: 13%;
+  left: 10%;
   top: 40%;
   display: inline-block;
   text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
@@ -128,11 +164,13 @@ const login = () => {
 
 .sloganText2 {
   z-index: 1;
-  font-size: 45px;
-  color: white;
+  font-size: 18px;
+  color: #b7bec5;
   position: absolute;
-  left: 15%;
-  top: 47%;
+  word-wrap: break-word;
+  left: 11%;
+  width: 35%;
+  top: 46%;
   display: inline-block;
   text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
 }

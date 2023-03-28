@@ -7,8 +7,9 @@
       <img src= https://cdn-icons-png.flaticon.com/512/277/277991.png>
     </div>
     <div class="websiteName">TimetablePro</div>
-    <div class="sloganText1">Your Timetable,</div>
-    <div class="sloganText2">Made easy</div>
+    <div class="sloganText1">Your Timetable, made easy</div>
+    <div class="sloganText2">{{ quoteText }}
+    <br> {{ authorText }}</div>
     <div class="center">
       <h1>Sign Up</h1>
       <form>
@@ -106,6 +107,7 @@ import { ref } from "vue";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "vue-router";
 import { getFunctions, httpsCallable } from "firebase/functions";
+import axios from "axios";
 
 const functions = getFunctions(app);
 const auth = getAuth();
@@ -118,10 +120,21 @@ export default {
       password: "",
       auth: "",
       admin: false,
+      quote: "Quote goes here",
+      author: "Author goes here",
     };
   },
   created() {
     this.router = useRouter();
+    this.getQuote();
+  },
+  computed: {
+    quoteText() {
+      return this.quote;
+    },
+    authorText() {
+      return this.author;
+    },
   },
   methods: {
     create() {
@@ -181,6 +194,18 @@ export default {
       console.log("Error creating user:", error);
     });
 },
+async getQuote() {
+      try {
+    const response = await axios.get('https://api.quotable.io/random?minLength=100&maxLength=140');
+    this.qt = response.data.content;
+    this.author = "-" + response.data.author;
+    this.quote = "'" + this.qt + "'";
+    return this.quote;
+  } catch (error) {
+    console.error(error);
+    return 'Error getting quote';
+  }
+},
       login() {
         this.router.push("/login");
       }
@@ -222,7 +247,7 @@ export default {
   font-size: 40px;
   color: white;
   position: absolute;
-  left: 13%;
+  left: 10%;
   top: 40%;
   display: inline-block;
   text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
@@ -230,11 +255,13 @@ export default {
 
 .sloganText2 {
   z-index: 1;
-  font-size: 45px;
-  color: white;
+  font-size: 18px;
+  color: #b7bec5;
   position: absolute;
-  left: 15%;
-  top: 47%;
+  word-wrap: break-word;
+  left: 11%;
+  width: 35%;
+  top: 46%;
   display: inline-block;
   text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
 }
