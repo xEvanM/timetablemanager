@@ -32,8 +32,8 @@ function isAuthLecturer(to, from, next) {
                 email: email,
             };
             getAccessLevel(data).then((result) => {
-                console.log("Result: " + result.data);
-                if (result.data === "lecturer") {
+                console.log("Access level: " + result.data.accessLevel);
+                if (result.data.accessLevel === "lecturer") {
                     console.log("User is a lecturer");
                     return next();
                 } else {
@@ -60,8 +60,8 @@ function isAuthStudent(to, from, next) {
                 email: email,
             };
             getAccessLevel(data).then((result) => {
-                console.log("Result: " + result.data);
-                if (result.data === "student") {
+                console.log("Result: " + result.data.getAccessLevel);
+                if (result.data.accessLevel === "student") {
                     console.log("User is a student");
                     return next();
                 } else {

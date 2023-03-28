@@ -158,8 +158,9 @@ export default {
       getAccessLevel(data, {
         headers: { Authorization: `Bearer ${idToken}` },
       }).then((result) => {
-        console.log(result.data);
-        const level = result.data;
+        console.log(result.data.message);
+        const level = result.data.accessLevel;
+        console.log("level: " + level);
 
         if (level == "student") {
           this.router.push("/student");

@@ -19,11 +19,13 @@ exports.createStudent = functions.https.onRequest(async (req, res) => {
       await studentRef.set({  // set the data for the student, based on the student ref
         fname: fname
       }, { merge: true }); // if the student already exists, update the existing student
-      res.status(200).send({"status": "success", "data": "Student added successfully"});
+      res.json({data: {message : 'Student added successfully'}});
+      return;
 
     } catch (error) { // error handling
       console.error('Error adding or updating student', error);
-      res.status(500).send({"status": "fail", "data": "Student was not added"});
+      res.json({data: {error : 'Student was not added'}});
+      return;
     }
   });
 });
@@ -48,28 +50,32 @@ exports.createLecturer = functions.https.onRequest(async (req, res) => {
         await lectureRef.set({  // set the data for the student, based on the lecturer ref
           name: name
         }, { merge: true }); // if the lecturer already exists, update the existing lecturer
-        res.status(200).send({"status": "success", "data": "Lecturer added successfully"});
+        res.json({data: {message : 'Lecturer added successfully'}});
+        return;
   
       } catch (error) { // error handling
         console.error('Error adding or updating lecturer', error);
-        res.status(500).send({"status": "fail", "data": "Lecturer was not added"});
+        res.json({data: {error : 'Lecturer was not added'}});
+        return;
       }
     } else {
-      res.status(200).send({"status": "fail", "data": "Admin not authorised"});
+      res.json({data: {error : 'Lecturer was not added - unauthorized'}});
+      return;
     }
   });
 });
 
 
 // this function is used to retrieve the first name of the student based on their email 
-exports.getFirstName = functions.https.onRequest(async (request, response) => {
-  cors(request, response, async () => {
+exports.getFirstName = functions.https.onRequest(async (req, res) => {
+  cors(req, res, async () => {
     try {
-      const authToken = request.headers.authorization?.split('Bearer ')[1]; // get the auth token from the request headers
+      const authToken = req.headers.authorization?.split('Bearer ')[1]; // get the auth token from the request headers
       if (!authToken) { // if the auth token is not present, return an error - function only runs if called by a user who is logged in to our system
-        return response.status(401).send({"status": "fail", "data": "Unauthorized: User must be logged in"});
+        res.json({data: {error : 'Unauthorized: User must be logged in'}});
+        return;
       }
-      const email = request.body.data.email;
+      const email = req.body.data.email;
       const encodedEmail = encodeURIComponent(email);
 
       const studentRef = db.collection('students').doc(encodedEmail);
@@ -78,30 +84,34 @@ exports.getFirstName = functions.https.onRequest(async (request, response) => {
         if (doc.exists) {
           const data = doc.data();
           const fname = data.fname;
-          response.status(200).send({"status": "success", "data": fname});
+          res.json({data: {message : 'Student first name retrieved successfully', fname: fname}});
+          return;
         } else {
-          response.status(404).send({"status": "fail", "data": "Student not found"});
+          res.json({data: {error : 'Student not found'}});
+          return;
         }
       });
     } catch (error) {
       console.error('Error retrieving student first name', error);
-      response.status(500).send({"status": "fail", "data": "Student first name was not retrieved"});
+      res.json({data: {error : 'Student first name was not retrieved'}});
+      return;
     }
   });
 });
 
 
 // This function is used to get a lecturers fullname based on their email provided in auth, in order to add their name to the module that they teach 
-exports.getLecturerName = functions.https.onRequest(async (request, response) => {
-  cors(request, response, async () => {
-    const email = request.body.data.email;
+exports.getLecturerName = functions.https.onRequest(async (req, res) => {
+  cors(req, res, async () => {
+    const email = req.body.data.email;
     console.log("Email: " + email);
     const encodedEmail = encodeURIComponent(email);
 
     try {
-      const authToken = request.headers.authorization?.split('Bearer ')[1]; // get the auth token from the request headers
+      const authToken = req.headers.authorization?.split('Bearer ')[1]; // get the auth token from the request headers
       if (!authToken) { // if the auth token is not present, return an error - function only runs if called by a user who is logged in to our system
-        return response.status(401).send({"status": "fail", "data": "Unauthorized: User must be logged in"});
+        res.json({data: {error : 'Unauthorized: User must be logged in'}});
+        return;
       }
       const lecturerRef = db.collection('lecturers').doc(encodedEmail);
 
@@ -109,14 +119,17 @@ exports.getLecturerName = functions.https.onRequest(async (request, response) =>
         if (doc.exists) {
           const data = doc.data();
           const name = data.name;
-          response.status(200).send({"status": "success", "data": name});
+          res.json({data: {message : 'Lecturer name retrieved successfully', name: name}});
+          return;
         } else {
-          response.status(404).send({"status": "fail", "data": "Lecturer not found"});
+          res.json({data: {error : 'Lecturer not found'}});
+          return;
         }
       });
     } catch (error) {
       console.error('Error retrieving lecturers name', error);
-      response.status(500).send({"status": "fail", "data": "Lecturers name was not retrieved"});
+      res.json({data: {error : 'Lecturer name was not retrieved'}});
+      return;
     }
   });
 });
@@ -139,7 +152,8 @@ exports.moduleManagement = functions.https.onRequest(async (req, res) => {
     try {
       const authToken = req.headers.authorization?.split('Bearer ')[1]; // get the auth token from the request headers
       if (!authToken) { // if the auth token is not present, return an error - function only runs if called by a user who is logged in to our system
-        return response.status(401).send({"status": "fail", "data": "Unauthorized: User must be logged in"});
+        res.json({data: {error : 'Unauthorized: User must be logged in'}});
+        return;
       }
       // Get a reference to the module document in Firestore
       const moduleRef = db.collection('modules').doc(moduleID);
@@ -157,11 +171,13 @@ exports.moduleManagement = functions.https.onRequest(async (req, res) => {
       }, { merge: true });
 
       // Return a success message
-      res.status(200).send({ success: true, data: 'Module data updated successfully' });
+      res.json({data: {message : 'Module data updated successfully'}});
+      return;
     } catch (error) {
       // If an error occurs, log it and return an error message
       console.error('Error updating module data:', error);
-      res.status(500).send({ success: false, data: 'Module data was not updated' });
+      res.json({data: {error : 'Module data was not updated'}});
+      return;
     }
   });
 });
@@ -177,23 +193,54 @@ exports.addStudentToModule = functions.https.onRequest(async (req, res) => {
   try {
     const authToken = req.headers.authorization?.split('Bearer ')[1]; // get the auth token from the request headers
     if (!authToken) { // if the auth token is not present, return an error - function only runs if called by a user who is logged in to our system
-      return response.status(401).send({"status": "fail", "data": "Unauthorized: User must be logged in"});
+      res.json({data: {error : 'Unauthorized: User must be logged in'}});
+      return;
     }
     // Check if the module exists
     const moduleDoc = await db.collection('modules').doc(code).get();
     if (!moduleDoc.exists) {
-      return res.status(404).send({ "success": "false", "data": "Module not found" });
+      res.json({data: {error : 'Module not found'}});
+      return;
     }
 
-    // Check if the student is already in the module
+    // Check if the student exists
     const studentDoc = await db.collection('students').doc(encodedEmail).get();
     if (!studentDoc.exists) {
-      return res.status(404).send({ "success": "false", "data": "Student not found" });
+      res.json({data: {error : 'Student not found'}});
+      return;
     }
+
+    // check if the student is already in the module
     const studentData = studentDoc.data();
     if (studentData.modules && studentData.modules.includes(code)) {
-      return res.status(400).send({ "success": "false", "data": "Student already in module" });
+      res.json({data: {error : 'Student is already in this module'}});
+      return;
     }
+
+    // check if the student has a time conflict with any other module
+    const moduleData = moduleDoc.data(); // data for the new module to be added
+    const studentModules = studentData.modules; // modules the student is already in
+    const newModuleTimes = moduleData.times; // get the times for the new module
+    const studentModuleTimes = []; // get the times for each module the student is already in
+    console.log("Entering first for loop");
+    for (const module of studentModules) { // for each module the student is already in
+      const moduleDoc = await db.collection('modules').doc(module).get(); // get the module document
+      const moduleData = moduleDoc.data(); // get the data for the module
+      const times = moduleData.times; // get the times for the module
+      studentModuleTimes.push(...times); // add the times to the studentModuleTimes array
+    }
+    console.log("Entering second for loop");
+    for (const newModuleTime of newModuleTimes) { // for each time in the new module
+      for (const studentModuleTime of studentModuleTimes) { // for each time in the student's modules
+        console.log("Comparing studentModuleTime: " + studentModuleTime + " with newModuleTime: " + newModuleTime + "");
+        if (newModuleTime === studentModuleTime) { // if the times are the same
+          res.json({data: {error : 'Student has a time conflict with another module'}});
+          return;
+        }
+        console.log ("No time conflict!");
+      }
+    }
+
 
     // Add the module to the student
     const studentRef = db.collection('students').doc(encodedEmail);
@@ -201,24 +248,27 @@ exports.addStudentToModule = functions.https.onRequest(async (req, res) => {
       modules: admin.firestore.FieldValue.arrayUnion(code)
     });
 
-    return res.status(200).send({ "success": "true", "data": "Student was added to module" });
+    res.json({data: {message : 'Student added to module successfully'}});
+    return;
   } catch (error) {
     console.error('Error adding student to module', error);
-    return res.status(500).send({ "success": "false", "data": "Some error occurred"});
+    res.json({data: {error : 'Student was not added to module'}});
+    return;
   }
   });
 });
 
 
-exports.getModulesStudied = functions.https.onRequest(async (request, response) => {
-  cors(request, response, async () => {
-    const email = request.body.data.email;
+exports.getModulesStudied = functions.https.onRequest(async (req, res) => {
+  cors(req, res, async () => {
+    const email = req.body.data.email;
     const encodedEmail = encodeURIComponent(email);
 
     try {
-      const authToken = request.headers.authorization?.split('Bearer ')[1]; // get the auth token from the request headers
+      const authToken = req.headers.authorization?.split('Bearer ')[1]; // get the auth token from the request headers
       if (!authToken) { // if the auth token is not present, return an error - function only runs if called by a user who is logged in to our system
-        return response.status(401).send({"status": "fail", "data": "Unauthorized: User must be logged in"});
+        res.json({data: {error : 'Unauthorized: User must be logged in'}});
+        return;
       }
       const studentRef = db.collection('students').doc(encodedEmail);
 
@@ -242,27 +292,31 @@ exports.getModulesStudied = functions.https.onRequest(async (request, response) 
           // Filter out null values for modules that couldn't be found in the "modules" collection
           const modulesStudied = moduleData.filter(module => module !== null);
 
-          response.status(200).send({"status": "success", "data": modulesStudied});
+          res.json({data: {message : 'Student modules retrieved successfully', modules: modulesStudied}});
+          return;
         } else {
-          response.status(404).send({"status": "fail", "data": "Student modules could not be found"});
+          res.json({data: {error : 'Student not found'}});
+          return;
         }
       });
     } catch (error) {
       console.error('Error retrieving student first name', error);
-      response.status(500).send({"status": "fail", "data": "Student modules not retrieved"});
+      res.json({data: {error : 'Student modules not retrieved'}});
+      return;
     }
   });
 });
 
-exports.getAccessLevel = functions.https.onRequest(async (request, response) => {
-  cors(request, response, async () => {
-    const email = request.body.data.email;
+exports.getAccessLevel = functions.https.onRequest(async (req, res) => {
+  cors(req, res, async () => {
+    const email = req.body.data.email;
     const encodedEmail = encodeURIComponent(email);
 
     try {
-      const authToken = request.headers.authorization?.split('Bearer ')[1]; // get the auth token from the request headers
+      const authToken = req.headers.authorization?.split('Bearer ')[1]; // get the auth token from the request headers
       if (!authToken) { // if the auth token is not present, return an error - function only runs if called by a user who is logged in to our system
-        return response.status(401).send({"status": "fail", "data": "Unauthorized: User must be logged in"});
+        res.json({data: {error : 'Unauthorized: User must be logged in'}});
+        return;
       }
       const studentRef = db.collection('students').doc(encodedEmail);
       const lecturerRef = db.collection('lecturers').doc(encodedEmail);
@@ -273,15 +327,19 @@ exports.getAccessLevel = functions.https.onRequest(async (request, response) => 
       ]);
 
       if (studentDoc.exists) {
-        response.status(200).send({"status": "success", "data": "student"});
+        res.json({data: {message : 'Student access level retrieved successfully', accessLevel: 'student'}});
+        return;
       } else if (lecturerDoc.exists) {
-        response.status(200).send({"status": "success", "data": "lecturer"});
+        res.json({data: {message : 'Lecturer access level retrieved successfully', accessLevel: 'lecturer'}});
+        return;
       } else {
-        response.status(404).send({"status": "fail", "data": "Access level could not be found"});
+        res.json({data: {error : 'Access level not retrieved'}});
+        return;
       }
     } catch (error) {
       console.error('Error retrieving access level', error);
-      response.status(500).send({"status": "fail", "data": "Access level not retrieved"});
+      res.json({data: {error : 'Access level not retrieved'}});
+      return;
     }
   });
 });

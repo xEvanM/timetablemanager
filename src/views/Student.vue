@@ -127,7 +127,7 @@ export default {
           },
         });
         console.log(result);
-        name.value = result.data;
+        name.value = result.data.fname;
       } catch (error) {
         console.error("Error retrieving student first name", error);
       }
@@ -156,7 +156,7 @@ export default {
           headers: { Authorization: `Bearer ${idToken}` },
         });
         console.log(result);
-        this.modules = result.data;
+        this.modules = result.data.modules;
         this.populateSchedule(this.modules);
       } catch (error) {
         console.error("Error fetching student modules", error);

@@ -123,7 +123,7 @@ export default {
         const idToken = auth.currentUser.getIdToken();
         getLecturerNameFn(email, { headers: { Authorization: `Bearer ${idToken}`,},})
           .then((resp) => {
-            lecturerName.value = resp.data;
+            lecturerName.value = resp.data.name;
             console.log("Lecturer name:", lecturerName.value);
           })
           .catch((err) => {
@@ -174,7 +174,7 @@ export default {
 
       moduleManagement(data, { headers: { Authorization: `Bearer ${idToken}`,},})
         .then((result) => {
-          console.log(result);
+          console.log(result.data.message);
         })
         .catch((error) => {
           console.error(error);
@@ -193,7 +193,8 @@ export default {
       };
       console.log(data);
       addStudentToModule(data, { headers: { Authorization: `Bearer ${idToken}`,},}).then((result) => {
-        console.log("Result: " + result.data);
+        console.log("Result: " + result.data.message);
+        console.log("Error: " + result.data.error);
       });
     },
     selectColour(colour) {
