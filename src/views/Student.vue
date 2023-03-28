@@ -70,6 +70,7 @@
           <div
             class="lecture"
             v-if="schedule[day] && schedule[day][hour] !== undefined"
+            :style="getLectureStyle(schedule[day][hour])"
           >
             {{ schedule[day][hour].name }}<br />
             {{ schedule[day][hour].lecturer }}<br />
@@ -183,9 +184,16 @@ export default {
             name: module.name,
             lecturer: module.lecturer,
             location: module.location,
+            colour: module.colour,
           };
         });
       });
+    },
+    getLectureStyle(lecture) {
+      if (lecture.colour) {
+        return { backgroundColor: lecture.colour };
+      }
+      return {};
     },
     signOut() {
       signOut(auth)

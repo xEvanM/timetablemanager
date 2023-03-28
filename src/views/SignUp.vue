@@ -36,7 +36,7 @@
         <div class="check_field">
           <input type="checkbox" v-model="admin" />
           <span></span>
-          <label>Admin Mode</label>
+          <label> Enable Admin Mode</label>
         </div>
         <div v-if="admin" class="txt_field_admin">
           <input type="password" v-model="auth" />
@@ -196,6 +196,7 @@ export default {
         })
         .catch((error) => {
           console.log("Error creating user:", error);
+          alert(error);
         });
     },
     async getQuote() {

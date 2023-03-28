@@ -39,14 +39,14 @@
           </div>
           <div class="colours">
             <ul>
-              <div class="violet"></div>
-              <div class="orange"></div>
-              <div class="lightorange"></div>
-              <div class="yellow"></div>
-              <div class="lightgreen"></div>
-              <div class="green"></div>
-              <div class="teal"></div>
-              <div class="blue"></div>
+              <div class="violet" @click="selectColour('#cf9fff')" ></div> 
+              <div class="orange" @click="selectColour('#ff5733')"></div>
+              <div class="lightorange" @click="selectColour('#ff8d1a')"></div>
+              <div class="yellow" @click="selectColour('#eddd53')"></div>
+              <div class="lightgreen" @click="selectColour('#add45c')"></div>
+              <div class="green" @click="selectColour('#57c785')"></div>
+              <div class="teal" @click="selectColour('#00baad')"></div>
+              <div class="blue" @click="selectColour('#2a7b9b')"></div>
             </ul>
           </div>
         </div>
@@ -146,15 +146,17 @@ export default {
       code: "",
       email: "",
       lecturer: "",
+      colour: "#ff5733",
     };
   },
 
   methods: {
     async moduleManagement() {
-      const moduleID = this.moduleID;
+      const moduleID = this.moduleID.toUpperCase();
       const name = this.name;
       const location = this.location;
       const lecturer = this.lecturerName;
+      const colour = this.colour;
       const idToken = await auth.currentUser.getIdToken();
       const times = this.times.split(",");
       console.log("Attempting to manage the module");
@@ -166,6 +168,7 @@ export default {
         location: location,
         times: times,
         lecturer: lecturer,
+        colour: colour,
       };
       console.log(data);
 
@@ -178,7 +181,7 @@ export default {
         });
     },
     async addStudentToModule() {
-      const code = this.code
+      const code = this.code.toUpperCase();
       const email = this.email;
       const idToken = await auth.currentUser.getIdToken();
       console.log("Attempting to add a student to module");
@@ -192,6 +195,10 @@ export default {
       addStudentToModule(data, { headers: { Authorization: `Bearer ${idToken}`,},}).then((result) => {
         console.log("Result: " + result.data);
       });
+    },
+    selectColour(colour) {
+      this.colour = colour;
+      console.log(this.colour);
     },
     signOut() {
       signOut(auth)

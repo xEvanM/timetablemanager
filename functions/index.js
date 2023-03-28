@@ -132,6 +132,7 @@ exports.moduleManagement = functions.https.onRequest(async (req, res) => {
     const location = req.body.data.location;
     const times = req.body.data.times;
     const lecturer = req.body.data.lecturer;
+    const colour = req.body.data.colour;
 
     mouduleIDString = moduleID.toString();
 
@@ -151,6 +152,7 @@ exports.moduleManagement = functions.https.onRequest(async (req, res) => {
         name: name,
         location: location,
         lecturer: lecturer,
+        colour: colour,
         times: admin.firestore.FieldValue.arrayUnion(... times) // using spread operator to add multiple elements to the array
       }, { merge: true });
 

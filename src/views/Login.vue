@@ -17,7 +17,7 @@
     </div>
     <div class="center">
       <h1>Log In</h1>
-      <p v-if="loggedIn"></p>
+      <p class="checkLogIn" v-if="checkStatus"> <br/> Checking if you are logged in...</p>
       <form v-if="notLoggedIn">
         <div class="txt_field">
           <input type="email" v-model="email" />
@@ -102,7 +102,7 @@ export default {
       quote: "Quote goes here",
       author: "Author goes here",
       notLoggedIn: false,
-      loggedIn: true,
+      checkStatus: true,
     };
   },
   created() {
@@ -116,7 +116,7 @@ export default {
       } else {
         console.log("User is not logged in");
         this.notLoggedIn = true;
-        this.LogeedIn = false;
+        this.checkStatus = false;
         console.log(this.notLoggedIn);
       }
     });
@@ -180,6 +180,7 @@ export default {
         this.getAccess();
       } else {
         console.log("User is not logged in");
+        this.checkStatus = false;
       }
     },
     async getQuote() {
@@ -288,6 +289,11 @@ body {
 
 .center form {
   padding: 0 40px;
+}
+
+.checkLogIn {
+  color: red;
+  text-align: center;
 }
 
 form .txt_field {
