@@ -7,9 +7,11 @@
       <img src= https://cdn-icons-png.flaticon.com/512/277/277991.png>
     </div>
     <div class="websiteName">TimetablePro</div>
-    <div class="sloganText1">Your Timetable, made easy</div>
-    <div class="sloganText2">{{ quoteText }}
-    <br> {{ authorText }}</div>
+    <div class="sloganText1">Your Timetable, <br />Made easy</div>
+    <div class="sloganText2">
+      {{ quoteText }} <br />
+      {{ authorText }}
+    </div>
     <div class="center">
       <h1>Password Reset</h1>
       <form>
@@ -92,34 +94,35 @@ export default {
   },
   methods: {
     reset() {
-  sendPasswordResetEmail(auth, this.email)
-    .then(() => {
-      console.log("Password reset email sent to " + this.email);
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // other error handling stuff goes here
-    });
-},
-async getQuote() {
+      sendPasswordResetEmail(auth, this.email)
+        .then(() => {
+          console.log("Password reset email sent to " + this.email);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          // other error handling stuff goes here
+        });
+    },
+    async getQuote() {
       try {
-    const response = await axios.get('https://api.quotable.io/random?minLength=100&maxLength=140');
-    this.qt = response.data.content;
-    this.author = "-" + response.data.author;
-    this.quote = "'" + this.qt + "'";
-    return this.quote;
-  } catch (error) {
-    console.error(error);
-    return 'Error getting quote';
-  }
-},
+        const response = await axios.get(
+          "https://api.quotable.io/random?minLength=100&maxLength=140"
+        );
+        this.qt = response.data.content;
+        this.author = "-" + response.data.author;
+        this.quote = "'" + this.qt + "'";
+        return this.quote;
+      } catch (error) {
+        console.error(error);
+        return "Error getting quote";
+      }
+    },
     login() {
-        router.push("/login");
-    }
+      router.push("/login");
+    },
   },
 };
-
 </script>
 
 <style scoped>
@@ -156,23 +159,25 @@ async getQuote() {
   font-size: 40px;
   color: white;
   position: absolute;
-  left: 10%;
-  top: 40%;
+  left: 12%;
+  top: 30%;
   display: inline-block;
   text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
+  text-align: center;
 }
 
 .sloganText2 {
   z-index: 1;
   font-size: 18px;
-  color: #b7bec5;
+  color: #becddb;
   position: absolute;
   word-wrap: break-word;
-  left: 11%;
+  left: 7%;
   width: 35%;
-  top: 46%;
+  top: 55%;
   display: inline-block;
   text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
+  text-align: center;
 }
 
 body {
@@ -322,8 +327,8 @@ form .txt_field {
 
 .emailicon {
   position: absolute;
-  top: 45%;
-  right: 21.5%;
+  top: 44%;
+  right: 18%;
   height: 4%;
   width: 4%;
   display: block;

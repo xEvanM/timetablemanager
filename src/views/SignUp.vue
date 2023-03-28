@@ -7,37 +7,41 @@
       <img src= https://cdn-icons-png.flaticon.com/512/277/277991.png>
     </div>
     <div class="websiteName">TimetablePro</div>
-    <div class="sloganText1">Your Timetable, made easy</div>
-    <div class="sloganText2">{{ quoteText }}
-    <br> {{ authorText }}</div>
+    <div class="sloganText1">
+      Your Timetable,<br />
+      Made easy
+    </div>
+    <div class="sloganText2">
+      {{ quoteText }} <br />
+      {{ authorText }}
+    </div>
     <div class="center">
       <h1>Sign Up</h1>
       <form>
-        <div class="check_field">
-          <input type="checkbox" v-model="admin" />
-          <span></span>
-          <label>Admin Mode</label>
-        </div>
-        <div v-if="admin" class="txt_field_admin">
-            <input type="password" v-model="auth" />
-            <span></span>
-            <label>Enter Admin Password</label>
-          </div>
         <div class="txt_field">
           <input type="text" v-model="name" />
           <span></span>
-          <label>{{ admin ? 'Enter Full Name' : 'Enter First Name' }}</label>
-
+          <label>{{ admin ? "Enter Full Name" : "Enter First Name" }}</label>
         </div>
         <div class="txt_field">
           <input type="email" v-model="email" />
           <span></span>
           <label>Enter Email</label>
         </div>
-        <div class="txt_field">
+        <div class="txt_field" style="margin-bottom: 10px">
           <input type="password" v-model="password" />
           <span></span>
           <label>Create Password</label>
+        </div>
+        <div class="check_field">
+          <input type="checkbox" v-model="admin" />
+          <span></span>
+          <label>Admin Mode</label>
+        </div>
+        <div v-if="admin" class="txt_field_admin">
+          <input type="password" v-model="auth" />
+          <span></span>
+          <label>Enter Admin Password</label>
         </div>
         <input id="button" @click="create" value="Sign up" readonly />
         <div class="signup_link">
@@ -45,35 +49,35 @@
         </div>
       </form>
       <svg
-      :class="admin ? 'emailicon2' : 'emailicon'"
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-    >
-      <path
-        fill="currentColor"
-        d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5l-8-5h16zm0 12H4V8l8 5l8-5v10z"
-      />
-    </svg>
-    <svg
-      :class="admin ? 'nameicon2' : 'nameicon'"
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-    >
-      <path
-        fill="currentColor"
-        d="M5.85 17.1q1.275-.975 2.85-1.538T12 15q1.725 0 3.3.563t2.85 1.537q.875-1.025 1.363-2.325T20 12q0-3.325-2.337-5.663T12 4Q8.675 4 6.337 6.337T4 12q0 1.475.488 2.775T5.85 17.1ZM12 13q-1.475 0-2.488-1.012T8.5 9.5q0-1.475 1.012-2.488T12 6q1.475 0 2.488 1.012T15.5 9.5q0 1.475-1.012 2.488T12 13Zm0 9q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22Z"
-      />
-    </svg>
-    <svg
-    :class="admin ? 'passwordicon2' : 'passwordicon'"
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-    >
-      <path
-        fill="currentColor"
-        d="M6 22q-.825 0-1.413-.588T4 20V10q0-.825.588-1.413T6 8h1V6q0-2.075 1.463-3.538T12 1q2.075 0 3.538 1.463T17 6v2h1q.825 0 1.413.588T20 10v10q0 .825-.588 1.413T18 22H6Zm0-2h12V10H6v10Zm6-3q.825 0 1.413-.588T14 15q0-.825-.588-1.413T12 13q-.825 0-1.413.588T10 15q0 .825.588 1.413T12 17ZM9 8h6V6q0-1.25-.875-2.125T12 3q-1.25 0-2.125.875T9 6v2ZM6 20V10v10Z"
-      />
-    </svg>
+        :class="admin ? 'emailicon2' : 'emailicon'"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+      >
+        <path
+          fill="currentColor"
+          d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5l-8-5h16zm0 12H4V8l8 5l8-5v10z"
+        />
+      </svg>
+      <svg
+        :class="admin ? 'nameicon2' : 'nameicon'"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+      >
+        <path
+          fill="currentColor"
+          d="M5.85 17.1q1.275-.975 2.85-1.538T12 15q1.725 0 3.3.563t2.85 1.537q.875-1.025 1.363-2.325T20 12q0-3.325-2.337-5.663T12 4Q8.675 4 6.337 6.337T4 12q0 1.475.488 2.775T5.85 17.1ZM12 13q-1.475 0-2.488-1.012T8.5 9.5q0-1.475 1.012-2.488T12 6q1.475 0 2.488 1.012T15.5 9.5q0 1.475-1.012 2.488T12 13Zm0 9q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22Z"
+        />
+      </svg>
+      <svg
+        :class="admin ? 'passwordicon2' : 'passwordicon'"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+      >
+        <path
+          fill="currentColor"
+          d="M6 22q-.825 0-1.413-.588T4 20V10q0-.825.588-1.413T6 8h1V6q0-2.075 1.463-3.538T12 1q2.075 0 3.538 1.463T17 6v2h1q.825 0 1.413.588T20 10v10q0 .825-.588 1.413T18 22H6Zm0-2h12V10H6v10Zm6-3q.825 0 1.413-.588T14 15q0-.825-.588-1.413T12 13q-.825 0-1.413.588T10 15q0 .825.588 1.413T12 17ZM9 8h6V6q0-1.25-.875-2.125T12 3q-1.25 0-2.125.875T9 6v2ZM6 20V10v10Z"
+        />
+      </svg>
     </div>
     <div class="custom-shape-divider-bottom-1679498594">
       <svg
@@ -159,56 +163,58 @@ export default {
       createStudent(data);
     },
     async createLecturer() {
-        console.log("Attempting to create lecturer");
-        const createLecturer = httpsCallable(functions, "createLecturer");;
-  
-        // Call reg() method inside createStudent() method
-        this.reg();
-  
-        const data = {
-          name: this.name,
-          email: this.email,
-          auth: this.auth
-        };
-        console.log(data);
-        createLecturer(data);
-      },
-      // Move reg() method inside Vue instance
-      reg() {
-  console.log("sign up function was called");
-  createUserWithEmailAndPassword(getAuth(), this.email, this.password)
-    .then(() => {
-      console.log("User created successfully");
-      // Wait for 2 seconds before navigating to another route after successful sign up
-      setTimeout(() => {
-        if (this.admin == true) {
-          this.router.push("/lecturer");
-          console.log("Pushing to lecturer route");
-        } else {
-          this.router.push("/student");
-          console.log("Pushing to student route");
-        }
-      }, 2000);
-    })
-    .catch((error) => {
-      console.log("Error creating user:", error);
-    });
-},
-async getQuote() {
+      console.log("Attempting to create lecturer");
+      const createLecturer = httpsCallable(functions, "createLecturer");
+
+      // Call reg() method inside createStudent() method
+      this.reg();
+
+      const data = {
+        name: this.name,
+        email: this.email,
+        auth: this.auth,
+      };
+      console.log(data);
+      createLecturer(data);
+    },
+    // Move reg() method inside Vue instance
+    reg() {
+      console.log("sign up function was called");
+      createUserWithEmailAndPassword(getAuth(), this.email, this.password)
+        .then(() => {
+          console.log("User created successfully");
+          // Wait for 2 seconds before navigating to another route after successful sign up
+          setTimeout(() => {
+            if (this.admin == true) {
+              this.router.push("/lecturer");
+              console.log("Pushing to lecturer route");
+            } else {
+              this.router.push("/student");
+              console.log("Pushing to student route");
+            }
+          }, 2000);
+        })
+        .catch((error) => {
+          console.log("Error creating user:", error);
+        });
+    },
+    async getQuote() {
       try {
-    const response = await axios.get('https://api.quotable.io/random?minLength=100&maxLength=140');
-    this.qt = response.data.content;
-    this.author = "-" + response.data.author;
-    this.quote = "'" + this.qt + "'";
-    return this.quote;
-  } catch (error) {
-    console.error(error);
-    return 'Error getting quote';
-  }
-},
-      login() {
-        this.router.push("/login");
+        const response = await axios.get(
+          "https://api.quotable.io/random?minLength=100&maxLength=140"
+        );
+        this.qt = response.data.content;
+        this.author = "-" + response.data.author;
+        this.quote = "'" + this.qt + "'";
+        return this.quote;
+      } catch (error) {
+        console.error(error);
+        return "Error getting quote";
       }
+    },
+    login() {
+      this.router.push("/login");
+    },
   },
 };
 </script>
@@ -247,23 +253,25 @@ async getQuote() {
   font-size: 40px;
   color: white;
   position: absolute;
-  left: 10%;
-  top: 40%;
+  left: 12%;
+  top: 30%;
   display: inline-block;
   text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
+  text-align: center;
 }
 
 .sloganText2 {
   z-index: 1;
   font-size: 18px;
-  color: #b7bec5;
+  color: #becddb;
   position: absolute;
   word-wrap: break-word;
-  left: 11%;
+  left: 7%;
   width: 35%;
-  top: 46%;
+  top: 55%;
   display: inline-block;
   text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
+  text-align: center;
 }
 
 body {
@@ -299,18 +307,16 @@ body {
 form .check_field {
   align-items: center;
   justify-content: space-between;
-  margin: 5px 0;
-  margin-left: 90px;
-  padding-top: 5px;
+  margin: 0px 0;
+  margin-left: 5px;
+  padding-top: 0px;
 }
 .check_field label {
   position: absolute;
-  margin: 0 5px;
+  margin: 0 0px;
   color: rgb(223, 79, 39);
   font-size: 16px;
 }
-
-
 
 form .txt_field {
   position: relative;
@@ -362,53 +368,54 @@ form .txt_field {
 }
 
 form .txt_field_admin {
-    position: relative;
-    border-bottom: 2px solid #adadad;
-    margin: 30px 0;
-  }
-  
-  .txt_field_admin input {
-    width: 100%;
-    padding: 0 5px;
-    height: 40px;
-    font-size: 16px;
-    border: none;
-    background: none;
-    outline: none;
-  }
-  
-  .txt_field_admin label {
-    position: absolute;
-    top: 50%;
-    left: 5px;
-    color: #adadad;
-    transform: translateY(-50%);
-    font-size: 16px;
-    pointer-events: none;
-    transition: 0.5s;
-  }
-  
-  .txt_field_admin span::before {
-    content: "";
-    position: absolute;
-    top: 40px;
-    left: 0;
-    width: 0%;
-    height: 2px;
-    background: rgb(223, 79, 39);
-    transition: 0.5s;
-  }
-  
-  .txt_field_admin input:focus ~ label,
-  .txt_field_admin input:valid ~ label {
-    top: -5px;
-    color: rgb(223, 79, 39);
-  }
-  
-  .txt_field_admin input:focus ~ span::before,
-  .txt_field_admin input:valid ~ span::before {
-    width: 100%;
-  }
+  position: relative;
+  border-bottom: 2px solid #adadad;
+  margin: 20px 0;
+  margin-bottom: 10px;
+}
+
+.txt_field_admin input {
+  width: 100%;
+  padding: 0 5px;
+  height: 40px;
+  font-size: 16px;
+  border: none;
+  background: none;
+  outline: none;
+}
+
+.txt_field_admin label {
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  color: #adadad;
+  transform: translateY(-50%);
+  font-size: 16px;
+  pointer-events: none;
+  transition: 0.5s;
+}
+
+.txt_field_admin span::before {
+  content: "";
+  position: absolute;
+  top: 40px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: rgb(223, 79, 39);
+  transition: 0.5s;
+}
+
+.txt_field_admin input:focus ~ label,
+.txt_field_admin input:valid ~ label {
+  top: -5px;
+  color: rgb(223, 79, 39);
+}
+
+.txt_field_admin input:focus ~ span::before,
+.txt_field_admin input:valid ~ span::before {
+  width: 100%;
+}
 
 .pass {
   margin: -5px 0 20px 5px;
@@ -478,8 +485,8 @@ form .txt_field_admin {
 
 .emailicon {
   position: absolute;
-  top: 44%;
-  right: 16.5%;
+  top: 42%;
+  right: 13%;
   height: 6%;
   width: 6%;
   display: block;
@@ -488,8 +495,8 @@ form .txt_field_admin {
 
 .emailicon2 {
   position: absolute;
-  top: 51.5%;
-  right: 16.5%;
+  top: 36%;
+  right: 13%;
   height: 6%;
   width: 6%;
   display: block;
@@ -497,9 +504,9 @@ form .txt_field_admin {
 }
 
 .passwordicon {
-  position: absolute;
-  top: 58%;
-  right: 16.5%;
+  position: fixed;
+  top: 57%;
+  right: 13%;
   height: 6%;
   width: 6%;
   display: block;
@@ -508,8 +515,8 @@ form .txt_field_admin {
 
 .passwordicon2 {
   position: absolute;
-  top: 64%;
-  right: 16.5%;
+  top: 49%;
+  right: 13%;
   height: 6%;
   width: 6%;
   display: block;
@@ -518,8 +525,8 @@ form .txt_field_admin {
 
 .nameicon {
   position: absolute;
-  top: 30%;
-  right: 16.5%;
+  top: 27%;
+  right: 13%;
   height: 6%;
   width: 6%;
   display: block;
@@ -528,8 +535,8 @@ form .txt_field_admin {
 
 .nameicon2 {
   position: absolute;
-  top: 39.5%;
-  right: 16.5%;
+  top: 23%;
+  right: 13%;
   height: 6%;
   width: 6%;
   display: block;
