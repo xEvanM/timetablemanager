@@ -25,7 +25,9 @@
         </div>
         <div class="pass" @click="forgot">Forgot Password?</div>
         <input id="button" @click="login" value="Log In" readonly />
-        <div class="signup_link">Need an account? <a href="#" @click="signup">Sign up</a></div>
+        <div class="signup_link">
+          Need an account? <a href="#" @click="signup">Sign up</a>
+        </div>
       </form>
       <svg
         class="emailicon"
@@ -82,6 +84,7 @@ import { useRouter } from "vue-router";
 import { getFunctions, httpsCallable } from "firebase/functions";
 
 const functions = getFunctions(app);
+const auth = getAuth();
 
 export default {
   data() {
@@ -110,15 +113,16 @@ export default {
           alert(error.code);
         });
     },
-    getAccess() {
+    async getAccess() {
       console.log("Attempting to find access level");
       const getAccessLevel = httpsCallable(functions, "getAccessLevel");
+      const idToken = await auth.currentUser.getIdToken();
 
       const data = {
         email: this.email,
       };
       console.log(data);
-      getAccessLevel(data).then((result) => {
+      getAccessLevel(data, { headers: { Authorization: `Bearer ${idToken}`,},}).then((result) => {
         console.log(result.data);
         const level = result.data;
 
@@ -127,7 +131,9 @@ export default {
         } else if (level == "lecturer") {
           this.router.push("/lecturer");
         } else {
-          alert("Error: There is an issue with your account. Contact administrator.");
+          alert(
+            "Error: There is an issue with your account. Contact administrator."
+          );
         }
       });
     },

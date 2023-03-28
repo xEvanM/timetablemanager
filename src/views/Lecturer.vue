@@ -120,7 +120,8 @@ export default {
         console.log("User: " + user.email);
         const userEmail = user.email;
         const email = { email: userEmail };
-        getLecturerNameFn(email)
+        const idToken = auth.currentUser.getIdToken();
+        getLecturerNameFn(email, { headers: { Authorization: `Bearer ${idToken}`,},})
           .then((resp) => {
             lecturerName.value = resp.data;
             console.log("Lecturer name:", lecturerName.value);
@@ -149,11 +150,12 @@ export default {
   },
 
   methods: {
-    moduleManagement() {
+    async moduleManagement() {
       const moduleID = this.moduleID;
       const name = this.name;
       const location = this.location;
       const lecturer = this.lecturerName;
+      const idToken = await auth.currentUser.getIdToken();
       const times = this.times.split(",");
       console.log("Attempting to manage the module");
       const moduleManagement = httpsCallable(functions, "moduleManagement");
@@ -167,7 +169,7 @@ export default {
       };
       console.log(data);
 
-      moduleManagement(data)
+      moduleManagement(data, { headers: { Authorization: `Bearer ${idToken}`,},})
         .then((result) => {
           console.log(result);
         })
@@ -175,9 +177,10 @@ export default {
           console.error(error);
         });
     },
-    addStudentToModule() {
+    async addStudentToModule() {
       const code = this.code
       const email = this.email;
+      const idToken = await auth.currentUser.getIdToken();
       console.log("Attempting to add a student to module");
       const addStudentToModule = httpsCallable(functions, "addStudentToModule");
 
@@ -186,7 +189,7 @@ export default {
         email: email,
       };
       console.log(data);
-      addStudentToModule(data).then((result) => {
+      addStudentToModule(data, { headers: { Authorization: `Bearer ${idToken}`,},}).then((result) => {
         console.log("Result: " + result.data);
       });
     },

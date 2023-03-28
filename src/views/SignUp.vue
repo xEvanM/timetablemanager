@@ -108,6 +108,7 @@ import { useRouter } from "vue-router";
 import { getFunctions, httpsCallable } from "firebase/functions";
 
 const functions = getFunctions(app);
+const auth = getAuth();
 
 export default {
   data() {
@@ -130,7 +131,7 @@ export default {
         this.createStudent();
       }
     },
-    createStudent() {
+    async createStudent() {
       console.log("Attempting to create student");
       const createStudent = httpsCallable(functions, "createStudent");
 
@@ -142,14 +143,11 @@ export default {
         email: this.email,
       };
       console.log(data);
-      createStudent(data).then((result) => {
-        console.log(result.data);
-      });
+      createStudent(data);
     },
-    createLecturer() {
+    async createLecturer() {
         console.log("Attempting to create lecturer");
-        const createLecturer = httpsCallable(functions, "createLecturer");
-        
+        const createLecturer = httpsCallable(functions, "createLecturer");;
   
         // Call reg() method inside createStudent() method
         this.reg();
@@ -160,29 +158,29 @@ export default {
           auth: this.auth
         };
         console.log(data);
-        createLecturer(data).then((result) => {
-          console.log(result.data);
-        });
+        createLecturer(data);
       },
       // Move reg() method inside Vue instance
       reg() {
-        console.log("sign up function was called");
-        createUserWithEmailAndPassword(getAuth(), this.email, this.password)
-          .then(() => {
-            console.log("User created successfully");
-            // Navigate to another route after successful sign up
-            if (this.admin == true) {
-              this.router.push("/lecturer");
-              console.log("Pushing to lecturer route");
-            } else {
-              this.router.push("/student");
-              console.log("Pushing to student route");
-            }
-          })
-          .catch((error) => {
-            console.log("Error creating user:", error);
-          });
-      },
+  console.log("sign up function was called");
+  createUserWithEmailAndPassword(getAuth(), this.email, this.password)
+    .then(() => {
+      console.log("User created successfully");
+      // Wait for 2 seconds before navigating to another route after successful sign up
+      setTimeout(() => {
+        if (this.admin == true) {
+          this.router.push("/lecturer");
+          console.log("Pushing to lecturer route");
+        } else {
+          this.router.push("/student");
+          console.log("Pushing to student route");
+        }
+      }, 2000);
+    })
+    .catch((error) => {
+      console.log("Error creating user:", error);
+    });
+},
       login() {
         this.router.push("/login");
       }

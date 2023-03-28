@@ -64,10 +64,14 @@ exports.createLecturer = functions.https.onRequest(async (req, res) => {
 // this function is used to retrieve the first name of the student based on their email 
 exports.getFirstName = functions.https.onRequest(async (request, response) => {
   cors(request, response, async () => {
-    const email = request.body.data.email;
-    const encodedEmail = encodeURIComponent(email);
-
     try {
+      const authToken = request.headers.authorization?.split('Bearer ')[1]; // get the auth token from the request headers
+      if (!authToken) { // if the auth token is not present, return an error - function only runs if called by a user who is logged in to our system
+        return response.status(401).send({"status": "fail", "data": "Unauthorized: User must be logged in"});
+      }
+      const email = request.body.data.email;
+      const encodedEmail = encodeURIComponent(email);
+
       const studentRef = db.collection('students').doc(encodedEmail);
 
       await studentRef.get().then((doc) => {
@@ -86,6 +90,7 @@ exports.getFirstName = functions.https.onRequest(async (request, response) => {
   });
 });
 
+
 // This function is used to get a lecturers fullname based on their email provided in auth, in order to add their name to the module that they teach 
 exports.getLecturerName = functions.https.onRequest(async (request, response) => {
   cors(request, response, async () => {
@@ -94,6 +99,10 @@ exports.getLecturerName = functions.https.onRequest(async (request, response) =>
     const encodedEmail = encodeURIComponent(email);
 
     try {
+      const authToken = request.headers.authorization?.split('Bearer ')[1]; // get the auth token from the request headers
+      if (!authToken) { // if the auth token is not present, return an error - function only runs if called by a user who is logged in to our system
+        return response.status(401).send({"status": "fail", "data": "Unauthorized: User must be logged in"});
+      }
       const lecturerRef = db.collection('lecturers').doc(encodedEmail);
 
       await lecturerRef.get().then((doc) => {
@@ -127,6 +136,10 @@ exports.moduleManagement = functions.https.onRequest(async (req, res) => {
     mouduleIDString = moduleID.toString();
 
     try {
+      const authToken = req.headers.authorization?.split('Bearer ')[1]; // get the auth token from the request headers
+      if (!authToken) { // if the auth token is not present, return an error - function only runs if called by a user who is logged in to our system
+        return response.status(401).send({"status": "fail", "data": "Unauthorized: User must be logged in"});
+      }
       // Get a reference to the module document in Firestore
       const moduleRef = db.collection('modules').doc(moduleID);
       console.log("moduleRef: " + moduleRef);
@@ -160,6 +173,10 @@ exports.addStudentToModule = functions.https.onRequest(async (req, res) => {
   const encodedEmail = encodeURIComponent(email);
 
   try {
+    const authToken = req.headers.authorization?.split('Bearer ')[1]; // get the auth token from the request headers
+    if (!authToken) { // if the auth token is not present, return an error - function only runs if called by a user who is logged in to our system
+      return response.status(401).send({"status": "fail", "data": "Unauthorized: User must be logged in"});
+    }
     // Check if the module exists
     const moduleDoc = await db.collection('modules').doc(code).get();
     if (!moduleDoc.exists) {
@@ -197,6 +214,10 @@ exports.getModulesStudied = functions.https.onRequest(async (request, response) 
     const encodedEmail = encodeURIComponent(email);
 
     try {
+      const authToken = request.headers.authorization?.split('Bearer ')[1]; // get the auth token from the request headers
+      if (!authToken) { // if the auth token is not present, return an error - function only runs if called by a user who is logged in to our system
+        return response.status(401).send({"status": "fail", "data": "Unauthorized: User must be logged in"});
+      }
       const studentRef = db.collection('students').doc(encodedEmail);
 
       await studentRef.get().then(async (doc) => {
@@ -237,6 +258,10 @@ exports.getAccessLevel = functions.https.onRequest(async (request, response) => 
     const encodedEmail = encodeURIComponent(email);
 
     try {
+      const authToken = request.headers.authorization?.split('Bearer ')[1]; // get the auth token from the request headers
+      if (!authToken) { // if the auth token is not present, return an error - function only runs if called by a user who is logged in to our system
+        return response.status(401).send({"status": "fail", "data": "Unauthorized: User must be logged in"});
+      }
       const studentRef = db.collection('students').doc(encodedEmail);
       const lecturerRef = db.collection('lecturers').doc(encodedEmail);
       

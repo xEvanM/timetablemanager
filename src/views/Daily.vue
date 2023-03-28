@@ -157,13 +157,12 @@ export default {
         console.log("Attempting to get student first name");
         const addModule = httpsCallable(functions, "getFirstName");
         const email = auth.currentUser.email;
+        const idToken = await auth.currentUser.getIdToken();
         const data = {
           email: email,
         };
         console.log(data);
-        const jsonData = JSON.stringify(data);
-        console.log(jsonData);
-        const result = await addModule(data);
+        const result = await addModule(data, { headers: { Authorization: `Bearer ${idToken}`,},});
         console.log(result);
         name.value = result.data;
       } catch (error) {
@@ -187,7 +186,12 @@ export default {
         console.log("Fetching student modules");
         const getModules = httpsCallable(functions, "getModulesStudied");
         const email = auth.currentUser.email;
-        const result = await getModules({ email });
+        const idToken = await auth.currentUser.getIdToken();
+        const data = {
+          email: email,
+        };
+
+        const result = await getModules(data, { headers: { Authorization: `Bearer ${idToken}`,},} );
         console.log(result);
         this.modules = result.data;
         this.populateSchedule(this.modules);
