@@ -15,6 +15,7 @@ const router = createRouter({
         { path: "/student", component: () => import("../views/Student.vue"), beforeEnter: isAuthStudent},
         { path: "/lecturer", component: () => import("../views/Lecturer.vue"), beforeEnter: isAuthLecturer },
         { path: "/daily", component: () => import("../views/Daily.vue"), beforeEnter: isAuthStudent },
+        { path: "/", redirect: "/login"},
     ]
 });
 

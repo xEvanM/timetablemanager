@@ -12,7 +12,8 @@
     <br> {{ authorText }}</div>
     <div class="center">
       <h1>Log In</h1>
-      <form>
+      <p v-if="loggedIn">Checking if already logged in...</p>
+      <form v-if="notLoggedIn">
         <div class="txt_field">
           <input type="email" v-model="email" />
           <span></span>
@@ -95,12 +96,26 @@ export default {
       password: "",
       quote: "Quote goes here",
       author: "Author goes here",
+      notLoggedIn: false,
+      loggedIn: true,
     };
   },
   created() {
-    this.router = useRouter();
-    this.getQuote();
-  },
+  this.router = useRouter();
+  this.getQuote();
+  auth.onAuthStateChanged((user) => {
+    console.log("Authentication state changed");
+    if (user) {
+      console.log("User is logged in");
+      this.getAccess();
+    } else {
+      console.log("User is not logged in");
+      this.notLoggedIn = true;
+      this.LogeedIn = false;
+      console.log(this.notLoggedIn);
+    }
+  });
+},
   computed: {
     quoteText() {
       return this.quote;
@@ -117,7 +132,7 @@ export default {
         .then(() => {
           console.log("Logged In!");
           console.log(auth.currentUser);
-          this.getAccess();
+          this.checkLoggedIn();
 
           // router.push("/student"); // redirect to student page - will update this to send to STUDENT or LECTURER depending on credentials
         })
@@ -130,9 +145,9 @@ export default {
       console.log("Attempting to find access level");
       const getAccessLevel = httpsCallable(functions, "getAccessLevel");
       const idToken = await auth.currentUser.getIdToken();
-
+      const mail = auth.currentUser.email;
       const data = {
-        email: this.email,
+        email: mail,
       };
       console.log(data);
       getAccessLevel(data, {
@@ -151,6 +166,16 @@ export default {
           );
         }
       });
+    },
+    async checkLoggedIn() {
+      const user = auth.currentUser;
+      console.log("Checking if user is logged in");
+      if (user) {
+        console.log("User is logged in");
+        this.getAccess();
+      } else {
+        console.log("User is not logged in");
+      }
     },
     async getQuote() {
       try {
