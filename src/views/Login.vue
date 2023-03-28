@@ -7,12 +7,17 @@
       <img src= https://cdn-icons-png.flaticon.com/512/277/277991.png>
     </div>
     <div class="websiteName">TimetablePro</div>
-    <div class="sloganText1">Your Timetable, made easy</div>
-    <div class="sloganText2">{{ quoteText }}
-    <br> {{ authorText }}</div>
+    <div class="sloganText1">
+      Your Timetable,<br />
+      Made easy
+    </div>
+    <div class="sloganText2">
+      {{ quoteText }} <br />
+      {{ authorText }}
+    </div>
     <div class="center">
       <h1>Log In</h1>
-      <p v-if="loggedIn">Checking if already logged in...</p>
+      <p v-if="loggedIn"></p>
       <form v-if="notLoggedIn">
         <div class="txt_field">
           <input type="email" v-model="email" />
@@ -101,21 +106,21 @@ export default {
     };
   },
   created() {
-  this.router = useRouter();
-  this.getQuote();
-  auth.onAuthStateChanged((user) => {
-    console.log("Authentication state changed");
-    if (user) {
-      console.log("User is logged in");
-      this.getAccess();
-    } else {
-      console.log("User is not logged in");
-      this.notLoggedIn = true;
-      this.LogeedIn = false;
-      console.log(this.notLoggedIn);
-    }
-  });
-},
+    this.router = useRouter();
+    this.getQuote();
+    auth.onAuthStateChanged((user) => {
+      console.log("Authentication state changed");
+      if (user) {
+        console.log("User is logged in");
+        this.getAccess();
+      } else {
+        console.log("User is not logged in");
+        this.notLoggedIn = true;
+        this.LogeedIn = false;
+        console.log(this.notLoggedIn);
+      }
+    });
+  },
   computed: {
     quoteText() {
       return this.quote;
@@ -179,16 +184,18 @@ export default {
     },
     async getQuote() {
       try {
-    const response = await axios.get('https://api.quotable.io/random?minLength=100&maxLength=140');
-    this.qt = response.data.content;
-    this.author = "-" + response.data.author;
-    this.quote = "'" + this.qt + "'";
-    return this.quote;
-  } catch (error) {
-    console.error(error);
-    return 'Error getting quote';
-  }
-},
+        const response = await axios.get(
+          "https://api.quotable.io/random?minLength=100&maxLength=140"
+        );
+        this.qt = response.data.content;
+        this.author = "-" + response.data.author;
+        this.quote = "'" + this.qt + "'";
+        return this.quote;
+      } catch (error) {
+        console.error(error);
+        return "Error getting quote";
+      }
+    },
     forgot() {
       this.router.push("/forgot");
     },
@@ -232,23 +239,25 @@ export default {
   font-size: 40px;
   color: white;
   position: absolute;
-  left: 10%;
-  top: 40%;
+  left: 12%;
+  top: 30%;
   display: inline-block;
   text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
+  text-align: center;
 }
 
 .sloganText2 {
   z-index: 1;
   font-size: 18px;
-  color: #b7bec5;
+  color: #becddb;
   position: absolute;
   word-wrap: break-word;
-  left: 11%;
+  left: 7%;
   width: 35%;
-  top: 46%;
+  top: 55%;
   display: inline-block;
   text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
+  text-align: center;
 }
 
 body {
@@ -399,8 +408,8 @@ form .txt_field {
 
 .emailicon {
   position: absolute;
-  top: 28%;
-  right: 16.5%;
+  top: 29%;
+  right: 12%;
   height: 6.5%;
   width: 6.5%;
   display: block;
@@ -409,8 +418,8 @@ form .txt_field {
 
 .passwordicon {
   position: absolute;
-  top: 44.5%;
-  right: 16.5%;
+  top: 45.5%;
+  right: 12%;
   height: 6.5%;
   width: 6.5%;
   display: block;

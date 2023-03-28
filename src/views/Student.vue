@@ -93,19 +93,19 @@ const auth = getAuth(app);
 
 export default {
   data() {
-      return {
-        days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        hours: ["9am", "10am", "11am", "12pm", "1pm", "2pm", "3pm", "4pm", "5pm"],
-        modules: [],
-        schedule: {}
-      };
-    },
-    mounted() {
-      this.$nextTick(() => {
-        this.fetchModules();
-        console.log("Mounted!");
-      });
-    },
+    return {
+      days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      hours: ["9am", "10am", "11am", "12pm", "1pm", "2pm", "3pm", "4pm", "5pm"],
+      modules: [],
+      schedule: {},
+    };
+  },
+  mounted() {
+    this.$nextTick(() => {
+      this.fetchModules();
+      console.log("Mounted!");
+    });
+  },
   setup() {
     const name = ref("");
 
@@ -119,11 +119,12 @@ export default {
           email: email,
         };
         console.log(data);
-        const result = await getFirstName(data, {     // pass the ID token in the second argument
-      headers: {
-        Authorization: `Bearer ${idToken}`,
-      },
-    });
+        const result = await getFirstName(data, {
+          // pass the ID token in the second argument
+          headers: {
+            Authorization: `Bearer ${idToken}`,
+          },
+        });
         console.log(result);
         name.value = result.data;
       } catch (error) {
@@ -150,7 +151,9 @@ export default {
         const data = {
           email: email,
         };
-        const result = await getModules(data, { headers: { Authorization: `Bearer ${idToken}`,},});
+        const result = await getModules(data, {
+          headers: { Authorization: `Bearer ${idToken}` },
+        });
         console.log(result);
         this.modules = result.data;
         this.populateSchedule(this.modules);
@@ -164,10 +167,12 @@ export default {
         console.error("Invalid modules array:", modules);
         return;
       }
-      modules.forEach(module => {
-        module.times.forEach(time => {
+      modules.forEach((module) => {
+        module.times.forEach((time) => {
           const dayCode = time.substr(0, 2).toLowerCase();
-          const dayIndex = this.days.findIndex(day => day.toLowerCase().startsWith(dayCode));
+          const dayIndex = this.days.findIndex((day) =>
+            day.toLowerCase().startsWith(dayCode)
+          );
           const day = this.days[dayIndex];
           const hourIndex = parseInt(time.substr(2)) - 9;
           const hour = this.hours[hourIndex];
@@ -177,8 +182,8 @@ export default {
           this.schedule[day][hour] = {
             name: module.name,
             lecturer: module.lecturer,
-            location: module.location
-          }
+            location: module.location,
+          };
         });
       });
     },
@@ -188,17 +193,16 @@ export default {
           console.log("Signed out");
           this.$router.push("/login");
         })
-        .catch(error => {
+        .catch((error) => {
           console.error("Error signing out", error);
         });
     },
     daily() {
       this.router.push("/daily");
-    }
-  }
-}
+    },
+  },
+};
 </script>
-
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap");
@@ -250,7 +254,7 @@ th {
   border-top-right-radius: 15px;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
-  font-size: 9.5px;
+  font-size: 11px;
   word-wrap: break-word;
   background-color: rgb(204, 0, 0);
   box-shadow: 0px 0px 5px 0px rgba(23, 2, 32, 1);
@@ -258,7 +262,7 @@ th {
 
 .topleft {
   border: 0;
-  background: #8ca6be;
+  background: #becddb;
 }
 
 .loginimg img {
@@ -272,18 +276,18 @@ th {
 
 .time {
   border: 0;
-  background: #8ca6be;
+  background: #becddb;
   box-shadow: none;
   text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
   color: white;
 }
 
 .box1 {
-  background: rgba(217, 217, 217, 1);
+  background: white;
   position: absolute;
   top: 12%;
   left: 15.6%;
-  height: 86%;
+  height: 83%;
   width: 14%;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
@@ -293,11 +297,11 @@ th {
 }
 
 .box2 {
-  background: rgba(217, 217, 217, 1);
+  background: white;
   position: absolute;
   top: 12%;
-  left: 30.5%;
-  height: 86%;
+  left: 30.3%;
+  height: 83%;
   width: 14%;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
@@ -307,11 +311,11 @@ th {
 }
 
 .box3 {
-  background: rgba(217, 217, 217, 1);
+  background: white;
   position: absolute;
   top: 12%;
   left: 45.2%;
-  height: 86%;
+  height: 83%;
   width: 14%;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
@@ -321,11 +325,11 @@ th {
 }
 
 .box4 {
-  background: rgba(217, 217, 217, 1);
+  background: white;
   position: absolute;
   top: 12%;
   left: 59.9%;
-  height: 86%;
+  height: 83%;
   width: 14%;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
@@ -335,11 +339,11 @@ th {
 }
 
 .box5 {
-  background: rgba(217, 217, 217, 1);
+  background: white;
   position: absolute;
   top: 12%;
   left: 74.8%;
-  height: 86%;
+  height: 83%;
   width: 14%;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
@@ -350,7 +354,7 @@ th {
 
 .box {
   width: 85%;
-  height: 88%;
+  height: 85%;
   position: absolute;
   top: 10.5%;
   left: 6%;
@@ -358,7 +362,7 @@ th {
   border-top-right-radius: 15px;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
-  background: #8ca6be;
+  background: #becddb;
   box-shadow: 0px 0px 5px 0px rgba(23, 2, 32, 1);
 }
 
@@ -379,9 +383,8 @@ th {
 }
 
 #button {
-  width: 8%;
+  width: 7.5%;
   height: 6%;
-  border: 2px solid;
   background: white;
   border-radius: 10px;
   font-size: 15px;
@@ -395,14 +398,13 @@ th {
 }
 
 #button:hover {
-  border-color: rgb(46, 78, 141);
-  transition: 0.5s;
+  transition: transform 0.3s;
+  transform: scale(1.1);
 }
 
 #viewbutton {
-  width: 9%;
+  width: 8.8%;
   height: 6%;
-  border: 1px solid white;
   background: rgb(37, 37, 37);
   border-radius: 10px;
   font-size: 15px;
@@ -417,8 +419,8 @@ th {
 }
 
 #viewbutton:hover {
-  border-color: rgb(37, 37, 37);
-  transition: 0.5s;
+  transition: transform 0.3s;
+  transform: scale(1.1);
 }
 
 .custom-shape-divider-bottom-1679498594 {
