@@ -56,8 +56,8 @@
               ></div>
               <div
                 :style="this.colour == '#eddd53' ? getColourStyle() : {}"
-                class="yellow"
-                @click="selectColour('#eddd53')"
+                class="brown"
+                @click="selectColour('#ad9176')"
               ></div>
               <div
                 :style="this.colour == '#add45c' ? getColourStyle() : {}"
@@ -186,10 +186,10 @@ export default {
   methods: {
     async moduleManagement() {
       this.$notify({
-          type: "warn",
-          title: "Please wait",
-          text: "Attempting to manage your module...",
-        });
+        type: "warn",
+        title: "Please wait",
+        text: "Attempting to manage your module...",
+      });
       const moduleID = this.moduleID.toUpperCase();
       const name = this.name;
       const location = this.location;
@@ -212,24 +212,24 @@ export default {
         headers: { Authorization: `Bearer ${idToken}` },
       }).then((result) => {
         if (result.data.message) {
-        this.$notify({
-          type: "success",
-          title: "Success",
-          text: result.data.message,
-        });
-      } else if (result.data.error) {
-        this.$notify({
-          type: "error",
-          title: "Error",
-          text: result.data.error,
-        });
-      } else {
-        this.$notify({
-          type: "error",
-          title: "Error",
-          text: "An unknown error occurred",
-        });
-      }
+          this.$notify({
+            type: "success",
+            title: "Success",
+            text: result.data.message,
+          });
+        } else if (result.data.error) {
+          this.$notify({
+            type: "error",
+            title: "Error",
+            text: result.data.error,
+          });
+        } else {
+          this.$notify({
+            type: "error",
+            title: "Error",
+            text: "An unknown error occurred",
+          });
+        }
       });
     },
     getColourStyle() {
@@ -237,10 +237,10 @@ export default {
     },
     async addStudentToModule() {
       this.$notify({
-          type: "warn",
-          title: "Please wait",
-          text: "Attempting to add student to module...",
-        });
+        type: "warn",
+        title: "Please wait",
+        text: "Attempting to add student to module...",
+      });
       const code = this.code.toUpperCase();
       const email = this.email;
       const idToken = await auth.currentUser.getIdToken();
@@ -258,24 +258,24 @@ export default {
         console.log(result.data.message);
         console.log(result.data.error);
         if (result.data.message) {
-        this.$notify({
-          type: "success",
-          title: "Success",
-          text: result.data.message,
-        });
-      } else if (result.data.error) {
-        this.$notify({
-          type: "error",
-          title: "Error",
-          text: result.data.error,
-        });
-      } else {
-        this.$notify({
-          type: "error",
-          title: "Error",
-          text: "An unknown error occurred",
-        });
-      }
+          this.$notify({
+            type: "success",
+            title: "Success",
+            text: result.data.message,
+          });
+        } else if (result.data.error) {
+          this.$notify({
+            type: "error",
+            title: "Error",
+            text: result.data.error,
+          });
+        } else {
+          this.$notify({
+            type: "error",
+            title: "Error",
+            text: "An unknown error occurred",
+          });
+        }
       });
     },
     selectColour(colour) {
@@ -524,8 +524,8 @@ ul div:hover {
   height: 25%;
   border-radius: 50%;
 }
-.yellow {
-  background-color: #eddd53;
+.brown {
+  background-color: #ad9176;
   position: absolute;
   top: 125%;
   left: 60%;
