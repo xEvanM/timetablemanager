@@ -317,10 +317,10 @@ th {
   border-bottom-right-radius: 15px;
 }
 
-
 .lecture {
   border-top-left-radius: 15px;
   font-size: 18px;
+  height: 5%;
   border-top-right-radius: 15px;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
@@ -354,9 +354,9 @@ th {
   background: rgba(217, 217, 217, 1);
   position: absolute;
   top: 12%;
-  left: 24.2%;
+  left: 23.8%;
   height: 86%;
-  width: 16%;
+  width: 17%;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
   border-bottom-left-radius: 15px;
@@ -368,9 +368,9 @@ th {
   background: rgba(217, 217, 217, 1);
   position: absolute;
   top: 12%;
-  left: 43.5%;
+  left: 43%;
   height: 86%;
-  width: 16%;
+  width: 17%;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
   border-bottom-left-radius: 15px;
@@ -382,9 +382,9 @@ th {
   background: rgba(217, 217, 217, 1);
   position: absolute;
   top: 12%;
-  left: 62.6%;
+  left: 62%;
   height: 86%;
-  width: 16%;
+  width: 17%;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
   border-bottom-left-radius: 15px;
@@ -537,5 +537,101 @@ th {
   width: 4%;
   display: block;
   z-index: 2;
+}
+
+@media screen and (max-width: 1400px) {
+
+  table {
+  position: absolute;
+  top: 11%;
+  left: 12%;
+  width: 70%;
+  height: 85%;
+  display: table;
+  text-align: center;
+  overflow: hidden;
+  font-size: 20px;
+  border-spacing: 70px 5px;
+  table-layout: fixed;
+  overflow: hidden;
+}
+
+th {
+  color: rgb(37, 37, 37);
+  font-size: 22px;
+  text-align: center;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+
+.lecture {
+  border-top-left-radius: 15px;
+  font-size: 15px;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  background-color: rgb(204, 0, 0);
+  box-shadow: 0px 0px 5px 0px rgba(23, 2, 32, 1);
+}
+
+.box1 {
+  background: rgba(217, 217, 217, 1);
+  position: absolute;
+  top: 12%;
+  left: 25.2%;
+  height: 86%;
+  width: 16%;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  box-shadow: 0px 0px 5px 0px rgba(23, 2, 32, 1);
+}
+
+.box2 {
+  background: rgba(217, 217, 217, 1);
+  position: absolute;
+  top: 12%;
+  left: 43.7%;
+  height: 86%;
+  width: 16%;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  box-shadow: 0px 0px 5px 0px rgba(23, 2, 32, 1);
+}
+
+.box3 {
+  background: rgba(217, 217, 217, 1);
+  position: absolute;
+  top: 12%;
+  left: 62.5%;
+  height: 86%;
+  width: 16%;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  box-shadow: 0px 0px 5px 0px rgba(23, 2, 32, 1);
+}
+
+.box {
+  width: 67%;
+  height: 88%;
+  position: absolute;
+  top: 10.5%;
+  left: 14.5%;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  background: #8ca6be;
+  box-shadow: 0px 0px 5px 0px rgba(23, 2, 32, 1);
+}
+
 }
 </style>

@@ -241,8 +241,8 @@ export default {
   font-size: 40px;
   color: white;
   position: absolute;
-  left: 12%;
-  top: 30%;
+  left: 18%;
+  top: 38%;
   display: inline-block;
   text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
   text-align: center;
@@ -254,9 +254,9 @@ export default {
   color: #becddb;
   position: absolute;
   word-wrap: break-word;
-  left: 7%;
+  left: 10%;
   width: 35%;
-  top: 55%;
+  top: 53%;
   display: inline-block;
   text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
   text-align: center;
@@ -432,4 +432,33 @@ form .txt_field {
   display: block;
   z-index: 2;
 }
+
+@media screen and (max-width: 1400px) { 
+  .sloganText1 {
+  z-index: 1;
+  font-size: 40px;
+  color: white;
+  position: absolute;
+  left: 12%;
+  top: 32%;
+  display: inline-block;
+  text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
+  text-align: center;
+}
+
+.sloganText2 {
+  z-index: 1;
+  font-size: 18px;
+  color: #becddb;
+  position: absolute;
+  word-wrap: break-word;
+  left: 7%;
+  width: 35%;
+  top: 52%;
+  display: inline-block;
+  text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
+  text-align: center;
+}
+}
+
 </style>
