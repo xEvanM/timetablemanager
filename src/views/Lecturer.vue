@@ -183,7 +183,6 @@ export default {
       colour: "#cf9fff",
     };
   },
-
   methods: {
     async moduleManagement() {
       this.$notify({
@@ -209,13 +208,9 @@ export default {
         lecturer: lecturer,
         colour: colour,
       };
-      console.log(data);
-
       moduleManagement(data, {
         headers: { Authorization: `Bearer ${idToken}` },
       }).then((result) => {
-        console.log(result.data.message);
-        console.log(result.data.error);
         if (result.data.message) {
         this.$notify({
           type: "success",
@@ -238,15 +233,7 @@ export default {
       });
     },
     getColourStyle() {
-      console.log("Getting colour style");
       return { border: "2px solid black" };
-    },
-    testAlert() {
-      this.$notify({
-        type: "success",
-        title: "Success",
-        text: "Module was created/updated sucessfully",
-      });
     },
     async addStudentToModule() {
       this.$notify({

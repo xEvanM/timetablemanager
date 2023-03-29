@@ -83,6 +83,11 @@ export default {
   created() {
     this.router = useRouter();
     this.getQuote();
+    document.addEventListener("keydown", this.enterKeyPressed);
+
+  },
+  beforeUnmount() {
+    document.removeEventListener("keydown", this.enterKeyPressed);
   },
   computed: {
     quoteText() {
@@ -96,13 +101,26 @@ export default {
     reset() {
       sendPasswordResetEmail(auth, this.email)
         .then(() => {
-          console.log("Password reset email sent to " + this.email);
+          this.$notify({
+        type: "success",
+        title: "Success",
+        text: "Password reset email sent to " + this.email,
+      });
         })
         .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
+          console.log(error.message);
+          this.$notify({
+        type: "error",
+        title: "Error",
+        text: "Incorrect or invalid email. Try again!",
+      });
           // other error handling stuff goes here
         });
+    },
+    enterKeyPressed(event) {
+      if (event.keyCode === 13) {
+        this.reset();
+      }
     },
     async getQuote() {
       try {

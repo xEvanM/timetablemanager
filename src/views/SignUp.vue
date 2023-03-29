@@ -131,6 +131,10 @@ export default {
   created() {
     this.router = useRouter();
     this.getQuote();
+    document.addEventListener("keydown", this.enterKeyPressed);
+  },
+  beforeDestroy() {
+    document.removeEventListener('keydown', this.enterKeyPressed);
   },
   computed: {
     quoteText() {
@@ -156,6 +160,11 @@ export default {
           text: "Attempting to create student account...",
         });
         this.createStudent();
+      }
+    },
+    enterKeyPressed(event) {
+      if (event.keyCode === 13) {
+        this.create();
       }
     },
     async createStudent() {

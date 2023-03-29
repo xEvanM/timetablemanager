@@ -108,10 +108,10 @@ export default {
     this.router = useRouter();
     this.getQuote();
     this.$notify({
-          type: "warn",
-          title: "Just a moment!",
-          text: "If you are logged in, you will be redirected.",
-        });
+      type: "warn",
+      title: "Just a moment!",
+      text: "If you are logged in, you will be redirected.",
+    });
     auth.onAuthStateChanged((user) => {
       console.log("Authentication state changed");
       if (user) {
@@ -129,6 +129,7 @@ export default {
         console.log(this.notLoggedIn);
       }
     });
+    document.addEventListener("keydown", this.enterKeyPressed);
   },
   computed: {
     quoteText() {
@@ -138,15 +139,19 @@ export default {
       return this.author;
     },
   },
+  beforeUnmount() {
+    document.removeEventListener("keydown", this.enterKeyPressed);
+    console.log("Destroyed");
+  },
   methods: {
     login() {
       this.$notify({
-          type: "warn",
-          title: "Please wait",
-          text: "Attempting to log you in...",
-        });
+        type: "warn",
+        title: "Please wait",
+        text: "Attempting to log you in...",
+      });
       const auth = getAuth();
-      const errorMsg = '';
+      const errorMsg = "";
       signInWithEmailAndPassword(auth, this.email, this.password)
         .then(() => {
           console.log("Logged In!");
@@ -158,11 +163,16 @@ export default {
         .catch((error) => {
           console.log(error.message);
           this.$notify({
-          type: "error",
-          title: "Error",
-          text: "Email or password is incorrect",
+            type: "error",
+            title: "Error",
+            text: "Email or password is incorrect",
+          });
         });
-        });
+    },
+    enterKeyPressed(event) {
+      if (event.keyCode === 13) {
+        this.login();
+      }
     },
     async getAccess() {
       console.log("Attempting to find access level");
@@ -451,32 +461,31 @@ form .txt_field {
   z-index: 2;
 }
 
-@media screen and (max-width: 1400px) { 
+@media screen and (max-width: 1400px) {
   .sloganText1 {
-  z-index: 1;
-  font-size: 40px;
-  color: white;
-  position: absolute;
-  left: 12%;
-  top: 32%;
-  display: inline-block;
-  text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
-  text-align: center;
-}
+    z-index: 1;
+    font-size: 40px;
+    color: white;
+    position: absolute;
+    left: 12%;
+    top: 32%;
+    display: inline-block;
+    text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
+    text-align: center;
+  }
 
-.sloganText2 {
-  z-index: 1;
-  font-size: 18px;
-  color: #becddb;
-  position: absolute;
-  word-wrap: break-word;
-  left: 7%;
-  width: 35%;
-  top: 52%;
-  display: inline-block;
-  text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
-  text-align: center;
+  .sloganText2 {
+    z-index: 1;
+    font-size: 18px;
+    color: #becddb;
+    position: absolute;
+    word-wrap: break-word;
+    left: 7%;
+    width: 35%;
+    top: 52%;
+    display: inline-block;
+    text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
+    text-align: center;
+  }
 }
-}
-
 </style>
