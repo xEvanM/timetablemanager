@@ -16,8 +16,7 @@
       {{ authorText }}
     </div>
     <div class="center">
-      <h1>Log In</h1>
-      <p class="checkLogIn" v-if="checkStatus"> <br/> Checking if you are logged in...</p>
+      <h1 v-if="notLoggedIn">Log In</h1>
       <form v-if="notLoggedIn">
         <div class="txt_field">
           <input type="email" v-model="email" />
@@ -110,11 +109,26 @@ export default {
     this.getQuote();
     auth.onAuthStateChanged((user) => {
       console.log("Authentication state changed");
+      this.$notify({
+          type: "warn",
+          title: "Please wait",
+          text: "Checking if already logged in to TimetablePro...",
+        });
       if (user) {
         console.log("User is logged in");
+        this.$notify({
+          type: "success",
+          title: "Logged In",
+          text: "Already logged in! Please wait to be redirected.",
+        });
         this.getAccess();
       } else {
         console.log("User is not logged in");
+        this.$notify({
+          type: "success",
+          title: "Not Logged In",
+          text: "Please proceed to log in to access TimetablePro...",
+        });
         this.notLoggedIn = true;
         this.checkStatus = false;
         console.log(this.notLoggedIn);
