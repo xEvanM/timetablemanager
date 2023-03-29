@@ -164,11 +164,11 @@ export default {
         this.modules = result.data.modules;
         this.populateSchedule(this.modules);
       } catch (error) {
-        console.error("Error fetching student modules", error);
+        console.error("Error fetching student modules", error.message);
         this.$notify({
           type: "error",
           title: "Error",
-          text: error,
+          text: error.message,
         });
       }
     },
@@ -176,6 +176,11 @@ export default {
       console.log("Populating schedule");
       if (!Array.isArray(modules)) {
         console.error("Invalid modules array:", modules);
+        this.$notify({
+          type: "error",
+          title: "Error",
+          text: "You have no modules - are you even a student?",
+        });
         return;
       }
       modules.forEach((module) => {

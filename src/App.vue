@@ -26,6 +26,7 @@ body {
   height: 120px;
   width: 100%;
   max-width: 800px;
+  opacity: 0.92;
   color: white;
   font-family: Poppins;
   border-radius: 5px;

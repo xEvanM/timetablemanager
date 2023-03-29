@@ -239,11 +239,6 @@ export default {
           console.log("User created successfully");
           // Wait for 2 seconds before navigating to another route after successful sign up
           setTimeout(() => {
-            this.$notify({
-          type: "success",
-          title: "Success",
-          text: "Account created! Please wait to be redirected.",
-        });
             if (this.admin == true) {
               this.router.push("/lecturer");
               console.log("Pushing to lecturer route");
