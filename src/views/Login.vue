@@ -119,7 +119,7 @@ export default {
         this.$notify({
           type: "success",
           title: "Logged In",
-          text: "Already logged in! Please wait to be redirected.",
+          text: "Please wait to be redirected.",
         });
         this.getAccess();
       } else {
@@ -127,7 +127,7 @@ export default {
         this.$notify({
           type: "success",
           title: "Not Logged In",
-          text: "Please proceed to log in to access TimetablePro...",
+          text: "Please log in to access TimetablePro...",
         });
         this.notLoggedIn = true;
         this.checkStatus = false;
@@ -155,11 +155,6 @@ export default {
       signInWithEmailAndPassword(auth, this.email, this.password)
         .then(() => {
           console.log("Logged In!");
-          this.$notify({
-          type: "success",
-          title: "Success",
-          text: "You've been logged in! Please wait to be redirected.",
-        });
           console.log(auth.currentUser);
           this.checkLoggedIn();
 
