@@ -6,7 +6,7 @@
     <div class="loginimg">
       <img src= https://cdn-icons-png.flaticon.com/512/277/277991.png>
     </div>
-    <div class="greeting">Hello, Lecturer</div>
+    <div class="greeting">Hello, {{ lecturerName }}!</div>
     <input id="signout" @click="signOut" value=" Sign Out" readonly />
     <div class="addModule">
       <h1>Create/Edit Module</h1>
