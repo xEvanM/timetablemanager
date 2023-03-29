@@ -256,7 +256,7 @@ export default {
   position: absolute;
   top: 4%;
   left: 2%;
-  height: 11%;
+  height: 10%;
   width: 6%;
 }
 
@@ -332,12 +332,11 @@ body {
 
 form .txt_field {
   position: relative;
-  border-bottom: 2px solid #adadad;
   margin: 30px 0;
 }
 
 .txt_field input {
-  width: 100%;
+  width: 90%;
   padding: 0 5px;
   height: 40px;
   font-size: 16px;
@@ -363,7 +362,7 @@ form .txt_field {
   position: absolute;
   top: 40px;
   left: 0;
-  width: 0%;
+  width: 90%;
   height: 2px;
   background: rgb(46, 78, 141);
   transition: 0.5s;
@@ -377,7 +376,7 @@ form .txt_field {
 
 .txt_field input:focus ~ span::before,
 .txt_field input:valid ~ span::before {
-  width: 100%;
+  width: 90%;
 }
 
 .pass {
@@ -448,8 +447,8 @@ form .txt_field {
 
 .emailicon {
   position: absolute;
-  top: 29%;
-  right: 12%;
+  top: 30%;
+  right: 10%;
   height: 6.5%;
   width: 6.5%;
   display: block;
@@ -458,8 +457,8 @@ form .txt_field {
 
 .passwordicon {
   position: absolute;
-  top: 45.5%;
-  right: 12%;
+  top: 46%;
+  right: 10%;
   height: 6.5%;
   width: 6.5%;
   display: block;
