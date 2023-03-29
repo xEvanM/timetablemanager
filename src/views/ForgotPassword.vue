@@ -137,7 +137,7 @@ export default {
       }
     },
     login() {
-      router.push("/login");
+      this.router.push("/login");
     },
   },
 };
