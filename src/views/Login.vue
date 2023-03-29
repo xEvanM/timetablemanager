@@ -107,13 +107,13 @@ export default {
   created() {
     this.router = useRouter();
     this.getQuote();
+    this.$notify({
+          type: "warn",
+          title: "Just a moment!",
+          text: "If you are logged in, you will be redirected.",
+        });
     auth.onAuthStateChanged((user) => {
       console.log("Authentication state changed");
-      this.$notify({
-          type: "warn",
-          title: "Please wait",
-          text: "Checking if already logged in to TimetablePro...",
-        });
       if (user) {
         console.log("User is logged in");
         this.$notify({
@@ -124,11 +124,6 @@ export default {
         this.getAccess();
       } else {
         console.log("User is not logged in");
-        this.$notify({
-          type: "success",
-          title: "Not Logged In",
-          text: "Please log in to access TimetablePro...",
-        });
         this.notLoggedIn = true;
         this.checkStatus = false;
         console.log(this.notLoggedIn);
