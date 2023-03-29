@@ -90,13 +90,13 @@
       </tr>
       <tr v-for="hour in hours" :key="hour">
         <td class="time">{{ hour }}</td>
-        <td :class="schedule[hour]?.name ? 'lecture' : ''">
+        <td :style="getLectureStyle(schedule[hour])" :class="schedule[hour]?.name ? 'lecture' : ''">
           {{ schedule[hour]?.name }}
         </td>
-        <td :class="schedule[hour]?.location ? 'lecture' : ''">
+        <td :style="getLectureStyle(schedule[hour])" :class="schedule[hour]?.location ? 'lecture' : ''">
           {{ schedule[hour]?.location }}
         </td>
-        <td :class="schedule[hour]?.lecturer ? 'lecture' : ''">
+        <td :style="getLectureStyle(schedule[hour])" :class="schedule[hour]?.lecturer ? 'lecture' : ''">
           {{ schedule[hour]?.lecturer }}
         </td>
       </tr>
@@ -120,15 +120,7 @@ export default {
       hours: ["9am", "10am", "11am", "12pm", "1pm", "2pm", "3pm", "4pm", "5pm"],
       modules: [],
       schedule: {},
-      daysOfWeek: [
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-      ],
+      daysOfWeek: ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
       currentDayIndex: (() => {
         const dayIndex = new Date().getDay();
         if (dayIndex === 6) {
@@ -221,11 +213,19 @@ export default {
             name: module.name,
             lecturer: module.lecturer,
             location: module.location,
+            colour: module.colour,
           };
           console.log("Added " + module.name + " to " + hour);
+          console.log("Colour: " + module.colour);
         });
       });
     },
+    getLectureStyle(lecture) {
+  if (lecture && lecture.colour) {
+    return { backgroundColor: lecture.colour };
+  }
+  return {};
+},
     signOut() {
       signOut(auth)
         .then(() => {
