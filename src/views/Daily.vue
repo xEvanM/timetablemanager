@@ -316,8 +316,11 @@ th {
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
 }
+
+
 .lecture {
   border-top-left-radius: 15px;
+  font-size: 18px;
   border-top-right-radius: 15px;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
@@ -351,7 +354,7 @@ th {
   background: rgba(217, 217, 217, 1);
   position: absolute;
   top: 12%;
-  left: 25.65%;
+  left: 24.2%;
   height: 86%;
   width: 16%;
   border-top-left-radius: 15px;
@@ -365,7 +368,7 @@ th {
   background: rgba(217, 217, 217, 1);
   position: absolute;
   top: 12%;
-  left: 43.9%;
+  left: 43.5%;
   height: 86%;
   width: 16%;
   border-top-left-radius: 15px;
@@ -379,7 +382,7 @@ th {
   background: rgba(217, 217, 217, 1);
   position: absolute;
   top: 12%;
-  left: 62.2%;
+  left: 62.6%;
   height: 86%;
   width: 16%;
   border-top-left-radius: 15px;

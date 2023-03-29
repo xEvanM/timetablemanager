@@ -262,7 +262,8 @@ th {
   border-top-right-radius: 15px;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
-  font-size: 11px;
+  font-size: 10px;
+  vertical-align: middle;
   word-wrap: break-word;
   background-color: rgb(204, 0, 0);
   box-shadow: 0px 0px 5px 0px rgba(23, 2, 32, 1);
@@ -294,7 +295,7 @@ th {
   background: white;
   position: absolute;
   top: 12%;
-  left: 15.6%;
+  left: 15.3%;
   height: 83%;
   width: 14%;
   border-top-left-radius: 15px;
@@ -308,7 +309,7 @@ th {
   background: white;
   position: absolute;
   top: 12%;
-  left: 30.3%;
+  left: 30.1%;
   height: 83%;
   width: 14%;
   border-top-left-radius: 15px;
@@ -322,7 +323,7 @@ th {
   background: white;
   position: absolute;
   top: 12%;
-  left: 45.2%;
+  left: 45%;
   height: 83%;
   width: 14%;
   border-top-left-radius: 15px;
