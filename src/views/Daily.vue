@@ -14,27 +14,59 @@
     <svg
       class="leftarrow"
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
+      viewBox="0 0 48 48"
     >
+      <mask id="ipSArrowCircleLeft0">
+        <g fill="none" stroke-linejoin="round" stroke-width="4">
+          <path
+            fill="#fff"
+            stroke="#fff"
+            d="M24 44c11.046 0 20-8.954 20-20S35.046 4 24 4S4 12.954 4 24s8.954 20 20 20Z"
+          />
+          <path
+            stroke="#000"
+            stroke-linecap="round"
+            d="M32.492 24.5h-18m9-9l-9 9l9 9"
+          />
+        </g>
+      </mask>
       <path
+        fill="currentColor"
         value="left"
         @click="handleClick('left')"
-        fill="currentColor"
-        d="m12 16l1.4-1.4l-1.6-1.6H16v-2h-4.2l1.6-1.6L12 8l-4 4l4 4Zm0 6q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22Z"
+        d="M0 0h48v48H0z"
+        mask="url(#ipSArrowCircleLeft0)"
       />
     </svg>
+
     <svg
       class="rightarrow"
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
+      viewBox="0 0 48 48"
     >
+      <mask id="ipSArrowCircleRight0">
+        <g fill="none" stroke-linejoin="round" stroke-width="4">
+          <path
+            fill="#fff"
+            stroke="#fff"
+            d="M24 44c11.046 0 20-8.954 20-20S35.046 4 24 4S4 12.954 4 24s8.954 20 20 20Z"
+          />
+          <path
+            stroke="#000"
+            stroke-linecap="round"
+            d="M14.492 24.5h18m-9-9l9 9l-9 9"
+          />
+        </g>
+      </mask>
       <path
+        fill="currentColor"
+        d="M0 0h48v48H0z"
+        mask="url(#ipSArrowCircleRight0)"
         value="right"
         @click="handleClick('right')"
-        fill="currentColor"
-        d="m12 16l4-4l-4-4l-1.4 1.4l1.6 1.6H8v2h4.2l-1.6 1.6L12 16Zm0 6q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22Z"
       />
     </svg>
+
     <svg
       class="signouticon"
       xmlns="http://www.w3.org/2000/svg"
@@ -521,7 +553,7 @@ th {
 .leftarrow {
   position: absolute;
   top: 45%;
-  left: 7.5%;
+  left: 7%;
   height: 12%;
   width: 12%;
   cursor: pointer;
@@ -533,7 +565,7 @@ th {
 .rightarrow {
   position: absolute;
   top: 45%;
-  right: 11.6%;
+  right: 11%;
   height: 12%;
   width: 12%;
   cursor: pointer;
