@@ -196,7 +196,7 @@ export default {
             "Error: There is an issue with your account. Contact administrator."
           );
         }
-        if (!loginAlertSent) {
+        if (!this.loginAlertSent) {
           this.$notify({
             type: "success",
             title: "Logged In",
