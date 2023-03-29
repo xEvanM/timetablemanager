@@ -191,11 +191,7 @@ export default {
           this.router.push("/student");
         } else if (level == "lecturer") {
           this.router.push("/lecturer");
-        } else {
-          alert(
-            "Error: There is an issue with your account. Contact administrator."
-          );
-        }
+        } 
         if (!this.loginAlertSent) {
           this.$notify({
             type: "success",
