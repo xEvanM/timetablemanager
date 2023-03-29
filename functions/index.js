@@ -19,12 +19,12 @@ exports.createStudent = functions.https.onRequest(async (req, res) => {
       await studentRef.set({  // set the data for the student, based on the student ref
         fname: fname
       }, { merge: true }); // if the student already exists, update the existing student
-      res.json({data: {message : 'Student added successfully'}});
+      res.json({data: {message : 'Student was created sucessfully'}});
       return;
 
     } catch (error) { // error handling
       console.error('Error adding or updating student', error);
-      res.json({data: {error : 'Student was not added'}});
+      res.json({data: {error : 'Student account not created'}});
       return;
     }
   });
@@ -50,16 +50,16 @@ exports.createLecturer = functions.https.onRequest(async (req, res) => {
         await lectureRef.set({  // set the data for the student, based on the lecturer ref
           name: name
         }, { merge: true }); // if the lecturer already exists, update the existing lecturer
-        res.json({data: {message : 'Lecturer added successfully'}});
+        res.json({data: {message : 'Lecturer created successfully'}});
         return;
   
       } catch (error) { // error handling
         console.error('Error adding or updating lecturer', error);
-        res.json({data: {error : 'Lecturer was not added'}});
+        res.json({data: {error : 'Lecturer was not created'}});
         return;
       }
     } else {
-      res.json({data: {error : 'Lecturer was not added - unauthorized'}});
+      res.json({data: {error : 'Admin password is incorrect'}});
       return;
     }
   });

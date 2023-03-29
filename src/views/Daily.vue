@@ -174,6 +174,11 @@ export default {
   },
   methods: {
     async fetchModules() {
+      this.$notify({
+          type: "warn",
+          title: "Please wait",
+          text: "We are getting your timetable for you!",
+        });
       try {
         console.log("Fetching student modules");
         const getModules = httpsCallable(functions, "getModulesStudied");

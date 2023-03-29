@@ -39,14 +39,46 @@
           </div>
           <div class="colours">
             <ul>
-              <div :style="this.colour=='#cf9fff' ? getColourStyle() : {} " class="violet" @click="selectColour('#cf9fff')" ></div> 
-              <div :style="this.colour=='#ff5733' ? getColourStyle() : {} " class="orange" @click="selectColour('#ff5733')"></div>
-              <div :style="this.colour=='#ff8d1a' ? getColourStyle() : {} " class="lightorange" @click="selectColour('#ff8d1a')"></div>
-              <div :style="this.colour=='#eddd53' ? getColourStyle() : {} " class="yellow" @click="selectColour('#eddd53')"></div>
-              <div :style="this.colour=='#add45c' ? getColourStyle() : {} " class="lightgreen" @click="selectColour('#add45c')"></div>
-              <div :style="this.colour=='#57c785' ? getColourStyle() : {} " class="green" @click="selectColour('#57c785')"></div>
-              <div :style="this.colour=='#00baad' ? getColourStyle() : {} " class="teal" @click="selectColour('#00baad')"></div>
-              <div :style="this.colour=='#2a7b9b' ? getColourStyle() : {} " class="blue" @click="selectColour('#2a7b9b')"></div>
+              <div
+                :style="this.colour == '#cf9fff' ? getColourStyle() : {}"
+                class="violet"
+                @click="selectColour('#cf9fff')"
+              ></div>
+              <div
+                :style="this.colour == '#ff5733' ? getColourStyle() : {}"
+                class="orange"
+                @click="selectColour('#ff5733')"
+              ></div>
+              <div
+                :style="this.colour == '#ff8d1a' ? getColourStyle() : {}"
+                class="lightorange"
+                @click="selectColour('#ff8d1a')"
+              ></div>
+              <div
+                :style="this.colour == '#eddd53' ? getColourStyle() : {}"
+                class="yellow"
+                @click="selectColour('#eddd53')"
+              ></div>
+              <div
+                :style="this.colour == '#add45c' ? getColourStyle() : {}"
+                class="lightgreen"
+                @click="selectColour('#add45c')"
+              ></div>
+              <div
+                :style="this.colour == '#57c785' ? getColourStyle() : {}"
+                class="green"
+                @click="selectColour('#57c785')"
+              ></div>
+              <div
+                :style="this.colour == '#00baad' ? getColourStyle() : {}"
+                class="teal"
+                @click="selectColour('#00baad')"
+              ></div>
+              <div
+                :style="this.colour == '#2a7b9b' ? getColourStyle() : {}"
+                class="blue"
+                @click="selectColour('#2a7b9b')"
+              ></div>
             </ul>
           </div>
         </div>
@@ -121,7 +153,9 @@ export default {
         const userEmail = user.email;
         const email = { email: userEmail };
         const idToken = auth.currentUser.getIdToken();
-        getLecturerNameFn(email, { headers: { Authorization: `Bearer ${idToken}`,},})
+        getLecturerNameFn(email, {
+          headers: { Authorization: `Bearer ${idToken}` },
+        })
           .then((resp) => {
             lecturerName.value = resp.data.name;
             console.log("Lecturer name:", lecturerName.value);
@@ -152,6 +186,11 @@ export default {
 
   methods: {
     async moduleManagement() {
+      this.$notify({
+          type: "warn",
+          title: "Please wait",
+          text: "Attempting to manage your module...",
+        });
       const moduleID = this.moduleID.toUpperCase();
       const name = this.name;
       const location = this.location;
@@ -172,19 +211,49 @@ export default {
       };
       console.log(data);
 
-      moduleManagement(data, { headers: { Authorization: `Bearer ${idToken}`,},})
-        .then((result) => {
-          console.log(result.data.message);
-        })
-        .catch((error) => {
-          console.error(error);
+      moduleManagement(data, {
+        headers: { Authorization: `Bearer ${idToken}` },
+      }).then((result) => {
+        console.log(result.data.message);
+        console.log(result.data.error);
+        if (result.data.message) {
+        this.$notify({
+          type: "success",
+          title: "Success",
+          text: result.data.message,
         });
+      } else if (result.data.error) {
+        this.$notify({
+          type: "error",
+          title: "Error",
+          text: result.data.error,
+        });
+      } else {
+        this.$notify({
+          type: "error",
+          title: "Error",
+          text: "An unknown error occurred",
+        });
+      }
+      });
     },
     getColourStyle() {
-    console.log("Getting colour style");
-    return { border: "2px solid black" };
-  },
+      console.log("Getting colour style");
+      return { border: "2px solid black" };
+    },
+    testAlert() {
+      this.$notify({
+        type: "success",
+        title: "Success",
+        text: "Module was created/updated sucessfully",
+      });
+    },
     async addStudentToModule() {
+      this.$notify({
+          type: "warn",
+          title: "Please wait",
+          text: "Attempting to add student to module...",
+        });
       const code = this.code.toUpperCase();
       const email = this.email;
       const idToken = await auth.currentUser.getIdToken();
@@ -196,9 +265,30 @@ export default {
         email: email,
       };
       console.log(data);
-      addStudentToModule(data, { headers: { Authorization: `Bearer ${idToken}`,},}).then((result) => {
-        console.log("Result: " + result.data.message);
-        console.log("Error: " + result.data.error);
+      addStudentToModule(data, {
+        headers: { Authorization: `Bearer ${idToken}` },
+      }).then((result) => {
+        console.log(result.data.message);
+        console.log(result.data.error);
+        if (result.data.message) {
+        this.$notify({
+          type: "success",
+          title: "Success",
+          text: result.data.message,
+        });
+      } else if (result.data.error) {
+        this.$notify({
+          type: "error",
+          title: "Error",
+          text: result.data.error,
+        });
+      } else {
+        this.$notify({
+          type: "error",
+          title: "Error",
+          text: "An unknown error occurred",
+        });
+      }
       });
     },
     selectColour(colour) {
@@ -211,7 +301,7 @@ export default {
           console.log("Signed out");
           this.$router.push("/login");
         })
-        .catch(error => {
+        .catch((error) => {
           console.error("Error signing out", error);
         });
     },
@@ -284,7 +374,6 @@ body {
   color: rgb(37, 37, 37);
 }
 
-
 .addStudent h1 {
   text-align: center;
   padding: 20px 0;
@@ -299,11 +388,10 @@ body {
   left: 15%;
 }
 
-
 form .txt_field {
   position: relative;
   margin: 45px 0;
-  width: 125%
+  width: 125%;
 }
 
 .txt_field input {
@@ -521,116 +609,114 @@ ul div:hover {
 
 @media screen and (max-width: 1400px) {
   .addModule {
-  z-index: 2;
-  position: absolute;
-  top: 20%;
-  left: 6%;
-  width: 50%;
-  height: 65%;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px 0px rgba(23, 2, 32, 1);
-  color: rgb(37, 37, 37);
-}
+    z-index: 2;
+    position: absolute;
+    top: 20%;
+    left: 6%;
+    width: 50%;
+    height: 65%;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(23, 2, 32, 1);
+    color: rgb(37, 37, 37);
+  }
 
-.addModule h1 {
-  text-align: center;
-  padding: 20px 0;
-  border-bottom: 1px solid silver;
-}
+  .addModule h1 {
+    text-align: center;
+    padding: 20px 0;
+    border-bottom: 1px solid silver;
+  }
 
-.addModule form {
-  padding: 0 40px;
-  padding-bottom: 40px;
-}
+  .addModule form {
+    padding: 0 40px;
+    padding-bottom: 40px;
+  }
 
-.addStudent {
-  z-index: 2;
-  position: absolute;
-  top: 20%;
-  left: 62%;
-  width: 30%;
-  height: 65%;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px 0px rgba(23, 2, 32, 1);
-  color: rgb(37, 37, 37);
-}
+  .addStudent {
+    z-index: 2;
+    position: absolute;
+    top: 20%;
+    left: 62%;
+    width: 30%;
+    height: 65%;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(23, 2, 32, 1);
+    color: rgb(37, 37, 37);
+  }
 
+  .addStudent h1 {
+    text-align: center;
+    padding: 20px 0;
+    border-bottom: 1px solid silver;
+  }
 
-.addStudent h1 {
-  text-align: center;
-  padding: 20px 0;
-  border-bottom: 1px solid silver;
-}
+  .addStudent form {
+    padding: 0 30px;
+    padding-bottom: 60px;
+    position: absolute;
+    top: 30%;
+    left: 15%;
+  }
 
-.addStudent form {
-  padding: 0 30px;
-  padding-bottom: 60px;
-  position: absolute;
-  top: 30%;
-  left: 15%;
-}
+  form .txt_field {
+    position: relative;
+    margin: 30px 0;
+  }
 
-form .txt_field {
-  position: relative;
-  margin: 30px 0;
-}
+  .txt_field input {
+    width: 100%;
+    padding: 0 5px;
+    height: 40px;
+    font-size: 16px;
+    border: none;
+    background: none;
+    outline: none;
+  }
 
-.txt_field input {
-  width: 100%;
-  padding: 0 5px;
-  height: 40px;
-  font-size: 16px;
-  border: none;
-  background: none;
-  outline: none;
-}
+  .txt_field label {
+    position: absolute;
+    left: 5px;
+    transform: translateY(-50%);
+    font-size: 16px;
+    pointer-events: none;
+    transition: 0.5s;
+  }
 
-.txt_field label {
-  position: absolute;
-  left: 5px;
-  transform: translateY(-50%);
-  font-size: 16px;
-  pointer-events: none;
-  transition: 0.5s;
-}
+  .txt_field span::before {
+    content: "";
+    position: absolute;
+    top: 40px;
+    left: 0;
+    height: 2px;
+    background: rgb(46, 78, 141);
+  }
 
-.txt_field span::before {
-  content: "";
-  position: absolute;
-  top: 40px;
-  left: 0;
-  height: 2px;
-  background: rgb(46, 78, 141);
-}
+  .txt_field label {
+    top: -5px;
+    color: rgb(46, 78, 141);
+  }
 
-.txt_field label {
-  top: -5px;
-  color: rgb(46, 78, 141);
-}
+  .txt_field input:focus ~ span::before,
+  .txt_field input:valid ~ span::before {
+    width: 80%;
+  }
 
-.txt_field input:focus ~ span::before,
-.txt_field input:valid ~ span::before {
-  width: 80%;
+  #button {
+    position: absolute;
+    width: 50%;
+    height: 50px;
+    top: 82%;
+    left: 25%;
+    border: 1px solid;
+    background: rgb(46, 78, 141);
+    border-radius: 25px;
+    font-size: 18px;
+    color: #e9f4fb;
+    font-weight: 700;
+    cursor: pointer;
+    outline: none;
+    text-align: center;
+  }
 }
-
-#button {
-  position: absolute;
-  width: 50%;
-  height: 50px;
-  top: 82%;
-  left: 25%;
-  border: 1px solid;
-  background: rgb(46, 78, 141);
-  border-radius: 25px;
-  font-size: 18px;
-  color: #e9f4fb;
-  font-weight: 700;
-  cursor: pointer;
-  outline: none;
-  text-align: center;
-}
-}
-
 </style>

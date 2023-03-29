@@ -143,8 +143,18 @@ export default {
   methods: {
     create() {
       if (this.admin == true) {
+        this.$notify({
+          type: "warn",
+          title: "Please wait",
+          text: "Attempting to create lecturer account...",
+        });
         this.createLecturer();
       } else {
+        this.$notify({
+          type: "warn",
+          title: "Please wait",
+          text: "Attempting to create student account...",
+        });
         this.createStudent();
       }
     },
@@ -160,7 +170,29 @@ export default {
         email: this.email,
       };
       console.log(data);
-      createStudent(data);
+      createStudent(data).then((result) => {
+        console.log("Fn message:" + result.data.message);
+        console.log("Fn error:" + result.data.error);
+        if (result.data.message) {
+        this.$notify({
+          type: "success",
+          title: "Success",
+          text: result.data.message,
+        });
+      } else if (result.data.error) {
+        this.$notify({
+          type: "error",
+          title: "Error",
+          text: result.data.error,
+        });
+      } else {
+        this.$notify({
+          type: "error",
+          title: "Error",
+          text: "An unknown error occurred",
+        });
+      }
+      });;
     },
     async createLecturer() {
       console.log("Attempting to create lecturer");
@@ -175,7 +207,29 @@ export default {
         auth: this.auth,
       };
       console.log(data);
-      createLecturer(data);
+      createLecturer(data).then((result) => {
+        console.log("Fn message:" + result.data.message);
+        console.log("Fn error:" + result.data.error);
+        if (result.data.message) {
+        this.$notify({
+          type: "success",
+          title: "Success",
+          text: result.data.message,
+        });
+      } else if (result.data.error) {
+        this.$notify({
+          type: "error",
+          title: "Error",
+          text: result.data.error,
+        });
+      } else {
+        this.$notify({
+          type: "error",
+          title: "Error",
+          text: "An unknown error occurred",
+        });
+      }
+      });
     },
     // Move reg() method inside Vue instance
     reg() {
@@ -185,6 +239,11 @@ export default {
           console.log("User created successfully");
           // Wait for 2 seconds before navigating to another route after successful sign up
           setTimeout(() => {
+            this.$notify({
+          type: "success",
+          title: "Success",
+          text: "Account created! Please wait to be redirected.",
+        });
             if (this.admin == true) {
               this.router.push("/lecturer");
               console.log("Pushing to lecturer route");
@@ -196,7 +255,11 @@ export default {
         })
         .catch((error) => {
           console.log("Error creating user:", error);
-          alert(error);
+          this.$notify({
+          type: "error",
+          title: "Error",
+          text: "Email invalid, or password too weak... Try again!",
+        });
         });
     },
     async getQuote() {

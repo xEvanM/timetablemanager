@@ -144,6 +144,11 @@ export default {
   },
   methods: {
     async fetchModules() {
+      this.$notify({
+          type: "warn",
+          title: "Please wait",
+          text: "We are getting your timetable for you!",
+        });
       try {
         console.log("Fetching student modules");
         const getModules = httpsCallable(functions, "getModulesStudied");
@@ -160,6 +165,11 @@ export default {
         this.populateSchedule(this.modules);
       } catch (error) {
         console.error("Error fetching student modules", error);
+        this.$notify({
+          type: "error",
+          title: "Error",
+          text: error,
+        });
       }
     },
     populateSchedule(modules) {

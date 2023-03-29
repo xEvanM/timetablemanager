@@ -131,19 +131,33 @@ export default {
   },
   methods: {
     login() {
-      console.log("login called");
+      this.$notify({
+          type: "warn",
+          title: "Please wait",
+          text: "Attempting to log you in...",
+        });
       const auth = getAuth();
+      const errorMsg = '';
       signInWithEmailAndPassword(auth, this.email, this.password)
         .then(() => {
           console.log("Logged In!");
+          this.$notify({
+          type: "success",
+          title: "Success",
+          text: "You've been logged in! Please wait to be redirected.",
+        });
           console.log(auth.currentUser);
           this.checkLoggedIn();
 
           // router.push("/student"); // redirect to student page - will update this to send to STUDENT or LECTURER depending on credentials
         })
         .catch((error) => {
-          console.log("Error: " + error.code);
-          alert(error.code);
+          console.log(error.message);
+          this.$notify({
+          type: "error",
+          title: "Error",
+          text: "Email or password is incorrect",
+        });
         });
     },
     async getAccess() {
