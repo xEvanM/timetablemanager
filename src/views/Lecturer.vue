@@ -268,6 +268,7 @@ body {
 .addModule form {
   padding: 0 40px;
   padding-bottom: 40px;
+  padding-top: 10%;
 }
 
 .addStudent {
@@ -283,6 +284,7 @@ body {
   color: rgb(37, 37, 37);
 }
 
+
 .addStudent h1 {
   text-align: center;
   padding: 20px 0;
@@ -290,16 +292,18 @@ body {
 }
 
 .addStudent form {
-  padding: 0 30px;
-  padding-bottom: 60px;
+  padding: 0 70px;
+  padding-bottom: 80px;
   position: absolute;
   top: 30%;
   left: 15%;
 }
 
+
 form .txt_field {
   position: relative;
-  margin: 30px 0;
+  margin: 45px 0;
+  width: 125%
 }
 
 .txt_field input {
@@ -514,4 +518,119 @@ ul div:hover {
   display: inline-block;
   transform: rotate(90deg);
 }
+
+@media screen and (max-width: 1400px) {
+  .addModule {
+  z-index: 2;
+  position: absolute;
+  top: 20%;
+  left: 6%;
+  width: 50%;
+  height: 65%;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(23, 2, 32, 1);
+  color: rgb(37, 37, 37);
+}
+
+.addModule h1 {
+  text-align: center;
+  padding: 20px 0;
+  border-bottom: 1px solid silver;
+}
+
+.addModule form {
+  padding: 0 40px;
+  padding-bottom: 40px;
+}
+
+.addStudent {
+  z-index: 2;
+  position: absolute;
+  top: 20%;
+  left: 62%;
+  width: 30%;
+  height: 65%;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(23, 2, 32, 1);
+  color: rgb(37, 37, 37);
+}
+
+
+.addStudent h1 {
+  text-align: center;
+  padding: 20px 0;
+  border-bottom: 1px solid silver;
+}
+
+.addStudent form {
+  padding: 0 30px;
+  padding-bottom: 60px;
+  position: absolute;
+  top: 30%;
+  left: 15%;
+}
+
+form .txt_field {
+  position: relative;
+  margin: 30px 0;
+}
+
+.txt_field input {
+  width: 100%;
+  padding: 0 5px;
+  height: 40px;
+  font-size: 16px;
+  border: none;
+  background: none;
+  outline: none;
+}
+
+.txt_field label {
+  position: absolute;
+  left: 5px;
+  transform: translateY(-50%);
+  font-size: 16px;
+  pointer-events: none;
+  transition: 0.5s;
+}
+
+.txt_field span::before {
+  content: "";
+  position: absolute;
+  top: 40px;
+  left: 0;
+  height: 2px;
+  background: rgb(46, 78, 141);
+}
+
+.txt_field label {
+  top: -5px;
+  color: rgb(46, 78, 141);
+}
+
+.txt_field input:focus ~ span::before,
+.txt_field input:valid ~ span::before {
+  width: 80%;
+}
+
+#button {
+  position: absolute;
+  width: 50%;
+  height: 50px;
+  top: 82%;
+  left: 25%;
+  border: 1px solid;
+  background: rgb(46, 78, 141);
+  border-radius: 25px;
+  font-size: 18px;
+  color: #e9f4fb;
+  font-weight: 700;
+  cursor: pointer;
+  outline: none;
+  text-align: center;
+}
+}
+
 </style>
