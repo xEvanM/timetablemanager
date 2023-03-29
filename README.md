@@ -17,6 +17,6 @@ https://timetable-management-sys-71448.web.app/
 4. Add a student to a module by typing in their email address.
 5. Module information can be updated at any time, just fill in all the details again.
 
-## Happy Timetabling!
+==Happy Timetabling!==
 
 developed by Evan Murphy, Conor Fleming, John Stewart and Michael Mc Curtin
