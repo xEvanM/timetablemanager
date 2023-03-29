@@ -39,14 +39,14 @@
           </div>
           <div class="colours">
             <ul>
-              <div class="violet" @click="selectColour('#cf9fff')" ></div> 
-              <div class="orange" @click="selectColour('#ff5733')"></div>
-              <div class="lightorange" @click="selectColour('#ff8d1a')"></div>
-              <div class="yellow" @click="selectColour('#eddd53')"></div>
-              <div class="lightgreen" @click="selectColour('#add45c')"></div>
-              <div class="green" @click="selectColour('#57c785')"></div>
-              <div class="teal" @click="selectColour('#00baad')"></div>
-              <div class="blue" @click="selectColour('#2a7b9b')"></div>
+              <div :style="this.colour=='#cf9fff' ? getColourStyle() : {} " class="violet" @click="selectColour('#cf9fff')" ></div> 
+              <div :style="this.colour=='#ff5733' ? getColourStyle() : {} " class="orange" @click="selectColour('#ff5733')"></div>
+              <div :style="this.colour=='#ff8d1a' ? getColourStyle() : {} " class="lightorange" @click="selectColour('#ff8d1a')"></div>
+              <div :style="this.colour=='#eddd53' ? getColourStyle() : {} " class="yellow" @click="selectColour('#eddd53')"></div>
+              <div :style="this.colour=='#add45c' ? getColourStyle() : {} " class="lightgreen" @click="selectColour('#add45c')"></div>
+              <div :style="this.colour=='#57c785' ? getColourStyle() : {} " class="green" @click="selectColour('#57c785')"></div>
+              <div :style="this.colour=='#00baad' ? getColourStyle() : {} " class="teal" @click="selectColour('#00baad')"></div>
+              <div :style="this.colour=='#2a7b9b' ? getColourStyle() : {} " class="blue" @click="selectColour('#2a7b9b')"></div>
             </ul>
           </div>
         </div>
@@ -146,7 +146,7 @@ export default {
       code: "",
       email: "",
       lecturer: "",
-      colour: "#ff5733",
+      colour: "#cf9fff",
     };
   },
 
@@ -180,6 +180,10 @@ export default {
           console.error(error);
         });
     },
+    getColourStyle() {
+    console.log("Getting colour style");
+    return { border: "2px solid black" };
+  },
     async addStudentToModule() {
       const code = this.code.toUpperCase();
       const email = this.email;
