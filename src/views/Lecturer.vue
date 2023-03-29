@@ -6,6 +6,16 @@
     <div class="loginimg">
       <img src= https://cdn-icons-png.flaticon.com/512/277/277991.png>
     </div>
+    <svg
+      class="signouticon"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+    >
+      <path
+        fill="#252525"
+        d="M16 17v-3H9v-4h7V7l5 5l-5 5M14 2a2 2 0 0 1 2 2v2h-2V4H5v16h9v-2h2v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9Z"
+      />
+    </svg>
     <div class="greeting">Hello, {{ lecturerName }}!</div>
     <input id="signout" @click="signOut" value=" Sign Out" readonly />
     <div class="addModule">
@@ -316,6 +326,16 @@ export default {
   width: 6%;
 }
 
+.signouticon {
+  position: absolute;
+  top: 6%;
+  right: 9.2%;
+  height: 4%;
+  width: 4%;
+  display: block;
+  z-index: 2;
+}
+
 body {
   background-color: rgb(60, 58, 185);
   overflow: hidden;
@@ -378,7 +398,7 @@ body {
 form .txt_field {
   position: relative;
   margin: 45px 0;
-  width: 125%;
+  width: 140%;
 }
 
 .txt_field input {
@@ -447,6 +467,7 @@ form .txt_field {
   cursor: pointer;
   outline: none;
   text-align: left;
+  padding-left: 2px;
   position: absolute;
   top: 5%;
   right: 10%;

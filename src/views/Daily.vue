@@ -496,6 +496,7 @@ th {
   outline: none;
   text-align: center;
   position: absolute;
+  padding-left: 2px;
   top: 3%;
   right: 6%;
   text-align: left;
@@ -516,6 +517,7 @@ th {
   font-weight: 700;
   cursor: pointer;
   outline: none;
+  padding-left: 2px;
   position: absolute;
   top: 3%;
   right: 15%;
@@ -593,7 +595,7 @@ th {
 .viewicon {
   position: absolute;
   top: 4%;
-  right: 14.3%;
+  right: 14.4%;
   height: 4%;
   width: 4%;
   display: block;

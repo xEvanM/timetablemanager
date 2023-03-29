@@ -417,6 +417,7 @@ th {
   outline: none;
   text-align: left;
   position: absolute;
+  padding-left: 2px;
   top: 3%;
   right: 6%;
 }
@@ -437,6 +438,7 @@ th {
   cursor: pointer;
   outline: none;
   position: absolute;
+  padding-left: 2px;
   top: 3%;
   right: 15%;
   text-align: left;
