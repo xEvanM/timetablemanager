@@ -102,6 +102,7 @@ export default {
       author: "Author goes here",
       notLoggedIn: false,
       checkStatus: true,
+      loginAlertSent: false,
     };
   },
   created() {
@@ -116,12 +117,8 @@ export default {
       console.log("Authentication state changed");
       if (user) {
         console.log("User is logged in");
-        this.$notify({
-          type: "success",
-          title: "Logged In",
-          text: "Please wait to be redirected.",
-        });
         this.getAccess();
+        auth.onAuthStateChanged(null);
       } else {
         console.log("User is not logged in");
         this.notLoggedIn = true;
@@ -198,6 +195,14 @@ export default {
           alert(
             "Error: There is an issue with your account. Contact administrator."
           );
+        }
+        if (!loginAlertSent) {
+          this.$notify({
+            type: "success",
+            title: "Logged In",
+            text: "Please wait to be redirected.",
+          });
+          this.loginAlertSent = true;
         }
       });
     },
