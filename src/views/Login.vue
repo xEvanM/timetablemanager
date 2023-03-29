@@ -269,7 +269,7 @@ export default {
   font-size: 40px;
   color: white;
   position: absolute;
-  left: 18%;
+  left: 18.2%;
   top: 38%;
   display: inline-block;
   text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
@@ -284,7 +284,7 @@ export default {
   word-wrap: break-word;
   left: 10%;
   width: 35%;
-  top: 53%;
+  top: 53.5%;
   display: inline-block;
   text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
   text-align: center;
