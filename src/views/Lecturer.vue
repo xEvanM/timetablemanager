@@ -55,7 +55,7 @@
                 @click="selectColour('#ff8d1a')"
               ></div>
               <div
-                :style="this.colour == '#eddd53' ? getColourStyle() : {}"
+                :style="this.colour == '#ad9176' ? getColourStyle() : {}"
                 class="brown"
                 @click="selectColour('#ad9176')"
               ></div>
