@@ -191,7 +191,7 @@ export default {
           this.router.push("/student");
         } else if (level == "lecturer") {
           this.router.push("/lecturer");
-        } 
+        }
         if (!this.loginAlertSent) {
           this.$notify({
             type: "success",

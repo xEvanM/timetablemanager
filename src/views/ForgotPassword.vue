@@ -84,7 +84,6 @@ export default {
     this.router = useRouter();
     this.getQuote();
     document.addEventListener("keydown", this.enterKeyPressed);
-
   },
   beforeUnmount() {
     document.removeEventListener("keydown", this.enterKeyPressed);
@@ -102,18 +101,18 @@ export default {
       sendPasswordResetEmail(auth, this.email)
         .then(() => {
           this.$notify({
-        type: "success",
-        title: "Success",
-        text: "Password reset email sent to " + this.email,
-      });
+            type: "success",
+            title: "Success",
+            text: "Password reset email sent to " + this.email,
+          });
         })
         .catch((error) => {
           console.log(error.message);
           this.$notify({
-        type: "error",
-        title: "Error",
-        text: "Incorrect or invalid email. Try again!",
-      });
+            type: "error",
+            title: "Error",
+            text: "Incorrect or invalid email. Try again!",
+          });
           // other error handling stuff goes here
         });
     },
@@ -159,7 +158,7 @@ export default {
   position: absolute;
   top: 4%;
   left: 2%;
-  height: 11%;
+  height: 10%;
   width: 6%;
 }
 
@@ -230,12 +229,11 @@ body {
 
 form .txt_field {
   position: relative;
-  border-bottom: 2px solid #adadad;
   margin: 30px 0;
 }
 
 .txt_field input {
-  width: 100%;
+  width: 90%;
   padding: 0 5px;
   height: 40px;
   font-size: 16px;
@@ -274,7 +272,7 @@ form .txt_field {
 
 .txt_field input:focus ~ span::before,
 .txt_field input:valid ~ span::before {
-  width: 100%;
+  width: 90%;
 }
 
 .pass {
@@ -345,39 +343,39 @@ form .txt_field {
 
 .emailicon {
   position: absolute;
-  top: 44%;
-  right: 18%;
-  height: 4%;
-  width: 4%;
+  top: 46.5%;
+  right: 20.5%;
+  height: 3%;
+  width: 3%;
   display: block;
   z-index: 2;
 }
 
-@media screen and (max-width: 1400px) { 
+@media screen and (max-width: 1400px) {
   .sloganText1 {
-  z-index: 1;
-  font-size: 40px;
-  color: white;
-  position: absolute;
-  left: 12%;
-  top: 32%;
-  display: inline-block;
-  text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
-  text-align: center;
-}
+    z-index: 1;
+    font-size: 40px;
+    color: white;
+    position: absolute;
+    left: 12%;
+    top: 32%;
+    display: inline-block;
+    text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
+    text-align: center;
+  }
 
-.sloganText2 {
-  z-index: 1;
-  font-size: 18px;
-  color: #becddb;
-  position: absolute;
-  word-wrap: break-word;
-  left: 7%;
-  width: 35%;
-  top: 52%;
-  display: inline-block;
-  text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
-  text-align: center;
-}
+  .sloganText2 {
+    z-index: 1;
+    font-size: 18px;
+    color: #becddb;
+    position: absolute;
+    word-wrap: break-word;
+    left: 7%;
+    width: 35%;
+    top: 52%;
+    display: inline-block;
+    text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
+    text-align: center;
+  }
 }
 </style>
