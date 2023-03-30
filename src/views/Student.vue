@@ -145,10 +145,10 @@ export default {
   methods: {
     async fetchModules() {
       this.$notify({
-          type: "warn",
-          title: "Please wait",
-          text: "We are getting your timetable for you!",
-        });
+        type: "warn",
+        title: "Please wait",
+        text: "We are getting your timetable for you!",
+      });
       try {
         console.log("Fetching student modules");
         const getModules = httpsCallable(functions, "getModulesStudied");
@@ -295,7 +295,7 @@ th {
   top: 1%;
   left: 5.5%;
   height: 8%;
-  width: 4%;
+  width: 5%;
 }
 
 .time {
@@ -397,17 +397,17 @@ th {
 }
 
 .greeting {
-  font-size: 35px;
+  font-size: 40px;
   position: absolute;
-  left: 10.5%;
-  top: 1.5%;
+  left: 12%;
+  top: 2.5%;
   display: inline-block;
   color: white;
   text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
 }
 
 #button {
-  width: 7.5%;
+  width: 7%;
   height: 6%;
   background: white;
   border-radius: 10px;
@@ -428,7 +428,7 @@ th {
 }
 
 #viewbutton {
-  width: 8.8%;
+  width: 8%;
   height: 6%;
   background: rgb(37, 37, 37);
   border-radius: 10px;
@@ -475,7 +475,7 @@ th {
 .signouticon {
   position: absolute;
   top: 4%;
-  right: 5.3%;
+  right: 5.5%;
   height: 4%;
   width: 4%;
   display: block;
@@ -485,7 +485,7 @@ th {
 .viewicon {
   position: absolute;
   top: 4%;
-  right: 14.3%;
+  right: 14.7%;
   height: 4%;
   width: 4%;
   display: block;
@@ -493,135 +493,133 @@ th {
 }
 
 @media screen and (max-width: 1400px) {
-
   .time {
-  border: 0;
-  background: #becddb;
-  box-shadow: none;
-  text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
-  color: white;
-}
+    border: 0;
+    background: #becddb;
+    box-shadow: none;
+    text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
+    color: white;
+  }
 
-.box1 {
-  background: white;
-  position: absolute;
-  top: 12%;
-  left: 15.5%;
-  height: 83%;
-  width: 14%;
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
-  box-shadow: 0px 0px 5px 0px rgba(23, 2, 32, 1);
-}
+  .box1 {
+    background: white;
+    position: absolute;
+    top: 12%;
+    left: 15.5%;
+    height: 83%;
+    width: 14%;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    box-shadow: 0px 0px 5px 0px rgba(23, 2, 32, 1);
+  }
 
-.box2 {
-  background: white;
-  position: absolute;
-  top: 12%;
-  left: 30.3%;
-  height: 83%;
-  width: 14%;
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
-  box-shadow: 0px 0px 5px 0px rgba(23, 2, 32, 1);
-}
+  .box2 {
+    background: white;
+    position: absolute;
+    top: 12%;
+    left: 30.3%;
+    height: 83%;
+    width: 14%;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    box-shadow: 0px 0px 5px 0px rgba(23, 2, 32, 1);
+  }
 
-.box3 {
-  background: white;
-  position: absolute;
-  top: 12%;
-  left: 45%;
-  height: 83%;
-  width: 14%;
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
-  box-shadow: 0px 0px 5px 0px rgba(23, 2, 32, 1);
-}
+  .box3 {
+    background: white;
+    position: absolute;
+    top: 12%;
+    left: 45%;
+    height: 83%;
+    width: 14%;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    box-shadow: 0px 0px 5px 0px rgba(23, 2, 32, 1);
+  }
 
-.box4 {
-  background: white;
-  position: absolute;
-  top: 12%;
-  left: 59.9%;
-  height: 83%;
-  width: 14%;
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
-  box-shadow: 0px 0px 5px 0px rgba(23, 2, 32, 1);
-}
+  .box4 {
+    background: white;
+    position: absolute;
+    top: 12%;
+    left: 59.9%;
+    height: 83%;
+    width: 14%;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    box-shadow: 0px 0px 5px 0px rgba(23, 2, 32, 1);
+  }
 
-.box5 {
-  background: white;
-  position: absolute;
-  top: 12%;
-  left: 74.8%;
-  height: 83%;
-  width: 14%;
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
-  box-shadow: 0px 0px 5px 0px rgba(23, 2, 32, 1);
-}
+  .box5 {
+    background: white;
+    position: absolute;
+    top: 12%;
+    left: 74.8%;
+    height: 83%;
+    width: 14%;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    box-shadow: 0px 0px 5px 0px rgba(23, 2, 32, 1);
+  }
 
-.box {
-  width: 84%;
-  height: 85%;
-  position: absolute;
-  top: 10.5%;
-  left: 6%;
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
-  background: #becddb;
-  box-shadow: 0px 0px 5px 0px rgba(23, 2, 32, 1);
-}
+  .box {
+    width: 84%;
+    height: 85%;
+    position: absolute;
+    top: 10.5%;
+    left: 6%;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    background: #becddb;
+    box-shadow: 0px 0px 5px 0px rgba(23, 2, 32, 1);
+  }
 
-table {
-  position: absolute;
-  top: 11%;
-  left: 5%;
-  width: 85%;
-  height: 85%;
-  display: table;
-  text-align: center;
-  overflow: hidden;
-  font-size: 20px;
-  border-spacing: 30px 5px;
-  table-layout: fixed;
-  overflow: hidden;
-}
+  table {
+    position: absolute;
+    top: 11%;
+    left: 5%;
+    width: 85%;
+    height: 85%;
+    display: table;
+    text-align: center;
+    overflow: hidden;
+    font-size: 20px;
+    border-spacing: 30px 5px;
+    table-layout: fixed;
+    overflow: hidden;
+  }
 
-th {
-  color: rgb(37, 37, 37);
-  font-size: 22px;
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
-  margin-block: 10px;
-}
+  th {
+    color: rgb(37, 37, 37);
+    font-size: 22px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    margin-block: 10px;
+  }
 
-.lecture {
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
-  font-size: 10px;
-  vertical-align: middle;
-  word-wrap: break-word;
-  background-color: rgb(204, 0, 0);
-  box-shadow: 0px 0px 5px 0px rgba(23, 2, 32, 1);
-}
-
+  .lecture {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    font-size: 10px;
+    vertical-align: middle;
+    word-wrap: break-word;
+    background-color: rgb(204, 0, 0);
+    box-shadow: 0px 0px 5px 0px rgba(23, 2, 32, 1);
+  }
 }
 </style>
