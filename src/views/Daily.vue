@@ -378,17 +378,24 @@ th {
   border-top-right-radius: 15px;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
+  padding-bottom: 10px;
+  padding-top: 20px;
+}
+
+td {
+  max-height: 60px;
+  padding-bottom: 20px;
 }
 
 .lecture {
   border-top-left-radius: 15px;
-  font-size: 18px;
-  height: 5%;
+  font-size: 16px;
+  padding-top: 15px;
   border-top-right-radius: 15px;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
   background-color: rgb(204, 0, 0);
-  box-shadow: 0px 0px 5px 0px rgba(23, 2, 32, 1);
+  box-shadow: 0px 0px 3px 0px rgba(23, 2, 32, 1);
 }
 
 .topleft {
@@ -411,6 +418,7 @@ th {
   box-shadow: none;
   text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
   color: white;
+  padding-top: 15px;
 }
 
 .box1 {
@@ -618,31 +626,39 @@ th {
   }
 
   th {
-    color: rgb(37, 37, 37);
-    font-size: 22px;
-    text-align: center;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
-  }
+  color: rgb(37, 37, 37);
+  font-size: 20px;
+  text-align: center;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  padding-bottom: 2px;
+  padding-top: 10px;
+}
 
-  .lecture {
-    border-top-left-radius: 15px;
-    font-size: 15px;
-    border-top-right-radius: 15px;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
-    background-color: rgb(204, 0, 0);
-    box-shadow: 0px 0px 5px 0px rgba(23, 2, 32, 1);
-  }
+td {
+  max-height: 50px;
+  padding-bottom: 10px;
+}
+
+.lecture {
+  border-top-left-radius: 15px;
+  font-size: 16px;
+  padding-top: 15px;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  background-color: rgb(204, 0, 0);
+  box-shadow: 0px 0px 3px 0px rgba(23, 2, 32, 1);
+}
 
   .box1 {
     background: white;
     position: absolute;
     top: 12%;
     left: 25.2%;
-    height: 83%;
+    height: 84.5%;
     width: 16%;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
@@ -656,7 +672,7 @@ th {
     position: absolute;
     top: 12%;
     left: 43.7%;
-    height: 83%;
+    height: 84.5%;
     width: 16%;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
@@ -670,7 +686,7 @@ th {
     position: absolute;
     top: 12%;
     left: 62.5%;
-    height: 83%;
+    height: 84.5%;
     width: 16%;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
@@ -681,7 +697,7 @@ th {
 
   .box {
     width: 67%;
-    height: 85%;
+    height: 87%;
     position: absolute;
     top: 10.5%;
     left: 14.5%;
@@ -692,5 +708,13 @@ th {
     background: #becddb;
     box-shadow: 0px 0px 5px 0px rgba(23, 2, 32, 1);
   }
+
+  #button {
+  font-size: 12px;
+}
+
+#viewbutton {
+  font-size: 11px;
+}
 }
 </style>
