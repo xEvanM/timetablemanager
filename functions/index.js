@@ -218,6 +218,7 @@ exports.addStudentToModule = functions.https.onRequest(async (req, res) => {
     }
 
     // check if the student has a time conflict with any other module
+    if (studentData.modules) {
     const moduleData = moduleDoc.data(); // data for the new module to be added
     const studentModules = studentData.modules; // modules the student is already in
     const newModuleTimes = moduleData.times; // get the times for the new module
@@ -240,12 +241,14 @@ exports.addStudentToModule = functions.https.onRequest(async (req, res) => {
         console.log ("No time conflict!");
       }
     }
+  }
 
 
     // Add the module to the student
     const studentRef = db.collection('students').doc(encodedEmail);
+
     await studentRef.update({
-      modules: admin.firestore.FieldValue.arrayUnion(code)
+      "modules": admin.firestore.FieldValue.arrayUnion(code)
     });
 
     res.json({data: {message : 'Student added to module successfully'}});
