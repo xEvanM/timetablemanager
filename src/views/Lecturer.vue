@@ -211,7 +211,7 @@ export default {
       const moduleManagement = httpsCallable(functions, "moduleManagement");
 
       const data = {
-        moduleID: moduleID,
+        moduleID: moduleIDparsed,
         name: name,
         location: location,
         times: times,

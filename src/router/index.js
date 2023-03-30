@@ -21,23 +21,18 @@ const router = createRouter({
 
 function isAuthLecturer(to, from, next) {
     const auth = getAuth(app);
-    console.log("Checking if user is a lecturer");
 
     onAuthStateChanged(auth, (user) => {
         if(user) {
-            console.log(user);
             const getAccessLevel = httpsCallable(functions, "getAccessLevel");
             const email = auth.currentUser.email;
             const data = {
                 email: email,
             };
             getAccessLevel(data).then((result) => {
-                console.log("Access level: " + result.data.accessLevel);
                 if (result.data.accessLevel === "lecturer") {
-                    console.log("User is a lecturer");
                     return next();
                 } else {
-                    console.log("User is not a lecturer");
                     return next({ path: "/login" });
                 }
             });
@@ -49,23 +44,18 @@ function isAuthLecturer(to, from, next) {
 
 function isAuthStudent(to, from, next) {
     const auth = getAuth(app);
-    console.log("Checking if user is a student");
 
     onAuthStateChanged(auth, (user) => {
         if(user) {
-            console.log(user);
             const getAccessLevel = httpsCallable(functions, "getAccessLevel");
             const email = auth.currentUser.email;
             const data = {
                 email: email,
             };
             getAccessLevel(data).then((result) => {
-                console.log("Result: " + result.data.getAccessLevel);
                 if (result.data.accessLevel === "student") {
-                    console.log("User is a student");
                     return next();
                 } else {
-                    console.log("User is not a student");
                     return next({ path: "/login" });
                 }
             });

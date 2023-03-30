@@ -272,6 +272,11 @@ th {
   margin-block: 10px;
 }
 
+td {
+  height: 65px;
+  padding-bottom: 20px;
+}
+
 .lecture {
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
@@ -378,7 +383,7 @@ th {
 
 .box {
   width: 85%;
-  height: 85%;
+  height: 86%;
   position: absolute;
   top: 10.5%;
   left: 6%;
@@ -506,7 +511,7 @@ th {
     position: absolute;
     top: 12%;
     left: 15.5%;
-    height: 83%;
+    height: 84%;
     width: 14%;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
@@ -520,7 +525,7 @@ th {
     position: absolute;
     top: 12%;
     left: 30.3%;
-    height: 83%;
+    height: 84%;
     width: 14%;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
@@ -534,7 +539,7 @@ th {
     position: absolute;
     top: 12%;
     left: 45%;
-    height: 83%;
+    height: 84%;
     width: 14%;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
@@ -548,7 +553,7 @@ th {
     position: absolute;
     top: 12%;
     left: 59.9%;
-    height: 83%;
+    height: 84%;
     width: 14%;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
@@ -562,7 +567,7 @@ th {
     position: absolute;
     top: 12%;
     left: 74.8%;
-    height: 83%;
+    height: 84%;
     width: 14%;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
@@ -573,7 +578,7 @@ th {
 
   .box {
     width: 84%;
-    height: 85%;
+    height: 87%;
     position: absolute;
     top: 10.5%;
     left: 6%;
@@ -601,25 +606,38 @@ th {
   }
 
   th {
-    color: rgb(37, 37, 37);
-    font-size: 22px;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
-    margin-block: 10px;
-  }
+  color: rgb(37, 37, 37);
+  font-size: 22px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  margin-block: 8px;
+}
 
-  .lecture {
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
-    font-size: 10px;
-    vertical-align: middle;
-    word-wrap: break-word;
-    background-color: rgb(204, 0, 0);
-    box-shadow: 0px 0px 5px 0px rgba(23, 2, 32, 1);
-  }
+td {
+  height: 60px;
+  padding-bottom: 1px;
+}
+
+.lecture {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  font-size: 12px;
+  vertical-align: middle;
+  word-wrap: break-word;
+  background-color: rgb(204, 0, 0);
+  box-shadow: 0px 0px 5px 0px rgba(23, 2, 32, 1);
+}
+
+#button {
+  font-size: 12px;
+}
+
+#viewbutton {
+  font-size: 12px;
+}
 }
 </style>
