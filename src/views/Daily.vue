@@ -357,7 +357,7 @@ body {
 
 table {
   position: absolute;
-  top: 11%;
+  top: 10%;
   left: 12%;
   width: 70%;
   height: 85%;
@@ -402,7 +402,7 @@ th {
   top: 1%;
   left: 5.5%;
   height: 8%;
-  width: 4%;
+  width: 5%;
 }
 
 .time {
@@ -476,17 +476,17 @@ th {
 }
 
 .greeting {
-  font-size: 35px;
+  font-size: 40px;
   position: absolute;
-  left: 10.5%;
-  top: 1.5%;
+  left: 12%;
+  top: 2.5%;
   display: inline-block;
   color: white;
   text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
 }
 
 #button {
-  width: 7.5%;
+  width: 7%;
   height: 6%;
   background: white;
   border-radius: 10px;
@@ -494,12 +494,11 @@ th {
   color: rgb(37, 37, 37);
   cursor: pointer;
   outline: none;
-  text-align: center;
+  text-align: left;
   position: absolute;
   padding-left: 2px;
   top: 3%;
   right: 6%;
-  text-align: left;
 }
 
 #button:hover {
@@ -508,7 +507,7 @@ th {
 }
 
 #viewbutton {
-  width: 10.2%;
+  width: 9%;
   height: 6%;
   background: rgb(37, 37, 37);
   border-radius: 10px;
@@ -517,8 +516,8 @@ th {
   font-weight: 700;
   cursor: pointer;
   outline: none;
-  padding-left: 2px;
   position: absolute;
+  padding-left: 2px;
   top: 3%;
   right: 15%;
   text-align: left;
@@ -585,7 +584,7 @@ th {
 .signouticon {
   position: absolute;
   top: 4%;
-  right: 5.3%;
+  right: 5.5%;
   height: 4%;
   width: 4%;
   display: block;
@@ -595,7 +594,7 @@ th {
 .viewicon {
   position: absolute;
   top: 4%;
-  right: 14.4%;
+  right: 15%;
   height: 4%;
   width: 4%;
   display: block;
