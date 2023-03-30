@@ -320,16 +320,16 @@ export default {
 .loginimg img {
   z-index: 1;
   position: absolute;
-  top: 4%;
-  left: 2%;
-  height: 11%;
-  width: 6%;
+  top: 6%;
+  left: 5.5%;
+  height: 8%;
+  width: 5%;
 }
 
 .signouticon {
   position: absolute;
-  top: 6%;
-  right: 9.2%;
+  top: 9%;
+  right: 10%;
   height: 4%;
   width: 4%;
   display: block;
@@ -346,10 +346,10 @@ body {
 .addModule {
   z-index: 2;
   position: absolute;
-  top: 20%;
-  left: 6%;
-  width: 50%;
-  height: 65%;
+  top: 25%;
+  left: 8%;
+  width: 45%;
+  height: 55%;
   background: white;
   border-radius: 10px;
   box-shadow: 0px 0px 10px 0px rgba(23, 2, 32, 1);
@@ -371,10 +371,10 @@ body {
 .addStudent {
   z-index: 2;
   position: absolute;
-  top: 20%;
-  left: 62%;
+  top: 25%;
+  left: 60%;
   width: 30%;
-  height: 65%;
+  height: 55%;
   background: white;
   border-radius: 10px;
   box-shadow: 0px 0px 10px 0px rgba(23, 2, 32, 1);
@@ -392,17 +392,17 @@ body {
   padding-bottom: 80px;
   position: absolute;
   top: 30%;
-  left: 15%;
+  left: 20%;
 }
 
 form .txt_field {
   position: relative;
   margin: 45px 0;
-  width: 140%;
+  width: 120%;
 }
 
 .txt_field input {
-  width: 100%;
+  width: 80%;
   padding: 0 5px;
   height: 40px;
   font-size: 16px;
@@ -459,7 +459,6 @@ form .txt_field {
 #signout {
   width: 8%;
   height: 6%;
-  border: 2px solid;
   background: white;
   border-radius: 10px;
   font-size: 15px;
@@ -467,15 +466,14 @@ form .txt_field {
   cursor: pointer;
   outline: none;
   text-align: left;
-  padding-left: 2px;
   position: absolute;
-  top: 5%;
+  top: 8%;
   right: 10%;
 }
 
-#button:hover {
-  border-color: rgb(46, 78, 141);
-  transition: 0.5s;
+#signout:hover {
+  transition: transform 0.3s;
+  transform: scale(1.1);
 }
 
 .custom-shape-divider-bottom-1679498594 {
@@ -500,10 +498,10 @@ form .txt_field {
 }
 
 .greeting {
-  font-size: 35px;
+  font-size: 40px;
   position: absolute;
-  left: 9%;
-  top: 5%;
+  left: 12%;
+  top: 7.5%;
   display: inline-block;
   color: white;
   text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
@@ -523,35 +521,35 @@ ul div:hover {
   position: absolute;
   top: 125%;
   left: 0%;
-  width: 15%;
-  height: 25%;
+  width: 20%;
+  height: 30%;
   border-radius: 50%;
 }
 .orange {
   background-color: #ff5733;
   position: absolute;
   top: 125%;
-  left: 20%;
-  width: 15%;
-  height: 25%;
+  left: 25%;
+  width: 20%;
+  height: 30%;
   border-radius: 50%;
 }
 .lightorange {
   background-color: #ff8d1a;
   position: absolute;
   top: 125%;
-  left: 40%;
-  width: 15%;
-  height: 25%;
+  left: 50%;
+  width: 20%;
+  height: 30%;
   border-radius: 50%;
 }
 .brown {
   background-color: #ad9176;
   position: absolute;
   top: 125%;
-  left: 60%;
-  width: 15%;
-  height: 25%;
+  left: 75%;
+  width: 20%;
+  height: 30%;
   border-radius: 50%;
 }
 .lightgreen {
@@ -559,56 +557,56 @@ ul div:hover {
   position: absolute;
   top: 165%;
   left: 0%;
-  width: 15%;
-  height: 25%;
+  width: 20%;
+  height: 30%;
   border-radius: 50%;
 }
 .green {
   background-color: #57c785;
   position: absolute;
   top: 165%;
-  left: 20%;
-  width: 15%;
-  height: 25%;
+  left: 25%;
+  width: 20%;
+  height: 30%;
   border-radius: 50%;
 }
 .teal {
   background-color: #00baad;
   position: absolute;
   top: 165%;
-  left: 40%;
-  width: 15%;
-  height: 25%;
+  left: 50%;
+  width: 20%;
+  height: 30%;
   border-radius: 50%;
 }
 .blue {
   background-color: #2a7b9b;
   position: absolute;
   top: 165%;
-  left: 60%;
-  width: 15%;
-  height: 25%;
+  left: 75%;
+  width: 20%;
+  height: 30%;
   border-radius: 50%;
 }
 
 .leftside {
   position: absolute;
-  left: 10%;
-  top: 22%;
+  left: 15%;
+  top: 25%;
 }
 
 .rightside {
   position: absolute;
   left: 60%;
-  top: 22%;
+  top: 25%;
 }
 
 .divider {
   content: "";
   position: absolute;
-  top: 52%;
-  left: 35%;
-  width: 30%;
+  top: 48%;
+  left: 32%;
+  width: 35%;
   height: 2px;
   background: silver;
   display: inline-block;
@@ -644,7 +642,7 @@ ul div:hover {
     z-index: 2;
     position: absolute;
     top: 20%;
-    left: 62%;
+    left: 70%;
     width: 30%;
     height: 65%;
     background: white;
@@ -661,7 +659,7 @@ ul div:hover {
 
   .addStudent form {
     padding: 0 30px;
-    padding-bottom: 60px;
+    padding-bottom: 100px;
     position: absolute;
     top: 30%;
     left: 15%;
