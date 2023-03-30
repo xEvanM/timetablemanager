@@ -377,5 +377,15 @@ form .txt_field {
     text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
     text-align: center;
   }
+
+  .emailicon {
+  position: absolute;
+  top: 45%;
+  right: 17%;
+  height: 4%;
+  width: 4%;
+  display: block;
+  z-index: 2;
+}
 }
 </style>

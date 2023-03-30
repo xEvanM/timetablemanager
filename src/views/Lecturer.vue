@@ -634,15 +634,17 @@ ul div:hover {
   }
 
   .addModule form {
-    padding: 0 40px;
-    padding-bottom: 40px;
+    padding-bottom: 100px;
+    padding-right: 20px;
+    top: 30%;
+    left: 5%;
   }
 
   .addStudent {
     z-index: 2;
     position: absolute;
     top: 20%;
-    left: 70%;
+    left: 65%;
     width: 30%;
     height: 65%;
     background: white;
@@ -662,7 +664,7 @@ ul div:hover {
     padding-bottom: 100px;
     position: absolute;
     top: 30%;
-    left: 15%;
+    left: 10%;
   }
 
   form .txt_field {
@@ -724,5 +726,31 @@ ul div:hover {
     outline: none;
     text-align: center;
   }
+
+  .signouticon {
+  position: absolute;
+  top: 9%;
+  right: 9.2%;
+  height: 4%;
+  width: 4%;
+  display: block;
+  z-index: 2;
+}
+
+.leftside {
+  position: absolute;
+  left: 10%;
+  top: 25%;
+}
+
+#signout {
+  width: 10%;
+}
+
+.rightside {
+  position: absolute;
+  left: 58%;
+  top: 25%;
+}
 }
 </style>
