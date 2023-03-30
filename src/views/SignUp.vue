@@ -638,7 +638,7 @@ form .txt_field_admin {
     color: white;
     position: absolute;
     left: 12%;
-    top: 32%;
+    top: 30%;
     display: inline-block;
     text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
     text-align: center;
@@ -652,10 +652,28 @@ form .txt_field_admin {
     word-wrap: break-word;
     left: 7%;
     width: 35%;
-    top: 52%;
+    top: 54%;
     display: inline-block;
     text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
     text-align: center;
+  }
+
+  .loginimg img {
+    z-index: 1;
+    position: absolute;
+    top: 4%;
+    left: 2%;
+    height: 11%;
+    width: 6%;
+  }
+
+  .websiteName {
+    font-size: 30px;
+    color: white;
+    position: absolute;
+    top: 6%;
+    left: 9%;
+    text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
   }
 }
 </style>
