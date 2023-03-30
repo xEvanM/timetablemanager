@@ -78,6 +78,16 @@
           d="M6 22q-.825 0-1.413-.588T4 20V10q0-.825.588-1.413T6 8h1V6q0-2.075 1.463-3.538T12 1q2.075 0 3.538 1.463T17 6v2h1q.825 0 1.413.588T20 10v10q0 .825-.588 1.413T18 22H6Zm0-2h12V10H6v10Zm6-3q.825 0 1.413-.588T14 15q0-.825-.588-1.413T12 13q-.825 0-1.413.588T10 15q0 .825.588 1.413T12 17ZM9 8h6V6q0-1.25-.875-2.125T12 3q-1.25 0-2.125.875T9 6v2ZM6 20V10v10Z"
         />
       </svg>
+      <svg
+        :class="[admin ? 'passwordicon3' : '', 'passwordicon']"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+      >
+        <path
+          fill="currentColor"
+          d="M6 22q-.825 0-1.413-.588T4 20V10q0-.825.588-1.413T6 8h1V6q0-2.075 1.463-3.538T12 1q2.075 0 3.538 1.463T17 6v2h1q.825 0 1.413.588T20 10v10q0 .825-.588 1.413T18 22H6Zm0-2h12V10H6v10Zm6-3q.825 0 1.413-.588T14 15q0-.825-.588-1.413T12 13q-.825 0-1.413.588T10 15q0 .825.588 1.413T12 17ZM9 8h6V6q0-1.25-.875-2.125T12 3q-1.25 0-2.125.875T9 6v2ZM6 20V10v10Z"
+        />
+      </svg>
     </div>
     <div class="custom-shape-divider-bottom-1679498594">
       <svg
@@ -134,7 +144,7 @@ export default {
     document.addEventListener("keydown", this.enterKeyPressed);
   },
   beforeUnmount() {
-    document.removeEventListener('keydown', this.enterKeyPressed);
+    document.removeEventListener("keydown", this.enterKeyPressed);
   },
   computed: {
     quoteText() {
@@ -183,25 +193,25 @@ export default {
         console.log("Fn message:" + result.data.message);
         console.log("Fn error:" + result.data.error);
         if (result.data.message) {
-        this.$notify({
-          type: "success",
-          title: "Success",
-          text: result.data.message,
-        });
-      } else if (result.data.error) {
-        this.$notify({
-          type: "error",
-          title: "Error",
-          text: result.data.error,
-        });
-      } else {
-        this.$notify({
-          type: "error",
-          title: "Error",
-          text: "An unknown error occurred",
-        });
-      }
-      });;
+          this.$notify({
+            type: "success",
+            title: "Success",
+            text: result.data.message,
+          });
+        } else if (result.data.error) {
+          this.$notify({
+            type: "error",
+            title: "Error",
+            text: result.data.error,
+          });
+        } else {
+          this.$notify({
+            type: "error",
+            title: "Error",
+            text: "An unknown error occurred",
+          });
+        }
+      });
     },
     async createLecturer() {
       console.log("Attempting to create lecturer");
@@ -220,24 +230,24 @@ export default {
         console.log("Fn message:" + result.data.message);
         console.log("Fn error:" + result.data.error);
         if (result.data.message) {
-        this.$notify({
-          type: "success",
-          title: "Success",
-          text: result.data.message,
-        });
-      } else if (result.data.error) {
-        this.$notify({
-          type: "error",
-          title: "Error",
-          text: result.data.error,
-        });
-      } else {
-        this.$notify({
-          type: "error",
-          title: "Error",
-          text: "An unknown error occurred",
-        });
-      }
+          this.$notify({
+            type: "success",
+            title: "Success",
+            text: result.data.message,
+          });
+        } else if (result.data.error) {
+          this.$notify({
+            type: "error",
+            title: "Error",
+            text: result.data.error,
+          });
+        } else {
+          this.$notify({
+            type: "error",
+            title: "Error",
+            text: "An unknown error occurred",
+          });
+        }
       });
     },
     // Move reg() method inside Vue instance
@@ -260,10 +270,10 @@ export default {
         .catch((error) => {
           console.log("Error creating user:", error);
           this.$notify({
-          type: "error",
-          title: "Error",
-          text: "Email invalid, or password too weak... Try again!",
-        });
+            type: "error",
+            title: "Error",
+            text: "Email invalid, or password too weak... Try again!",
+          });
         });
     },
     async getQuote() {
@@ -303,7 +313,7 @@ export default {
   position: absolute;
   top: 4%;
   left: 2%;
-  height: 11%;
+  height: 10%;
   width: 6%;
 }
 
@@ -381,19 +391,19 @@ form .check_field {
 }
 .check_field label {
   position: absolute;
-  margin: 0 0px;
+  margin: 0;
   color: rgb(223, 79, 39);
   font-size: 16px;
+  padding-left: 5px;
 }
 
 form .txt_field {
   position: relative;
-  border-bottom: 2px solid #adadad;
   margin: 30px 0;
 }
 
 .txt_field input {
-  width: 100%;
+  width: 90%;
   padding: 0 5px;
   height: 40px;
   font-size: 16px;
@@ -432,18 +442,17 @@ form .txt_field {
 
 .txt_field input:focus ~ span::before,
 .txt_field input:valid ~ span::before {
-  width: 100%;
+  width: 90%;
 }
 
 form .txt_field_admin {
   position: relative;
-  border-bottom: 2px solid #adadad;
   margin: 20px 0;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .txt_field_admin input {
-  width: 100%;
+  width: 90%;
   padding: 0 5px;
   height: 40px;
   font-size: 16px;
@@ -482,7 +491,7 @@ form .txt_field_admin {
 
 .txt_field_admin input:focus ~ span::before,
 .txt_field_admin input:valid ~ span::before {
-  width: 100%;
+  width: 90%;
 }
 
 .pass {
@@ -507,6 +516,7 @@ form .txt_field_admin {
   cursor: pointer;
   outline: none;
   text-align: center;
+  margin-top: 10px !important;
 }
 
 #button:hover {
@@ -554,7 +564,7 @@ form .txt_field_admin {
 .emailicon {
   position: absolute;
   top: 42%;
-  right: 13%;
+  right: 11%;
   height: 6%;
   width: 6%;
   display: block;
@@ -563,8 +573,8 @@ form .txt_field_admin {
 
 .emailicon2 {
   position: absolute;
-  top: 36%;
-  right: 13%;
+  top: 35%;
+  right: 11%;
   height: 6%;
   width: 6%;
   display: block;
@@ -574,7 +584,7 @@ form .txt_field_admin {
 .passwordicon {
   position: fixed;
   top: 57%;
-  right: 13%;
+  right: 11%;
   height: 6%;
   width: 6%;
   display: block;
@@ -583,18 +593,28 @@ form .txt_field_admin {
 
 .passwordicon2 {
   position: absolute;
-  top: 49%;
-  right: 13%;
+  top: 47%;
+  right: 11%;
   height: 6%;
   width: 6%;
   display: block;
   z-index: 2;
 }
 
+.passwordicon3 {
+  position: absolute;
+  top: 64%;
+  right: 11%;
+  height: 6%;
+  width: 6%;
+  z-index: 2;
+  display: block;
+}
+
 .nameicon {
   position: absolute;
   top: 27%;
-  right: 13%;
+  right: 11%;
   height: 6%;
   width: 6%;
   display: block;
@@ -603,39 +623,39 @@ form .txt_field_admin {
 
 .nameicon2 {
   position: absolute;
-  top: 23%;
-  right: 13%;
+  top: 22%;
+  right: 11%;
   height: 6%;
   width: 6%;
   display: block;
   z-index: 2;
 }
 
-@media screen and (max-width: 1400px) { 
+@media screen and (max-width: 1400px) {
   .sloganText1 {
-  z-index: 1;
-  font-size: 40px;
-  color: white;
-  position: absolute;
-  left: 12%;
-  top: 32%;
-  display: inline-block;
-  text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
-  text-align: center;
-}
+    z-index: 1;
+    font-size: 40px;
+    color: white;
+    position: absolute;
+    left: 12%;
+    top: 32%;
+    display: inline-block;
+    text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
+    text-align: center;
+  }
 
-.sloganText2 {
-  z-index: 1;
-  font-size: 18px;
-  color: #becddb;
-  position: absolute;
-  word-wrap: break-word;
-  left: 7%;
-  width: 35%;
-  top: 52%;
-  display: inline-block;
-  text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
-  text-align: center;
-}
+  .sloganText2 {
+    z-index: 1;
+    font-size: 18px;
+    color: #becddb;
+    position: absolute;
+    word-wrap: break-word;
+    left: 7%;
+    width: 35%;
+    top: 52%;
+    display: inline-block;
+    text-shadow: 1px 1px 0px rgba(23, 2, 32, 1);
+    text-align: center;
+  }
 }
 </style>
