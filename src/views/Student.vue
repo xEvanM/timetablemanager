@@ -606,38 +606,38 @@ td {
   }
 
   th {
-  color: rgb(37, 37, 37);
-  font-size: 22px;
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
-  margin-block: 8px;
-}
+    color: rgb(37, 37, 37);
+    font-size: 22px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    margin-block: 8px;
+  }
 
-td {
-  height: 60px;
-  padding-bottom: 1px;
-}
+  td {
+    height: 60px;
+    padding-bottom: 1px;
+  }
 
-.lecture {
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
-  font-size: 12px;
-  vertical-align: middle;
-  word-wrap: break-word;
-  background-color: rgb(204, 0, 0);
-  box-shadow: 0px 0px 5px 0px rgba(23, 2, 32, 1);
-}
+  .lecture {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    font-size: 12px;
+    vertical-align: middle;
+    word-wrap: break-word;
+    background-color: rgb(204, 0, 0);
+    box-shadow: 0px 0px 5px 0px rgba(23, 2, 32, 1);
+  }
 
-#button {
-  font-size: 12px;
-}
+  #button {
+    font-size: 12px;
+  }
 
-#viewbutton {
-  font-size: 12px;
-}
+  #viewbutton {
+    font-size: 12px;
+  }
 }
 </style>

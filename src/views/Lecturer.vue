@@ -605,8 +605,8 @@ ul div:hover {
   content: "";
   position: absolute;
   top: 48%;
-  left: 32%;
-  width: 35%;
+  left: 35%;
+  width: 30%;
   height: 2px;
   background: silver;
   display: inline-block;
@@ -728,29 +728,29 @@ ul div:hover {
   }
 
   .signouticon {
-  position: absolute;
-  top: 9%;
-  right: 9.2%;
-  height: 4%;
-  width: 4%;
-  display: block;
-  z-index: 2;
-}
+    position: absolute;
+    top: 9%;
+    right: 9.2%;
+    height: 4%;
+    width: 4%;
+    display: block;
+    z-index: 2;
+  }
 
-.leftside {
-  position: absolute;
-  left: 10%;
-  top: 25%;
-}
+  .leftside {
+    position: absolute;
+    left: 10%;
+    top: 25%;
+  }
 
-#signout {
-  width: 10%;
-}
+  #signout {
+    width: 10%;
+  }
 
-.rightside {
-  position: absolute;
-  left: 58%;
-  top: 25%;
-}
+  .rightside {
+    position: absolute;
+    left: 58%;
+    top: 25%;
+  }
 }
 </style>
